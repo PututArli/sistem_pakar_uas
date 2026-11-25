@@ -1,0 +1,270 @@
+- generic [active] [ref=f4e1]:
+  - link "Langsung ke konten utama" [ref=f4e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - alert [ref=f4e4]
+  - banner [ref=f4e5]:
+    - generic [ref=f4e6]:
+      - link "Indeks Ruang Kerja Mamdani K3" [ref=f4e7] [cursor=pointer]:
+        - /url: "#evaluasi"
+        - generic [ref=f4e8]: Indeks Ruang Kerja
+        - generic [ref=f4e9]: Mamdani K3
+      - navigation "Navigasi utama" [ref=f4e10]:
+        - link "Evaluasi" [ref=f4e11] [cursor=pointer]:
+          - /url: "#evaluasi"
+        - link "Komparasi 3/3" [ref=f4e12] [cursor=pointer]:
+          - /url: "#komparasi"
+          - text: Komparasi
+          - generic [ref=f4e13]: 3/3
+        - link "Perhitungan & Aturan" [ref=f4e14] [cursor=pointer]:
+          - /url: "#inspeksi"
+        - link "Tim" [ref=f4e15] [cursor=pointer]:
+          - /url: "#tim"
+      - button "Ganti ke mode terang" [pressed] [ref=f4e17] [cursor=pointer]:
+        - generic [ref=f4e18]: Terang
+  - main [ref=f4e19]:
+    - region "Evaluasi Kenyamanan Ruang Kerja (WFC / WFH)" [ref=f4e20]:
+      - generic [ref=f4e21]:
+        - generic [ref=f4e22]:
+          - heading "Evaluasi Kenyamanan Ruang Kerja (WFC / WFH)" [level=1] [ref=f4e23]
+          - paragraph [ref=f4e24]: Hitung skor kelayakan ruang kerja (0-100) dari suhu, kebisingan, dan pencahayaan berdasarkan standar K3 Permenkes RI No. 48 Tahun 2016.
+        - generic [ref=f4e25]:
+          - button "Spot WFC A (Z* 75,00)" [ref=f4e26] [cursor=pointer]
+          - button "Rumus Fungsi" [ref=f4e27] [cursor=pointer]
+      - generic [ref=f4e28]:
+        - generic [ref=f4e29]:
+          - generic [ref=f4e30]:
+            - generic [ref=f4e31]:
+              - generic [ref=f4e32] [cursor=pointer]: Nama Ruang Kerja / Spot WFC
+              - generic [ref=f4e33]: 3/3 slot komparasi
+            - textbox "Nama Ruang Kerja / Spot WFC" [ref=f4e34]:
+              - /placeholder: "Contoh: Ruang Kerja / Spot WFC A"
+              - text: "Studi Kasus: Spot WFC A"
+          - generic [ref=f4e35]:
+            - generic [ref=f4e36]:
+              - generic [ref=f4e37]: "Suhu Ruangan (Ideal: 23-26 °C)"
+              - generic [ref=f4e38]:
+                - generic [ref=f4e39] [cursor=pointer]: Patokan kondisi suhu ruangan
+                - combobox "Patokan kondisi suhu ruangan" [ref=f4e40] [cursor=pointer]:
+                  - option "Patokan suhu (opsional)..."
+                  - option "AC sangat dingin (19 °C)"
+                  - option "Ber-AC ideal K3 (24 °C)"
+                  - 'option "Spot WFC A: nyaman (25 °C)" [selected]'
+                  - option "Tanpa AC / panas (30 °C)"
+            - generic [ref=f4e41]:
+              - slider "Slider suhu ruangan dalam derajat Celsius" [ref=f4e42] [cursor=pointer]: "25"
+              - spinbutton "Suhu Ruangan" [ref=f4e43]: "25"
+              - generic [ref=f4e44]: °C
+            - generic [ref=f4e45]:
+              - generic [ref=f4e46]: Nyaman 0,75 · Panas 0,25
+              - generic [ref=f4e47]: 16-36 °C
+          - generic [ref=f4e48]:
+            - generic [ref=f4e49]:
+              - generic [ref=f4e50]: "Tingkat Kebisingan (Ideal: <= 55-65 dB)"
+              - generic [ref=f4e51]:
+                - generic [ref=f4e52] [cursor=pointer]: Patokan kondisi kebisingan ruangan
+                - combobox "Patokan kondisi kebisingan ruangan" [ref=f4e53] [cursor=pointer]:
+                  - option "Patokan kebisingan (opsional)..."
+                  - option "Ruang belajar sunyi (40 dB)"
+                  - option "Kantor tenang K3 (55 dB)"
+                  - 'option "Spot WFC A: sedang (60 dB)" [selected]'
+                  - option "Kafe ramai / jalan raya (80 dB)"
+            - generic [ref=f4e54]:
+              - slider "Slider tingkat kebisingan dalam dB" [ref=f4e55] [cursor=pointer]: "60"
+              - spinbutton "Tingkat Kebisingan" [ref=f4e56]: "60"
+              - generic [ref=f4e57]: dB
+            - generic [ref=f4e58]:
+              - generic [ref=f4e59]: Tenang 0,25 · Sedang 0,75
+              - generic [ref=f4e60]: 30-100 dB
+          - generic [ref=f4e61]:
+            - generic [ref=f4e62]:
+              - generic [ref=f4e63]: "Intensitas Pencahayaan (Ideal: >= 300 Lux)"
+              - generic [ref=f4e64]:
+                - generic [ref=f4e65] [cursor=pointer]: Patokan kondisi pencahayaan ruangan
+                - combobox "Patokan kondisi pencahayaan ruangan" [ref=f4e66] [cursor=pointer]:
+                  - option "Patokan cahaya (opsional)..."
+                  - option "Lampu kafe temaram (120 Lux)"
+                  - 'option "Spot WFC A: batas K3 (300 Lux)" [selected]'
+                  - option "Ruang kerja terang (400 Lux)"
+                  - option "Dekat jendela siang (520 Lux)"
+            - generic [ref=f4e67]:
+              - slider "Slider intensitas pencahayaan dalam Lux" [ref=f4e68] [cursor=pointer]: "300"
+              - spinbutton "Intensitas Pencahayaan" [ref=f4e69]: "300"
+              - generic [ref=f4e70]: Lux
+            - generic [ref=f4e71]:
+              - generic [ref=f4e72]: Cukup 1,00
+              - generic [ref=f4e73]: 0-600 Lux
+          - generic [ref=f4e74]:
+            - button "Simpan ke Komparasi" [ref=f4e75] [cursor=pointer]
+            - button "Reset" [ref=f4e76] [cursor=pointer]
+        - generic [ref=f4e77]:
+          - generic [ref=f4e78]:
+            - 'heading "Studi Kasus: Spot WFC A" [level=2] [ref=f4e79]'
+            - generic [ref=f4e80]:
+              - generic [aria-hidden] [ref=f4e81]: "[+]"
+              - generic [ref=f4e82]: Sangat Ideal
+          - generic [ref=f4e83]:
+            - generic [ref=f4e84]:
+              - generic [ref=f4e85]: 75,00
+              - generic [ref=f4e86]: / 100
+            - generic [ref=f4e87]:
+              - generic [ref=f4e88]: Z* = 307,50 / 4,10
+              - generic [ref=f4e89]: 4/27 aturan aktif
+          - paragraph [ref=f4e90]: Kondisi ruang selaras dengan standar K3 Perkantoran (Permenkes RI No. 48 Tahun 2016) untuk kerja fokus.
+          - generic "Status standar K3 per parameter" [ref=f4e91]:
+            - generic [ref=f4e92]:
+              - generic [ref=f4e93]:
+                - generic [ref=f4e94]: Suhu
+                - generic [ref=f4e95]: 25 °C
+              - generic [ref=f4e96]: "[+] Sesuai K3"
+            - generic [ref=f4e97]:
+              - generic [ref=f4e98]:
+                - generic [ref=f4e99]: Kebisingan
+                - generic [ref=f4e100]: 60 dB
+              - generic [ref=f4e101]: "[~] Ambang K3"
+            - generic [ref=f4e102]:
+              - generic [ref=f4e103]:
+                - generic [ref=f4e104]: Pencahayaan
+                - generic [ref=f4e105]: 300 Lux
+              - generic [ref=f4e106]: "[+] Sesuai K3"
+          - generic [ref=f4e107]:
+            - generic [ref=f4e108]:
+              - generic [ref=f4e109]: Kurva Agregasi Output & Garis Sentroid
+              - generic [ref=f4e110]: Real-time
+            - img "Grafik fungsi keanggotaan output kenyamanan ruang kerja dan area arsiran Centroid" [ref=f4e112]
+          - generic [ref=f4e113]:
+            - generic [ref=f4e114]:
+              - text: "MAX [TN/CN/SI]:"
+              - strong [ref=f4e115]: 0,00 / 0,25 / 0,75
+            - link "Lihat rincian perhitungan & saran ergonomi" [ref=f4e116] [cursor=pointer]:
+              - /url: "#inspeksi"
+    - region "Perbandingan 2-3 Ruang Kerja / Spot WFC" [ref=f4e117]:
+      - generic [ref=f4e118]:
+        - heading "Perbandingan 2-3 Ruang Kerja / Spot WFC" [level=2] [ref=f4e119]
+        - generic [ref=f4e120]:
+          - button "Muat 3 Sampel Uji" [ref=f4e121] [cursor=pointer]
+          - button "Kosongkan" [ref=f4e122] [cursor=pointer]
+      - generic [ref=f4e123]:
+        - article [ref=f4e124]:
+          - generic [ref=f4e125]:
+            - generic [ref=f4e126]:
+              - generic [ref=f4e127]: Peringkat 1 · Terbaik
+              - generic [ref=f4e128]: Simulasi
+            - 'heading "Sampel: Ruang Baca Tenang" [level=3] [ref=f4e129]'
+            - generic [ref=f4e130]:
+              - generic [ref=f4e131]: 81,74
+              - generic [ref=f4e132]: "[+] Sangat Ideal"
+            - generic [ref=f4e133]:
+              - generic [ref=f4e134]:
+                - generic [ref=f4e135]: Suhu
+                - generic [ref=f4e136]: 24 °C
+              - generic [ref=f4e137]:
+                - generic [ref=f4e138]: Bising
+                - generic [ref=f4e139]: 42 dB
+              - generic [ref=f4e140]:
+                - generic [ref=f4e141]: Cahaya
+                - generic [ref=f4e142]: 400 Lux
+          - generic [ref=f4e143]:
+            - button "Muat ke Evaluasi" [ref=f4e144] [cursor=pointer]
+            - 'button "Hapus Sampel: Ruang Baca Tenang dari papan komparasi" [ref=f4e145] [cursor=pointer]': Hapus
+        - article [ref=f4e146]:
+          - generic [ref=f4e147]:
+            - generic [ref=f4e148]:
+              - generic [ref=f4e149]: Peringkat 2
+              - generic [ref=f4e150]: Bab 4 Laporan
+            - 'heading "Studi Kasus: Spot WFC A" [level=3] [ref=f4e151]'
+            - generic [ref=f4e152]:
+              - generic [ref=f4e153]: 75,00
+              - generic [ref=f4e154]: "[+] Sangat Ideal"
+            - generic [ref=f4e155]:
+              - generic [ref=f4e156]:
+                - generic [ref=f4e157]: Suhu
+                - generic [ref=f4e158]: 25 °C
+              - generic [ref=f4e159]:
+                - generic [ref=f4e160]: Bising
+                - generic [ref=f4e161]: 60 dB
+              - generic [ref=f4e162]:
+                - generic [ref=f4e163]: Cahaya
+                - generic [ref=f4e164]: 300 Lux
+          - generic [ref=f4e165]:
+            - button "Muat ke Evaluasi" [ref=f4e166] [cursor=pointer]
+            - 'button "Hapus Studi Kasus: Spot WFC A dari papan komparasi" [ref=f4e167] [cursor=pointer]': Hapus
+        - article [ref=f4e168]:
+          - generic [ref=f4e169]:
+            - generic [ref=f4e170]:
+              - generic [ref=f4e171]: Peringkat 3
+              - generic [ref=f4e172]: Simulasi
+            - 'heading "Sampel: Teras Kafe Sore" [level=3] [ref=f4e173]'
+            - generic [ref=f4e174]:
+              - generic [ref=f4e175]: 27,11
+              - generic [ref=f4e176]: "[-] Tidak Nyaman"
+            - generic [ref=f4e177]:
+              - generic [ref=f4e178]:
+                - generic [ref=f4e179]: Suhu
+                - generic [ref=f4e180]: 29 °C
+              - generic [ref=f4e181]:
+                - generic [ref=f4e182]: Bising
+                - generic [ref=f4e183]: 74 dB
+              - generic [ref=f4e184]:
+                - generic [ref=f4e185]: Cahaya
+                - generic [ref=f4e186]: 160 Lux
+          - generic [ref=f4e187]:
+            - button "Muat ke Evaluasi" [ref=f4e188] [cursor=pointer]
+            - 'button "Hapus Sampel: Teras Kafe Sore dari papan komparasi" [ref=f4e189] [cursor=pointer]': Hapus
+    - region "Kurva Input, Perhitungan & Saran Ergonomi" [ref=f4e190]:
+      - generic [ref=f4e191]:
+        - heading "Kurva Input, Perhitungan & Saran Ergonomi" [level=2] [ref=f4e192]
+        - tablist "Inspeksi model Fuzzy Mamdani" [ref=f4e193]:
+          - tab "Kurva Input (3)" [selected] [ref=f4e194] [cursor=pointer]
+          - tab "4 Langkah & Ergonomi" [ref=f4e195] [cursor=pointer]
+          - tab "Basis 27 Aturan" [ref=f4e196] [cursor=pointer]
+      - tabpanel "Kurva Input (3)" [ref=f4e197]:
+        - generic [ref=f4e198]:
+          - generic [ref=f4e199]:
+            - generic [ref=f4e200]:
+              - heading "Suhu Ruangan (x)" [level=3] [ref=f4e201]
+              - generic [ref=f4e202]: 25 °C
+            - img "Grafik keanggotaan suhu ruangan" [ref=f4e204]
+          - generic [ref=f4e205]:
+            - generic [ref=f4e206]:
+              - heading "Kebisingan (y)" [level=3] [ref=f4e207]
+              - generic [ref=f4e208]: 60 dB
+            - img "Grafik keanggotaan tingkat kebisingan" [ref=f4e210]
+          - generic [ref=f4e211]:
+            - generic [ref=f4e212]:
+              - heading "Pencahayaan (z)" [level=3] [ref=f4e213]
+              - generic [ref=f4e214]: 300 Lux
+            - img "Grafik keanggotaan intensitas pencahayaan" [ref=f4e216]
+  - contentinfo [ref=f4e217]:
+    - generic [ref=f4e218]:
+      - generic [ref=f4e219]:
+        - generic [ref=f4e220]:
+          - heading "Ambang Klasifikasi Skor Akhir (Z*)" [level=2] [ref=f4e221]
+          - generic [ref=f4e222]:
+            - generic [ref=f4e223]:
+              - generic [ref=f4e224]: "[+] Sangat Ideal untuk Fokus"
+              - generic [ref=f4e225]: 70,00 - 100
+            - generic [ref=f4e226]:
+              - generic [ref=f4e227]: "[~] Cukup Nyaman (Penyesuaian Ergonomi)"
+              - generic [ref=f4e228]: 40,00 - 69,99
+            - generic [ref=f4e229]:
+              - generic [ref=f4e230]: "[-] Tidak Nyaman / Tidak Disarankan"
+              - generic [ref=f4e231]: 0,00 - 39,99
+        - generic [ref=f4e232]:
+          - heading "Tim Penyusun Proyek Sistem Pakar" [level=2] [ref=f4e233]
+          - generic [ref=f4e234]:
+            - generic [ref=f4e235]:
+              - paragraph [ref=f4e236]: Rafael Putut Arli (2417051042)
+              - paragraph [ref=f4e237]: Fuzzy Logic Engineer (standar K3 Permenkes 48/2016, 27 aturan & validasi)
+            - generic [ref=f4e238]:
+              - paragraph [ref=f4e239]: Miqdad Dzakiy Arroyan (2417051044)
+              - paragraph [ref=f4e240]: UI/UX & Frontend Developer (slider, preset bantu & komparasi 2-3 ruang)
+            - generic [ref=f4e241]:
+              - paragraph [ref=f4e242]: Wisnu Wira Winata
+              - paragraph [ref=f4e243]: Logic & Visualization Developer (mesin Mamdani & kurva Chart.js)
+            - generic [ref=f4e244]:
+              - paragraph [ref=f4e245]: Atalah
+              - paragraph [ref=f4e246]: QA, Data Sampel Pengukuran & Dokumentasi
+      - generic [ref=f4e247]:
+        - generic [ref=f4e248]: Sistem Pakar Evaluasi Kenyamanan Ruang Kerja WFC / WFH (Fuzzy Mamdani & Permenkes RI No. 48/2016)
+        - link "Kembali ke Atas" [ref=f4e249] [cursor=pointer]:
+          - /url: "#evaluasi"

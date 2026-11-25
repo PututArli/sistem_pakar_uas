@@ -3,42 +3,43 @@ import {
   RULES,
   evaluateMamdani,
   validateInputs,
+  buildErgonomicRecommendations,
   DENSE_CENTROID_SAMPLES
 } from '../src/fuzzyEngine.js';
 
 assert.equal(RULES.length, 27, 'Harus terdapat tepat 27 aturan pada basis aturan.');
 
-const combos = new Set(RULES.map((r) => `${r.wifi}|${r.noise}|${r.price}`));
+const combos = new Set(RULES.map((r) => `${r.temp}|${r.noise}|${r.light}`));
 assert.equal(combos.size, 27, 'Seluruh 27 kombinasi himpunan input harus unik dan lengkap.');
 
-// Verifikasi Studi Kasus Kafe A pada Bab 4 Laporan Progress 1 (x = 45, y = 60, z = 25)
-const kafeA = evaluateMamdani(45, 60, 25);
+// Verifikasi Studi Kasus Ruang Kerja / Spot WFC A pada Bab 4 Laporan Revisi (x = 25, y = 60, z = 300)
+const spotA = evaluateMamdani(25, 60, 300);
 
-assert.equal(kafeA.fuzzification.wifi.Lambat, 0);
-assert.equal(kafeA.fuzzification.wifi.Sedang, 0.25);
-assert.equal(kafeA.fuzzification.wifi.Cepat, 0.75);
+assert.equal(spotA.fuzzification.temp.Dingin, 0);
+assert.equal(spotA.fuzzification.temp.Nyaman, 0.75);
+assert.equal(spotA.fuzzification.temp.Panas, 0.25);
 
-assert.equal(kafeA.fuzzification.noise.Tenang, 0.25);
-assert.equal(kafeA.fuzzification.noise.Sedang, 0.75);
-assert.equal(kafeA.fuzzification.noise.Bising, 0);
+assert.equal(spotA.fuzzification.noise.Tenang, 0.25);
+assert.equal(spotA.fuzzification.noise.Sedang, 0.75);
+assert.equal(spotA.fuzzification.noise.Bising, 0);
 
-assert.equal(kafeA.fuzzification.price.Murah, 1);
-assert.equal(kafeA.fuzzification.price.Sedang, 0);
-assert.equal(kafeA.fuzzification.price.Mahal, 0);
+assert.equal(spotA.fuzzification.light.Redup, 0);
+assert.equal(spotA.fuzzification.light.Cukup, 1);
+assert.equal(spotA.fuzzification.light.Terang, 0);
 
 assert.deepEqual(
-  kafeA.activeRules.map((r) => ({ id: r.id, alpha: r.alpha })),
+  spotA.activeRules.map((r) => ({ id: r.id, alpha: r.alpha })),
   [
-    { id: 'R10', alpha: 0.25 },
-    { id: 'R13', alpha: 0.25 },
-    { id: 'R19', alpha: 0.25 },
-    { id: 'R22', alpha: 0.75 }
+    { id: 'R11', alpha: 0.25 },
+    { id: 'R14', alpha: 0.75 },
+    { id: 'R20', alpha: 0.25 },
+    { id: 'R23', alpha: 0.25 }
   ]
 );
 
-assert.equal(kafeA.aggregation['Tidak Disarankan'], 0);
-assert.equal(kafeA.aggregation['Cocok untuk Santai'], 0.25);
-assert.equal(kafeA.aggregation['Sangat Ideal'], 0.75);
+assert.equal(spotA.aggregation['Tidak Nyaman'], 0);
+assert.equal(spotA.aggregation['Cukup Nyaman'], 0.25);
+assert.equal(spotA.aggregation['Sangat Ideal'], 0.75);
 
 const expectedSampleMu = {
   10: 0,
@@ -53,25 +54,38 @@ const expectedSampleMu = {
   100: 0.75
 };
 
-for (const s of kafeA.centroid.samples) {
+for (const s of spotA.centroid.samples) {
   assert.ok(
     Math.abs(s.mu - expectedSampleMu[s.w]) < 1e-9,
     `Sampel w=${s.w} seharusnya memiliki mu=${expectedSampleMu[s.w]}, didapat ${s.mu}`
   );
 }
 
-assert.ok(Math.abs(kafeA.centroid.numerator - 307.5) < 1e-9, 'Pembilang Kafe A harus 307,5');
-assert.ok(Math.abs(kafeA.centroid.denominator - 4.1) < 1e-9, 'Penyebut Kafe A harus 4,10');
-assert.ok(Math.abs(kafeA.centroid.zStar - 75.0) < 1e-9, 'Skor Z* Kafe A harus 75,00');
-assert.equal(kafeA.classification.label, 'Sangat Ideal untuk Fokus');
+assert.ok(Math.abs(spotA.centroid.numerator - 307.5) < 1e-9, 'Pembilang Spot WFC A harus 307,5');
+assert.ok(Math.abs(spotA.centroid.denominator - 4.1) < 1e-9, 'Penyebut Spot WFC A harus 4,10');
+assert.ok(Math.abs(spotA.centroid.zStar - 75.0) < 1e-9, 'Skor Z* Spot WFC A harus 75,00');
+assert.equal(spotA.classification.label, 'Sangat Ideal untuk Fokus');
 
-// Uji batas ekstrem semesta pembicaraan di seluruh kombinasi pojok
+// Verifikasi rekomendasi ergonomi K3 untuk Spot WFC A
+assert.equal(spotA.recommendations.length, 3);
+assert.equal(spotA.recommendations[0].statusKey, 'ideal');
+assert.equal(spotA.recommendations[1].statusKey, 'cukup');
+assert.equal(spotA.recommendations[2].statusKey, 'ideal');
+
+// Uji rekomendasi kondisi di luar standar K3
+const badRecs = buildErgonomicRecommendations(30, 80, 100);
+assert.deepEqual(
+  badRecs.map((r) => r.statusKey),
+  ['tidak', 'tidak', 'tidak']
+);
+
+// Uji batas ekstrem semesta pembicaraan
 const corners = [
-  [0, 30, 10],
-  [0, 100, 100],
-  [100, 30, 10],
-  [100, 100, 100],
-  [30, 65, 45]
+  [16, 30, 0],
+  [16, 100, 600],
+  [36, 30, 0],
+  [36, 100, 600],
+  [24, 65, 300]
 ];
 
 for (const [x, y, z] of corners) {
@@ -83,10 +97,12 @@ for (const [x, y, z] of corners) {
 }
 
 // Uji validasi input di luar semesta pembicaraan
-assert.equal(validateInputs(-1, 60, 25).valid, false);
-assert.equal(validateInputs(45, 20, 25).valid, false);
-assert.equal(validateInputs(45, 60, 5).valid, false);
-assert.equal(validateInputs(45, 60, 120).valid, false);
-assert.equal(validateInputs('abc', 60, 25).valid, false);
+assert.equal(validateInputs(15, 60, 300).valid, false);
+assert.equal(validateInputs(37, 60, 300).valid, false);
+assert.equal(validateInputs(25, 29, 300).valid, false);
+assert.equal(validateInputs(25, 101, 300).valid, false);
+assert.equal(validateInputs(25, 60, -1).valid, false);
+assert.equal(validateInputs(25, 60, 601).valid, false);
+assert.equal(validateInputs('abc', 60, 300).valid, false);
 
-console.log('PASS: Seluruh pengujian mesin Fuzzy Mamdani (27 aturan, Studi Kasus Kafe A = 75.00, batas ekstrem, dan validasi) berhasil.');
+console.log('PASS: Seluruh pengujian mesin Fuzzy Mamdani K3 (27 aturan, Spot WFC A = 75.00, rekomendasi ergonomi, batas ekstrem, dan validasi) berhasil.');

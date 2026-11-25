@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Indeks Ruang Kerja WFC: Sistem Pakar Fuzzy Mamdani</title>
-  <meta name="description" content="Aplikasi web sistem pakar penentu kelayakan ruang kerja kafe (Work From Cafe) menggunakan metode logika Fuzzy Mamdani dengan 3 variabel input dan 27 aturan.">
+  <title>Indeks Ruang Kerja WFC / WFH: Sistem Pakar Fuzzy Mamdani</title>
+  <meta name="description" content="Sistem pakar evaluasi kenyamanan ruang kerja (WFC / WFH) berbasis standar K3 Perkantoran Permenkes RI No. 48 Tahun 2016 menggunakan logika Fuzzy Mamdani.">
   <link rel="icon" href="data:,">
   <script>
     (function () {
@@ -28,22 +28,22 @@
   <div id="polite-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
   <div id="assertive-announcer" class="sr-only" role="alert" aria-live="assertive"></div>
 
-  <!-- Header Kompak & Bersih -->
+  <!-- Header Bersih -->
   <header class="sticky top-0 z-40 border-b" style="background-color: var(--bg-page); border-color: var(--border-soft);">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between gap-3">
-      <a href="#evaluasi" class="inline-flex items-baseline gap-2.5 min-h-[44px] py-2 min-w-0">
-        <span class="font-editorial text-lg sm:text-xl font-bold truncate">Indeks WFC</span>
-        <span class="hidden sm:inline text-xs text-muted-custom font-formula">Fuzzy Mamdani</span>
+      <a href="#evaluasi" class="inline-flex items-baseline gap-2 min-h-[44px] py-2 min-w-0">
+        <span class="font-editorial text-lg sm:text-xl font-bold truncate">Indeks Ruang Kerja</span>
+        <span class="hidden sm:inline text-xs text-muted-custom font-formula">Mamdani K3</span>
       </a>
 
       <nav aria-label="Navigasi utama" class="hidden md:flex items-center gap-1">
-        <a href="#evaluasi" class="nav-link">01. Evaluasi</a>
+        <a href="#evaluasi" class="nav-link">Evaluasi</a>
         <a href="#komparasi" class="nav-link">
-          02. Komparasi
+          Komparasi
           <span id="nav-compare-count" class="ml-1.5 px-1.5 py-0.5 text-xs rounded font-formula border" style="border-color: var(--border-control); background-color: var(--bg-subtle);">2/3</span>
         </a>
-        <a href="#inspeksi" class="nav-link">03. Kurva &amp; Hitungan</a>
-        <a href="#tim" class="nav-link">04. Tim</a>
+        <a href="#inspeksi" class="nav-link">Perhitungan &amp; Aturan</a>
+        <a href="#tim" class="nav-link">Tim</a>
       </nav>
 
       <div class="flex items-center gap-2 shrink-0">
@@ -57,14 +57,14 @@
     </div>
 
     <nav id="mobile-nav-drawer" aria-label="Navigasi seluler" hidden class="md:hidden border-t px-4 py-2.5 space-y-1" style="background-color: var(--bg-surface); border-color: var(--border-soft);">
-      <a href="#evaluasi" class="nav-link w-full justify-start mobile-nav-item">01. Evaluasi Kafe</a>
-      <a href="#komparasi" class="nav-link w-full justify-start mobile-nav-item">02. Komparasi (2-3 Kafe)</a>
-      <a href="#inspeksi" class="nav-link w-full justify-start mobile-nav-item">03. Kurva, Hitungan &amp; 27 Aturan</a>
-      <a href="#tim" class="nav-link w-full justify-start mobile-nav-item">04. Identitas Tim</a>
+      <a href="#evaluasi" class="nav-link w-full justify-start mobile-nav-item">Evaluasi Ruang Kerja</a>
+      <a href="#komparasi" class="nav-link w-full justify-start mobile-nav-item">Komparasi (2-3 Ruangan)</a>
+      <a href="#inspeksi" class="nav-link w-full justify-start mobile-nav-item">Perhitungan, Ergonomi &amp; 27 Aturan</a>
+      <a href="#tim" class="nav-link w-full justify-start mobile-nav-item">Identitas Tim</a>
     </nav>
   </header>
 
-  <main id="main-content" tabindex="-1" class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-9 space-y-10 sm:space-y-14">
+  <main id="main-content" tabindex="-1" class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-10 sm:space-y-12">
     <!-- Status Galat Penyimpanan (R-27) -->
     <div id="storage-error-banner" role="alert" hidden class="surface-card p-4 border-2" style="border-color: var(--status-tidak); background-color: var(--status-tidak-bg);">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -76,20 +76,20 @@
       </div>
     </div>
 
-    <!-- BAGIAN 01: WORKSPACE EVALUASI UTAMA -->
+    <!-- ZONA 01: MEJA EVALUASI -->
     <section id="evaluasi" aria-labelledby="page-heading" class="space-y-5">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b pb-5" style="border-color: var(--border-soft);">
-        <div class="space-y-1.5 max-w-2xl">
-          <h1 id="page-heading" class="text-2xl sm:text-3xl lg:text-[2.15rem] font-bold leading-tight">
-            Evaluasi Kelayakan Ruang Kerja Kafe
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b pb-4" style="border-color: var(--border-soft);">
+        <div class="space-y-1 max-w-2xl">
+          <h1 id="page-heading" class="text-2xl sm:text-3xl font-bold leading-tight">
+            Evaluasi Kenyamanan Ruang Kerja (WFC / WFH)
           </h1>
-          <p class="text-sm sm:text-base text-muted-custom">
-            Hitung skor objektif Work From Cafe (0 sampai 100) dari kecepatan Wi-Fi, kebisingan ruang, dan rata-rata harga menu menggunakan inferensi Fuzzy Mamdani.
+          <p class="text-sm text-muted-custom">
+            Hitung skor kelayakan ruang kerja (0-100) dari suhu, kebisingan, dan pencahayaan berdasarkan standar K3 Permenkes RI No. 48 Tahun 2016.
           </p>
         </div>
         <div class="flex flex-wrap items-center gap-2 shrink-0">
           <button type="button" id="load-case-a-btn" class="btn-secondary">
-            Studi Kasus Kafe A (Z* 75,00)
+            Spot WFC A (Z* 75,00)
           </button>
           <button type="button" id="open-formula-dialog-btn" class="btn-secondary">
             Rumus Fungsi
@@ -97,188 +97,198 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-        <!-- Kolom Kiri: Form Parameter Input -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-7 items-start">
+        <!-- Form Parameter Ringkas -->
         <form id="eval-form" novalidate class="lg:col-span-6 surface-card p-4 sm:p-6 space-y-5">
           <div id="form-error-summary" tabindex="-1" role="alert" hidden class="p-3 rounded border-2 text-sm font-semibold" style="border-color: var(--status-tidak); background-color: var(--status-tidak-bg); color: var(--status-tidak);"></div>
 
-          <!-- Nama Kafe -->
+          <!-- Nama Ruangan -->
           <div class="space-y-1.5">
             <div class="flex items-baseline justify-between gap-2">
-              <label for="cafe-name" class="font-bold text-sm">Nama Kafe</label>
+              <label for="spot-name" class="font-bold text-sm">Nama Ruang Kerja / Spot WFC</label>
               <span id="compare-slot-feedback" class="text-xs text-muted-custom font-formula">2/3 slot terisi</span>
             </div>
             <input
               type="text"
-              id="cafe-name"
-              name="cafeName"
+              id="spot-name"
+              name="spotName"
               maxlength="60"
-              placeholder="Contoh: Kafe A (Jl. Zainal Abidin)"
-              aria-describedby="cafe-name-error"
+              placeholder="Contoh: Ruang Kerja / Spot WFC A"
+              aria-describedby="spot-name-error"
               aria-invalid="false"
               class="input-field w-full"
-              value="Studi Kasus: Kafe A"
+              value="Studi Kasus: Spot WFC A"
             >
-            <p id="cafe-name-error" class="text-xs font-semibold" style="color: var(--status-tidak);" hidden></p>
+            <p id="spot-name-error" class="text-xs font-semibold" style="color: var(--status-tidak);" hidden></p>
           </div>
 
-          <!-- Variabel 1: Wi-Fi -->
-          <div class="space-y-2 pt-2 border-t" style="border-color: var(--border-soft);">
-            <div class="flex flex-wrap items-baseline justify-between gap-2">
-              <label for="wifi-number" class="font-bold text-sm">
-                Kecepatan Wi-Fi <span class="text-muted-custom font-normal">(0-100 Mbps)</span>
-              </label>
-              <div id="wifi-mu-summary" class="text-xs font-formula text-muted-custom"></div>
-            </div>
-            <div class="flex flex-wrap sm:flex-nowrap items-center gap-2">
-              <div class="flex items-center gap-2 flex-1 min-w-[200px]">
-                <button type="button" class="step-btn shrink-0" data-step-target="wifi" data-step-delta="-5" aria-label="Kurangi Wi-Fi 5 Mbps">-5</button>
-                <input
-                  type="range"
-                  id="wifi-slider"
-                  min="0"
-                  max="100"
-                  step="1"
-                  value="45"
-                  aria-label="Slider kecepatan Wi-Fi"
-                  class="fuzzy-slider flex-1 min-w-0"
-                >
-                <button type="button" class="step-btn shrink-0" data-step-target="wifi" data-step-delta="5" aria-label="Tambah Wi-Fi 5 Mbps">+5</button>
+          <!-- Variabel 1: Suhu Ruangan -->
+          <div class="space-y-1.5 pt-3 border-t" style="border-color: var(--border-soft);">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <label for="temp-number" class="font-bold text-sm">Suhu Ruangan</label>
+                <span class="text-xs text-muted-custom ml-1">(Ideal: 23-26 °C)</span>
               </div>
-              <div class="flex items-center gap-1.5 shrink-0 ml-auto sm:ml-0">
-                <input
-                  type="number"
-                  id="wifi-number"
-                  min="0"
-                  max="100"
-                  step="0.5"
-                  value="45"
-                  inputmode="decimal"
-                  aria-describedby="wifi-error"
-                  aria-invalid="false"
-                  class="input-field w-20 font-formula text-right"
-                >
-                <span class="text-xs font-semibold text-muted-custom w-9">Mbps</span>
+              <div class="sm:w-56">
+                <label for="temp-preset" class="sr-only">Patokan kondisi suhu ruangan</label>
+                <select id="temp-preset" class="input-field w-full text-xs">
+                  <option value="">Patokan suhu (opsional)...</option>
+                  <option value="19">AC sangat dingin (19 °C)</option>
+                  <option value="24">Ber-AC ideal K3 (24 °C)</option>
+                  <option value="25">Spot WFC A: nyaman (25 °C)</option>
+                  <option value="30">Tanpa AC / panas (30 °C)</option>
+                </select>
               </div>
             </div>
-            <p id="wifi-error" class="text-xs font-semibold" style="color: var(--status-tidak);" hidden></p>
+            <div class="flex items-center gap-2.5">
+              <input
+                type="range"
+                id="temp-slider"
+                min="16"
+                max="36"
+                step="0.5"
+                value="25"
+                aria-label="Slider suhu ruangan dalam derajat Celsius"
+                class="fuzzy-slider flex-1 min-w-0"
+              >
+              <input
+                type="number"
+                id="temp-number"
+                min="16"
+                max="36"
+                step="0.5"
+                value="25"
+                inputmode="decimal"
+                aria-describedby="temp-error"
+                aria-invalid="false"
+                class="input-field w-20 font-formula text-right shrink-0"
+              >
+              <span class="text-xs font-semibold text-muted-custom w-8 shrink-0">°C</span>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <span id="temp-mu-summary" class="text-xs font-formula text-muted-custom"></span>
+              <span class="text-[11px] font-formula text-muted-custom">16-36 °C</span>
+            </div>
+            <p id="temp-error" class="text-xs font-semibold" style="color: var(--status-tidak);" hidden></p>
           </div>
 
-          <!-- Variabel 2: Kebisingan -->
-          <div class="space-y-2 pt-2 border-t" style="border-color: var(--border-soft);">
-            <div class="flex flex-wrap items-baseline justify-between gap-2">
-              <label for="noise-number" class="font-bold text-sm">
-                Tingkat Kebisingan <span class="text-muted-custom font-normal">(30-100 dB)</span>
-              </label>
-              <div id="noise-mu-summary" class="text-xs font-formula text-muted-custom"></div>
+          <!-- Variabel 2: Tingkat Kebisingan -->
+          <div class="space-y-1.5 pt-3 border-t" style="border-color: var(--border-soft);">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <label for="noise-number" class="font-bold text-sm">Tingkat Kebisingan</label>
+                <span class="text-xs text-muted-custom ml-1">(Ideal: &lt;= 55-65 dB)</span>
+              </div>
+              <div class="sm:w-56">
+                <label for="noise-preset" class="sr-only">Patokan kondisi kebisingan ruangan</label>
+                <select id="noise-preset" class="input-field w-full text-xs">
+                  <option value="">Patokan kebisingan (opsional)...</option>
+                  <option value="40">Ruang belajar sunyi (40 dB)</option>
+                  <option value="55">Kantor tenang K3 (55 dB)</option>
+                  <option value="60">Spot WFC A: sedang (60 dB)</option>
+                  <option value="80">Kafe ramai / jalan raya (80 dB)</option>
+                </select>
+              </div>
             </div>
-            <div class="flex flex-wrap sm:flex-nowrap items-center gap-2">
-              <div class="flex items-center gap-2 flex-1 min-w-[200px]">
-                <button type="button" class="step-btn shrink-0" data-step-target="noise" data-step-delta="-5" aria-label="Kurangi kebisingan 5 dB">-5</button>
-                <input
-                  type="range"
-                  id="noise-slider"
-                  min="30"
-                  max="100"
-                  step="1"
-                  value="60"
-                  aria-label="Slider tingkat kebisingan"
-                  class="fuzzy-slider flex-1 min-w-0"
-                >
-                <button type="button" class="step-btn shrink-0" data-step-target="noise" data-step-delta="5" aria-label="Tambah kebisingan 5 dB">+5</button>
-              </div>
-              <div class="flex items-center gap-1.5 shrink-0 ml-auto sm:ml-0">
-                <input
-                  type="number"
-                  id="noise-number"
-                  min="30"
-                  max="100"
-                  step="0.5"
-                  value="60"
-                  inputmode="decimal"
-                  aria-describedby="noise-error"
-                  aria-invalid="false"
-                  class="input-field w-20 font-formula text-right"
-                >
-                <span class="text-xs font-semibold text-muted-custom w-9">dB</span>
-              </div>
+            <div class="flex items-center gap-2.5">
+              <input
+                type="range"
+                id="noise-slider"
+                min="30"
+                max="100"
+                step="1"
+                value="60"
+                aria-label="Slider tingkat kebisingan dalam dB"
+                class="fuzzy-slider flex-1 min-w-0"
+              >
+              <input
+                type="number"
+                id="noise-number"
+                min="30"
+                max="100"
+                step="1"
+                value="60"
+                inputmode="decimal"
+                aria-describedby="noise-error"
+                aria-invalid="false"
+                class="input-field w-20 font-formula text-right shrink-0"
+              >
+              <span class="text-xs font-semibold text-muted-custom w-8 shrink-0">dB</span>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <span id="noise-mu-summary" class="text-xs font-formula text-muted-custom"></span>
+              <span class="text-[11px] font-formula text-muted-custom">30-100 dB</span>
             </div>
             <p id="noise-error" class="text-xs font-semibold" style="color: var(--status-tidak);" hidden></p>
           </div>
 
-          <!-- Variabel 3: Harga Menu -->
-          <div class="space-y-2 pt-2 border-t" style="border-color: var(--border-soft);">
-            <div class="flex flex-wrap items-baseline justify-between gap-2">
-              <label for="price-number" class="font-bold text-sm">
-                Harga Rata-rata Menu <span id="price-rupiah-preview" class="text-muted-custom font-normal">(Rp25.000)</span>
-              </label>
-              <div id="price-mu-summary" class="text-xs font-formula text-muted-custom"></div>
-            </div>
-            <div class="flex flex-wrap sm:flex-nowrap items-center gap-2">
-              <div class="flex items-center gap-2 flex-1 min-w-[200px]">
-                <button type="button" class="step-btn shrink-0" data-step-target="price" data-step-delta="-5" aria-label="Kurangi harga 5 ribu rupiah">-5</button>
-                <input
-                  type="range"
-                  id="price-slider"
-                  min="10"
-                  max="100"
-                  step="1"
-                  value="25"
-                  aria-label="Slider harga rata-rata menu dalam ribu rupiah"
-                  class="fuzzy-slider flex-1 min-w-0"
-                >
-                <button type="button" class="step-btn shrink-0" data-step-target="price" data-step-delta="5" aria-label="Tambah harga 5 ribu rupiah">+5</button>
+          <!-- Variabel 3: Intensitas Pencahayaan -->
+          <div class="space-y-1.5 pt-3 border-t" style="border-color: var(--border-soft);">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <label for="light-number" class="font-bold text-sm">Intensitas Pencahayaan</label>
+                <span class="text-xs text-muted-custom ml-1">(Ideal: &gt;= 300 Lux)</span>
               </div>
-              <div class="flex items-center gap-1.5 shrink-0 ml-auto sm:ml-0">
-                <input
-                  type="number"
-                  id="price-number"
-                  min="10"
-                  max="100"
-                  step="0.5"
-                  value="25"
-                  inputmode="decimal"
-                  aria-describedby="price-error"
-                  aria-invalid="false"
-                  class="input-field w-20 font-formula text-right"
-                >
-                <span class="text-xs font-semibold text-muted-custom w-9">rb</span>
+              <div class="sm:w-56">
+                <label for="light-preset" class="sr-only">Patokan kondisi pencahayaan ruangan</label>
+                <select id="light-preset" class="input-field w-full text-xs">
+                  <option value="">Patokan cahaya (opsional)...</option>
+                  <option value="120">Lampu kafe temaram (120 Lux)</option>
+                  <option value="300">Spot WFC A: batas K3 (300 Lux)</option>
+                  <option value="400">Ruang kerja terang (400 Lux)</option>
+                  <option value="520">Dekat jendela siang (520 Lux)</option>
+                </select>
               </div>
             </div>
-            <p id="price-error" class="text-xs font-semibold" style="color: var(--status-tidak);" hidden></p>
+            <div class="flex items-center gap-2.5">
+              <input
+                type="range"
+                id="light-slider"
+                min="0"
+                max="600"
+                step="5"
+                value="300"
+                aria-label="Slider intensitas pencahayaan dalam Lux"
+                class="fuzzy-slider flex-1 min-w-0"
+              >
+              <input
+                type="number"
+                id="light-number"
+                min="0"
+                max="600"
+                step="5"
+                value="300"
+                inputmode="decimal"
+                aria-describedby="light-error"
+                aria-invalid="false"
+                class="input-field w-20 font-formula text-right shrink-0"
+              >
+              <span class="text-xs font-semibold text-muted-custom w-8 shrink-0">Lux</span>
+            </div>
+            <div class="flex items-center justify-between gap-2">
+              <span id="light-mu-summary" class="text-xs font-formula text-muted-custom"></span>
+              <span class="text-[11px] font-formula text-muted-custom">0-600 Lux</span>
+            </div>
+            <p id="light-error" class="text-xs font-semibold" style="color: var(--status-tidak);" hidden></p>
           </div>
 
-          <!-- Pengaturan Sampel & Aksi Simpan -->
-          <div class="pt-3 border-t space-y-4" style="border-color: var(--border-soft);">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <label for="sample-mode-select" class="text-xs font-semibold text-muted-custom">Titik Sampel Centroid</label>
-              <select id="sample-mode-select" class="input-field text-xs py-1.5 sm:w-64">
-                <option value="10">10 titik diskrit (Bab 4: w = 10..100)</option>
-                <option value="101">101 titik rapat (Presisi: w = 0..100)</option>
-              </select>
-            </div>
-
-            <div class="flex flex-col sm:flex-row gap-2.5">
-              <button type="submit" id="add-compare-btn" class="btn-primary flex-1">
-                Simpan ke Komparasi
-              </button>
-              <button type="button" id="reset-form-btn" class="btn-secondary">
-                Reset
-              </button>
-            </div>
+          <div class="pt-3 border-t flex flex-col sm:flex-row gap-2.5" style="border-color: var(--border-soft);">
+            <button type="submit" id="add-compare-btn" class="btn-primary flex-1">
+              Simpan ke Komparasi
+            </button>
+            <button type="button" id="reset-form-btn" class="btn-secondary">
+              Reset
+            </button>
           </div>
         </form>
 
-        <!-- Kolom Kanan: Papan Skor Z* & Grafik Output Centroid (Focal Point) -->
+        <!-- Kartu Skor Utama (Focal Point) -->
         <div class="lg:col-span-6 surface-elevated p-4 sm:p-6 space-y-4">
-          <div class="flex flex-wrap items-start justify-between gap-2">
-            <div class="min-w-0">
-              <p class="index-stamp">SKOR KECOCOKAN WFC (Z*)</p>
-              <h2 id="result-cafe-title" class="text-lg sm:text-xl font-bold truncate mt-0.5">Studi Kasus: Kafe A</h2>
-            </div>
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h2 id="result-spot-title" class="text-lg sm:text-xl font-bold truncate">Studi Kasus: Spot WFC A</h2>
             <div id="result-category-badge" class="status-tag status-ideal shrink-0">
               <span aria-hidden="true" id="result-category-symbol">[+]</span>
-              <span id="result-category-text">Sangat Ideal untuk Fokus</span>
+              <span id="result-category-text">Sangat Ideal</span>
             </div>
           </div>
 
@@ -288,47 +298,46 @@
               <span class="text-sm font-semibold text-muted-custom">/ 100</span>
             </div>
             <div class="sm:text-right font-formula text-xs space-y-0.5">
-              <div class="text-muted-custom">Centroid ∑(w·μ) / ∑μ</div>
-              <div id="summary-centroid-fraction" class="font-bold text-sm">307,50 / 4,10 = 75,00</div>
+              <div id="summary-centroid-fraction" class="font-bold text-sm">Z* = 307,50 / 4,10</div>
+              <div class="text-muted-custom"><span id="summary-active-rules">4/27</span> aturan aktif</div>
             </div>
           </div>
 
           <p id="result-category-summary" class="text-sm text-muted-custom"></p>
 
-          <!-- Grafik Kurva Output Centroid -->
+          <!-- Strip Kepatuhan Standar K3 -->
+          <div id="k3-quick-grid" class="grid grid-cols-1 sm:grid-cols-3 gap-2" aria-label="Status standar K3 per parameter"></div>
+
+          <!-- Grafik Output Centroid -->
           <div class="space-y-1.5 pt-1">
             <div class="flex items-center justify-between gap-2 text-xs">
               <span class="font-bold">Kurva Agregasi Output &amp; Garis Sentroid</span>
               <span id="chart-loading-status" class="text-muted-custom font-formula">Memuat grafik...</span>
             </div>
             <div id="chart-error-box" role="alert" hidden class="p-3 rounded border text-xs" style="border-color: var(--status-tidak); background-color: var(--status-tidak-bg); color: var(--status-tidak);">
-              Grafik gagal dimuat. Seluruh perhitungan numerik tetap tersedia di tab Rincian Hitung.
+              Grafik gagal dimuat. Perhitungan numerik tersedia di tab 4 Langkah &amp; Ergonomi.
             </div>
             <div class="chart-box-main">
-              <canvas id="output-chart" aria-label="Grafik fungsi keanggotaan output skor WFC dan area arsiran Centroid" role="img"></canvas>
+              <canvas id="output-chart" aria-label="Grafik fungsi keanggotaan output kenyamanan ruang kerja dan area arsiran Centroid" role="img"></canvas>
             </div>
           </div>
 
           <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t text-xs" style="border-color: var(--border-soft);">
             <span class="font-formula text-muted-custom">
-              Aturan aktif: <strong id="summary-active-rules" style="color: var(--text-main);">4/27</strong> |
-              MAX [TD/CS/SI]: <strong id="summary-aggregation" style="color: var(--text-main);">0,00 / 0,25 / 0,75</strong>
+              MAX [TN/CN/SI]: <strong id="summary-aggregation" style="color: var(--text-main);">0,00 / 0,25 / 0,75</strong>
             </span>
             <a href="#inspeksi" id="jump-to-steps-link" class="font-semibold underline underline-offset-4 py-1" style="color: var(--accent);">
-              Buka Rincian Hitung
+              Lihat rincian perhitungan &amp; saran ergonomi
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- BAGIAN 02: PAPAN KOMPARASI 2-3 KAFE -->
+    <!-- ZONA 02: KOMPARASI 2-3 RUANGAN / SPOT WFC -->
     <section id="komparasi" aria-labelledby="heading-komparasi" class="space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
-          <span class="index-stamp">02 / KOMPARASI PERINGKAT</span>
-          <h2 id="heading-komparasi" class="text-xl sm:text-2xl font-bold">Perbandingan Kandidat Kafe (Maksimal 3)</h2>
-        </div>
+        <h2 id="heading-komparasi" class="text-xl sm:text-2xl font-bold">Perbandingan 2-3 Ruang Kerja / Spot WFC</h2>
         <div class="flex flex-wrap items-center gap-2">
           <button type="button" id="load-preset-comparison-btn" class="btn-secondary">
             Muat 3 Sampel Uji
@@ -341,39 +350,35 @@
 
       <!-- Empty State (R-27) -->
       <div id="comparison-empty-state" hidden class="surface-card p-6 sm:p-8 text-center space-y-3">
-        <p class="font-editorial text-lg font-bold">Belum ada kafe pada papan komparasi</p>
+        <p class="font-editorial text-lg font-bold">Belum ada ruangan pada papan komparasi</p>
         <p class="text-sm text-muted-custom max-w-md mx-auto">
-          Simpan hasil evaluasi kafe dari formulir di atas atau muat 3 sampel uji untuk membandingkan peringkat berdampingan.
+          Simpan hasil evaluasi ruang kerja dari formulir di atas atau muat 3 sampel uji untuk membandingkan peringkat berdampingan.
         </p>
         <div class="flex flex-wrap justify-center gap-2.5 pt-1">
-          <a href="#evaluasi" class="btn-primary">Isi Evaluasi Kafe</a>
+          <a href="#evaluasi" class="btn-primary">Isi Evaluasi Ruang</a>
           <button type="button" id="empty-load-preset-btn" class="btn-secondary">Muat 3 Sampel Uji</button>
         </div>
       </div>
 
-      <!-- Info saat baru 1 kafe -->
       <div id="comparison-single-notice" hidden class="surface-subtle px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs sm:text-sm">
-        <span>Baru 1 kafe tersimpan. Tambahkan minimal 1 kafe lagi untuk membandingkan peringkat berdampingan.</span>
-        <a href="#evaluasi" class="font-semibold underline underline-offset-4 shrink-0" style="color: var(--accent);">Tambah Kafe</a>
+        <span>Baru 1 ruang tersimpan. Tambahkan minimal 1 ruang lagi untuk membandingkan peringkat berdampingan.</span>
+        <a href="#evaluasi" class="font-semibold underline underline-offset-4 shrink-0" style="color: var(--accent);">Tambah Ruang</a>
       </div>
 
       <div id="comparison-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
     </section>
 
-    <!-- BAGIAN 03: INSPEKSI MODEL TERPADU -->
+    <!-- ZONA 03: INSPEKSI MODEL & REKOMENDASI ERGONOMI -->
     <section id="inspeksi" aria-labelledby="heading-inspeksi" class="space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-        <div>
-          <span class="index-stamp">03 / TRANSPARANSI MODEL</span>
-          <h2 id="heading-inspeksi" class="text-xl sm:text-2xl font-bold">Kurva Input, Tahapan Hitung &amp; 27 Aturan</h2>
-        </div>
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <h2 id="heading-inspeksi" class="text-xl sm:text-2xl font-bold">Kurva Input, Perhitungan &amp; Saran Ergonomi</h2>
 
         <div role="tablist" aria-label="Inspeksi model Fuzzy Mamdani" class="surface-subtle p-1 flex flex-wrap gap-1">
           <button type="button" role="tab" id="tab-curves" aria-selected="true" aria-controls="panel-curves" tabindex="0" class="tab-btn">
             Kurva Input (3)
           </button>
           <button type="button" role="tab" id="tab-steps" aria-selected="false" aria-controls="panel-steps" tabindex="-1" class="tab-btn">
-            4 Langkah Hitung
+            4 Langkah &amp; Ergonomi
           </button>
           <button type="button" role="tab" id="tab-rules" aria-selected="false" aria-controls="panel-rules" tabindex="-1" class="tab-btn">
             Basis 27 Aturan
@@ -381,16 +386,16 @@
         </div>
       </div>
 
-      <!-- TAB PANEL 1: Kurva Fungsi Keanggotaan Input -->
+      <!-- TAB 1: Kurva Fungsi Keanggotaan Input -->
       <div role="tabpanel" id="panel-curves" aria-labelledby="tab-curves" class="surface-card p-4 sm:p-6">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           <div class="surface-subtle p-4 space-y-2">
             <div class="flex items-baseline justify-between gap-2">
-              <h3 class="font-bold text-sm">Wi-Fi (<span class="font-formula">x</span>)</h3>
-              <span id="wifi-chart-val" class="font-formula text-xs font-bold">45 Mbps</span>
+              <h3 class="font-bold text-sm">Suhu Ruangan (<span class="font-formula">x</span>)</h3>
+              <span id="temp-chart-val" class="font-formula text-xs font-bold">25 °C</span>
             </div>
             <div class="chart-box-input">
-              <canvas id="wifi-chart" aria-label="Grafik keanggotaan kecepatan Wi-Fi" role="img"></canvas>
+              <canvas id="temp-chart" aria-label="Grafik keanggotaan suhu ruangan" role="img"></canvas>
             </div>
           </div>
 
@@ -406,19 +411,27 @@
 
           <div class="surface-subtle p-4 space-y-2 md:col-span-2 lg:col-span-1">
             <div class="flex items-baseline justify-between gap-2">
-              <h3 class="font-bold text-sm">Harga Menu (<span class="font-formula">z</span>)</h3>
-              <span id="price-chart-val" class="font-formula text-xs font-bold">Rp25.000</span>
+              <h3 class="font-bold text-sm">Pencahayaan (<span class="font-formula">z</span>)</h3>
+              <span id="light-chart-val" class="font-formula text-xs font-bold">300 Lux</span>
             </div>
             <div class="chart-box-input">
-              <canvas id="price-chart" aria-label="Grafik keanggotaan harga rata-rata menu" role="img"></canvas>
+              <canvas id="light-chart" aria-label="Grafik keanggotaan intensitas pencahayaan" role="img"></canvas>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- TAB PANEL 2: 4 Langkah Perhitungan Mamdani -->
+      <!-- TAB 2: 4 Langkah Perhitungan + Rekomendasi Ergonomi K3 -->
       <div role="tabpanel" id="panel-steps" aria-labelledby="tab-steps" hidden class="surface-card p-4 sm:p-6 space-y-6">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="space-y-2.5">
+          <div class="flex flex-wrap items-baseline justify-between gap-2">
+            <h3 class="font-bold text-base">Rekomendasi Tindakan Ergonomi (Permenkes RI No. 48 Tahun 2016)</h3>
+            <span class="text-xs text-muted-custom">Evaluasi kondisi fisik aktual terhadap ambang K3 Perkantoran</span>
+          </div>
+          <div id="ergonomic-recommendations-grid" class="grid grid-cols-1 md:grid-cols-3 gap-3"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-4 border-t" style="border-color: var(--border-soft);">
           <div class="lg:col-span-7 space-y-2.5">
             <h3 class="font-bold text-base">Langkah 1: Fuzzifikasi Input</h3>
             <div id="step1-fuzzification-cards" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
@@ -432,7 +445,7 @@
         <div class="space-y-2.5 pt-4 border-t" style="border-color: var(--border-soft);">
           <div class="flex flex-wrap items-baseline justify-between gap-2">
             <h3 class="font-bold text-base">Langkah 2: Inferensi Aturan Aktif (Implikasi MIN)</h3>
-            <span class="font-formula text-xs text-muted-custom">α = min(μWi-Fi, μKebisingan, μHarga)</span>
+            <span class="font-formula text-xs text-muted-custom">α = min(μSuhu, μKebisingan, μCahaya)</span>
           </div>
           <div class="overflow-x-auto border rounded-lg" style="border-color: var(--border-soft);">
             <table class="w-full text-left text-sm border-collapse">
@@ -451,9 +464,18 @@
         </div>
 
         <div class="space-y-2.5 pt-4 border-t" style="border-color: var(--border-soft);">
-          <div class="flex flex-wrap items-baseline justify-between gap-2">
-            <h3 class="font-bold text-base">Langkah 4: Defuzzifikasi Centroid Diskrit</h3>
-            <span class="font-formula text-xs text-muted-custom">Z* = ∑(wᵢ × μ(wᵢ)) / ∑μ(wᵢ)</span>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h3 class="font-bold text-base">Langkah 4: Defuzzifikasi Centroid Diskrit</h3>
+              <p class="font-formula text-xs text-muted-custom">Z* = ∑(wᵢ × μ(wᵢ)) / ∑μ(wᵢ)</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <label for="sample-mode-select" class="text-xs font-semibold text-muted-custom shrink-0">Resolusi Sampel:</label>
+              <select id="sample-mode-select" class="input-field text-xs py-1.5 sm:w-56">
+                <option value="10">10 titik diskrit (Bab 4: 10..100)</option>
+                <option value="101">101 titik rapat (0..100)</option>
+              </select>
+            </div>
           </div>
           <div id="step4-formula-box" class="surface-subtle p-3.5 space-y-1 font-formula text-xs sm:text-sm break-words"></div>
           <div class="overflow-x-auto border rounded-lg max-h-72" style="border-color: var(--border-soft);">
@@ -461,7 +483,7 @@
               <thead class="sticky top-0" style="background-color: var(--bg-subtle);">
                 <tr class="border-b" style="border-color: var(--border-soft);">
                   <th scope="col" class="py-2 px-3 font-bold">Sampel <span class="font-formula">wᵢ</span></th>
-                  <th scope="col" class="py-2 px-3 font-bold">Terpotong [TD / CS / SI]</th>
+                  <th scope="col" class="py-2 px-3 font-bold">Terpotong [TN / CN / SI]</th>
                   <th scope="col" class="py-2 px-3 font-bold text-right"><span class="font-formula">μ(wᵢ)</span></th>
                   <th scope="col" class="py-2 px-3 font-bold text-right"><span class="font-formula">wᵢ × μ(wᵢ)</span></th>
                 </tr>
@@ -472,7 +494,7 @@
         </div>
       </div>
 
-      <!-- TAB PANEL 3: Basis Pengetahuan 27 Aturan -->
+      <!-- TAB 3: Basis Pengetahuan 27 Aturan -->
       <div role="tabpanel" id="panel-rules" aria-labelledby="tab-rules" hidden class="surface-card p-4 sm:p-6 space-y-4">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
           <div>
@@ -480,8 +502,8 @@
             <select id="rule-filter-output" class="input-field w-full text-sm">
               <option value="ALL">Semua Kategori (27)</option>
               <option value="Sangat Ideal">Sangat Ideal</option>
-              <option value="Cocok untuk Santai">Cocok untuk Santai</option>
-              <option value="Tidak Disarankan">Tidak Disarankan</option>
+              <option value="Cukup Nyaman">Cukup Nyaman</option>
+              <option value="Tidak Nyaman">Tidak Nyaman</option>
             </select>
           </div>
           <div>
@@ -508,10 +530,10 @@
             <thead style="background-color: var(--bg-subtle);">
               <tr class="border-b" style="border-color: var(--border-soft);">
                 <th scope="col" class="py-2.5 px-3.5 font-bold">Kode</th>
-                <th scope="col" class="py-2.5 px-3.5 font-bold">Wi-Fi</th>
+                <th scope="col" class="py-2.5 px-3.5 font-bold">Suhu Ruangan</th>
                 <th scope="col" class="py-2.5 px-3.5 font-bold">Kebisingan</th>
-                <th scope="col" class="py-2.5 px-3.5 font-bold">Harga Menu</th>
-                <th scope="col" class="py-2.5 px-3.5 font-bold">Keputusan Output</th>
+                <th scope="col" class="py-2.5 px-3.5 font-bold">Pencahayaan</th>
+                <th scope="col" class="py-2.5 px-3.5 font-bold">Output Kenyamanan</th>
                 <th scope="col" class="py-2.5 px-3.5 font-bold text-right">Nilai α</th>
               </tr>
             </thead>
@@ -524,23 +546,23 @@
     </section>
   </main>
 
-  <!-- Footer Profesional & Ringkas -->
-  <footer id="tim" class="mt-12 border-t py-8" style="border-color: var(--border-soft); background-color: var(--bg-surface);">
+  <!-- Footer Ringkas -->
+  <footer id="tim" class="mt-10 border-t py-8" style="border-color: var(--border-soft); background-color: var(--bg-surface);">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-6">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
         <div class="md:col-span-5 space-y-2">
-          <h2 class="text-base font-bold">Ambang Klasifikasi Skor WFC (Z*)</h2>
+          <h2 class="text-base font-bold">Ambang Klasifikasi Skor Akhir (Z*)</h2>
           <div class="space-y-1.5 text-xs">
             <div class="flex flex-wrap items-center justify-between gap-2 py-1 border-b" style="border-color: var(--border-soft);">
               <span class="status-tag status-ideal">[+] Sangat Ideal untuk Fokus</span>
               <span class="font-formula font-bold">70,00 - 100</span>
             </div>
             <div class="flex flex-wrap items-center justify-between gap-2 py-1 border-b" style="border-color: var(--border-soft);">
-              <span class="status-tag status-santai">[~] Cocok untuk Santai</span>
+              <span class="status-tag status-santai">[~] Cukup Nyaman (Penyesuaian Ergonomi)</span>
               <span class="font-formula font-bold">40,00 - 69,99</span>
             </div>
             <div class="flex flex-wrap items-center justify-between gap-2 py-1">
-              <span class="status-tag status-tidak">[-] Tidak Disarankan untuk Nugas</span>
+              <span class="status-tag status-tidak">[-] Tidak Nyaman / Tidak Disarankan</span>
               <span class="font-formula font-bold">0,00 - 39,99</span>
             </div>
           </div>
@@ -551,26 +573,26 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 text-xs">
             <div>
               <p class="font-bold">Rafael Putut Arli <span class="font-formula font-normal text-muted-custom">(2417051042)</span></p>
-              <p class="text-muted-custom">Fuzzy Logic Engineer (27 aturan &amp; validasi)</p>
+              <p class="text-muted-custom">Fuzzy Logic Engineer (standar K3 Permenkes 48/2016, 27 aturan &amp; validasi)</p>
             </div>
             <div>
               <p class="font-bold">Miqdad Dzakiy Arroyan <span class="font-formula font-normal text-muted-custom">(2417051044)</span></p>
-              <p class="text-muted-custom">UI/UX &amp; Frontend Developer</p>
+              <p class="text-muted-custom">UI/UX &amp; Frontend Developer (slider, preset bantu &amp; komparasi 2-3 ruang)</p>
             </div>
             <div>
               <p class="font-bold">Wisnu Wira Winata</p>
-              <p class="text-muted-custom">Logic &amp; Visualization Developer (Chart.js)</p>
+              <p class="text-muted-custom">Logic &amp; Visualization Developer (mesin Mamdani &amp; kurva Chart.js)</p>
             </div>
             <div>
               <p class="font-bold">Atalah</p>
-              <p class="text-muted-custom">QA, Data Sampel &amp; Dokumentasi</p>
+              <p class="text-muted-custom">QA, Data Sampel Pengukuran &amp; Dokumentasi</p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="pt-4 border-t flex flex-wrap items-center justify-between gap-3 text-xs text-muted-custom" style="border-color: var(--border-soft);">
-        <span>Sistem Pakar Evaluasi Kenyamanan Ruang Kerja (Metode Fuzzy Mamdani)</span>
+        <span>Sistem Pakar Evaluasi Kenyamanan Ruang Kerja WFC / WFH (Fuzzy Mamdani &amp; Permenkes RI No. 48/2016)</span>
         <a href="#evaluasi" class="font-semibold underline underline-offset-4 py-2" style="color: var(--accent);">Kembali ke Atas</a>
       </div>
     </div>
@@ -587,28 +609,28 @@
       </div>
       <div class="space-y-2.5 text-xs max-h-[65vh] overflow-y-auto pr-1">
         <div class="surface-subtle p-3 space-y-1">
-          <p class="font-bold">A. Kecepatan Wi-Fi (x dalam [0, 100] Mbps)</p>
-          <p class="font-formula">Lambat [0, 0, 10, 30]: 1 (x ≤ 10); (30-x)/20 (10 &lt; x &lt; 30); 0 (x ≥ 30)</p>
-          <p class="font-formula">Sedang [10, 30, 50]: (x-10)/20 (10 &lt; x ≤ 30); (50-x)/20 (30 &lt; x &lt; 50)</p>
-          <p class="font-formula">Cepat [30, 50, 100, 100]: (x-30)/20 (30 &lt; x &lt; 50); 1 (x ≥ 50)</p>
+          <p class="font-bold">A. Suhu Ruangan (x dalam [16, 36] °C, Ideal K3: 23-26 °C)</p>
+          <p class="font-formula">Dingin [16, 16, 20, 24]: 1 (x &lt;= 20); (24-x)/4 (20 &lt; x &lt; 24); 0 (x &gt;= 24)</p>
+          <p class="font-formula">Nyaman [20, 24, 28]: (x-20)/4 (20 &lt; x &lt;= 24); (28-x)/4 (24 &lt; x &lt; 28)</p>
+          <p class="font-formula">Panas [24, 28, 36, 36]: (x-24)/4 (24 &lt; x &lt; 28); 1 (x &gt;= 28)</p>
         </div>
         <div class="surface-subtle p-3 space-y-1">
-          <p class="font-bold">B. Tingkat Kebisingan (y dalam [30, 100] dB)</p>
-          <p class="font-formula">Tenang [30, 30, 45, 65]: 1 (y ≤ 45); (65-y)/20 (45 &lt; y &lt; 65); 0 (y ≥ 65)</p>
-          <p class="font-formula">Sedang [45, 65, 85]: (y-45)/20 (45 &lt; y ≤ 65); (85-y)/20 (65 &lt; y &lt; 85)</p>
-          <p class="font-formula">Bising [65, 85, 100, 100]: (y-65)/20 (65 &lt; y &lt; 85); 1 (y ≥ 85)</p>
+          <p class="font-bold">B. Tingkat Kebisingan (y dalam [30, 100] dB, Ideal K3: &lt;= 55-65 dB)</p>
+          <p class="font-formula">Tenang [30, 30, 45, 65]: 1 (y &lt;= 45); (65-y)/20 (45 &lt; y &lt; 65); 0 (y &gt;= 65)</p>
+          <p class="font-formula">Sedang [45, 65, 85]: (y-45)/20 (45 &lt; y &lt;= 65); (85-y)/20 (65 &lt; y &lt; 85)</p>
+          <p class="font-formula">Bising [65, 85, 100, 100]: (y-65)/20 (65 &lt; y &lt; 85); 1 (y &gt;= 85)</p>
         </div>
         <div class="surface-subtle p-3 space-y-1">
-          <p class="font-bold">C. Harga Rata-rata Menu (z dalam [10, 100] Ribu Rp)</p>
-          <p class="font-formula">Murah [10, 10, 25, 45]: 1 (z ≤ 25); (45-z)/20 (25 &lt; z &lt; 45); 0 (z ≥ 45)</p>
-          <p class="font-formula">Sedang [25, 45, 65]: (z-25)/20 (25 &lt; z ≤ 45); (65-z)/20 (45 &lt; z &lt; 65)</p>
-          <p class="font-formula">Mahal [45, 65, 100, 100]: (z-45)/20 (45 &lt; z &lt; 65); 1 (z ≥ 65)</p>
+          <p class="font-bold">C. Intensitas Pencahayaan (z dalam [0, 600] Lux, Ideal K3: &gt;= 300 Lux)</p>
+          <p class="font-formula">Redup [0, 0, 150, 300]: 1 (z &lt;= 150); (300-z)/150 (150 &lt; z &lt; 300); 0 (z &gt;= 300)</p>
+          <p class="font-formula">Cukup [150, 300, 450]: (z-150)/150 (150 &lt; z &lt;= 300); (450-z)/150 (300 &lt; z &lt; 450)</p>
+          <p class="font-formula">Terang [300, 450, 600, 600]: (z-300)/150 (300 &lt; z &lt; 450); 1 (z &gt;= 450)</p>
         </div>
         <div class="surface-subtle p-3 space-y-1">
-          <p class="font-bold">D. Skor Kecocokan WFC (w dalam [0, 100])</p>
-          <p class="font-formula">Tidak Disarankan [0, 0, 25, 50]: 1 (w ≤ 25); (50-w)/25 (25 &lt; w &lt; 50)</p>
-          <p class="font-formula">Cocok untuk Santai [25, 50, 75]: (w-25)/25 (25 &lt; w ≤ 50); (75-w)/25 (50 &lt; w &lt; 75)</p>
-          <p class="font-formula">Sangat Ideal [50, 75, 100, 100]: (w-50)/25 (50 &lt; w &lt; 75); 1 (w ≥ 75)</p>
+          <p class="font-bold">D. Skor Kenyamanan Ruang Kerja (w dalam [0, 100])</p>
+          <p class="font-formula">Tidak Nyaman [0, 0, 25, 50]: 1 (w &lt;= 25); (50-w)/25 (25 &lt; w &lt; 50)</p>
+          <p class="font-formula">Cukup Nyaman [25, 50, 75]: (w-25)/25 (25 &lt; w &lt;= 50); (75-w)/25 (50 &lt; w &lt; 75)</p>
+          <p class="font-formula">Sangat Ideal [50, 75, 100, 100]: (w-50)/25 (50 &lt; w &lt; 75); 1 (w &gt;= 75)</p>
         </div>
       </div>
     </div>
@@ -619,7 +641,7 @@
     <div class="space-y-4">
       <div class="border-b pb-3" style="border-color: var(--border-soft);">
         <h2 id="replace-dialog-title" class="text-lg font-bold">Slot Komparasi Penuh (3/3)</h2>
-        <p class="text-xs text-muted-custom mt-1">Pilih kafe yang ingin diganti:</p>
+        <p class="text-xs text-muted-custom mt-1">Pilih ruang kerja yang ingin diganti:</p>
       </div>
       <div id="replace-options-list" class="space-y-2"></div>
       <div class="flex justify-end pt-1">

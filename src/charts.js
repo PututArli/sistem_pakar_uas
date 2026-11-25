@@ -1,7 +1,7 @@
 import {
-  fuzzifyWifi,
+  fuzzifyTemp,
   fuzzifyNoise,
-  fuzzifyPrice,
+  fuzzifyLight,
   membershipOutput,
   aggregatedMembershipAt
 } from './fuzzyEngine.js';
@@ -17,8 +17,7 @@ function getPalette() {
       accentFill: 'rgba(237, 125, 85, 0.28)',
       low: '#F48687',
       mid: '#F2B84B',
-      high: '#6BD496',
-      marker: '#F4EDE2'
+      high: '#6BD496'
     };
   }
   return {
@@ -29,8 +28,7 @@ function getPalette() {
     accentFill: 'rgba(166, 58, 27, 0.24)',
     low: '#9E2A2B',
     mid: '#804E00',
-    high: '#1F5C3A',
-    marker: '#211813'
+    high: '#1F5C3A'
   };
 }
 
@@ -84,8 +82,8 @@ const verticalMarkerPlugin = {
 
 function generateRange(min, max, step = 1) {
   const pts = [];
-  for (let v = min; v <= max; v += step) {
-    pts.push(v);
+  for (let v = min; v <= max + 1e-9; v += step) {
+    pts.push(Math.round(v * 100) / 100);
   }
   return pts;
 }
@@ -98,9 +96,7 @@ export class FuzzyChartsManager {
 
   init() {
     const ChartGlobal = window.Chart;
-    if (!ChartGlobal) {
-      return false;
-    }
+    if (!ChartGlobal) return false;
     ChartGlobal.register(verticalMarkerPlugin);
     this.ready = true;
     this.createInputCharts();
@@ -175,47 +171,48 @@ export class FuzzyChartsManager {
   createInputCharts() {
     const ChartGlobal = window.Chart;
     const palette = getPalette();
+    const badgeFg = document.documentElement.getAttribute('data-theme') === 'dark' ? '#17120F' : '#FFFDF8';
 
-    const wifiXs = generateRange(0, 100, 1);
-    const wifiCtx = document.getElementById('wifi-chart');
-    if (wifiCtx) {
-      this.charts.wifi = new ChartGlobal(wifiCtx, {
+    const tempXs = generateRange(16, 36, 0.5);
+    const tempCtx = document.getElementById('temp-chart');
+    if (tempCtx) {
+      this.charts.temp = new ChartGlobal(tempCtx, {
         type: 'line',
         data: {
           datasets: [
             {
-              label: 'Lambat',
-              data: wifiXs.map((x) => ({ x, y: fuzzifyWifi(x).Lambat })),
-              borderColor: palette.low,
+              label: 'Dingin',
+              data: tempXs.map((x) => ({ x, y: fuzzifyTemp(x).Dingin })),
+              borderColor: palette.mid,
               borderWidth: 2,
               pointRadius: 0,
               tension: 0
             },
             {
-              label: 'Sedang',
-              data: wifiXs.map((x) => ({ x, y: fuzzifyWifi(x).Sedang })),
-              borderColor: palette.mid,
+              label: 'Nyaman',
+              data: tempXs.map((x) => ({ x, y: fuzzifyTemp(x).Nyaman })),
+              borderColor: palette.high,
               borderWidth: 2,
               borderDash: [6, 3],
               pointRadius: 0,
               tension: 0
             },
             {
-              label: 'Cepat',
-              data: wifiXs.map((x) => ({ x, y: fuzzifyWifi(x).Cepat })),
-              borderColor: palette.high,
+              label: 'Panas',
+              data: tempXs.map((x) => ({ x, y: fuzzifyTemp(x).Panas })),
+              borderColor: palette.low,
               borderWidth: 2,
               pointRadius: 0,
               tension: 0
             }
           ]
         },
-        options: this.baseOptions(0, 100, 'Kecepatan Wi-Fi (Mbps)', palette, {
-          value: 45,
+        options: this.baseOptions(16, 36, 'Suhu Ruangan (°C)', palette, {
+          value: 25,
           color: palette.accent,
           badgeBg: palette.accent,
-          badgeFg: document.documentElement.getAttribute('data-theme') === 'dark' ? '#17120F' : '#FFFDF8',
-          label: 'x = 45'
+          badgeFg,
+          label: 'x = 25'
         })
       });
     }
@@ -258,30 +255,30 @@ export class FuzzyChartsManager {
           value: 60,
           color: palette.accent,
           badgeBg: palette.accent,
-          badgeFg: document.documentElement.getAttribute('data-theme') === 'dark' ? '#17120F' : '#FFFDF8',
+          badgeFg,
           label: 'y = 60'
         })
       });
     }
 
-    const priceZs = generateRange(10, 100, 1);
-    const priceCtx = document.getElementById('price-chart');
-    if (priceCtx) {
-      this.charts.price = new ChartGlobal(priceCtx, {
+    const lightZs = generateRange(0, 600, 5);
+    const lightCtx = document.getElementById('light-chart');
+    if (lightCtx) {
+      this.charts.light = new ChartGlobal(lightCtx, {
         type: 'line',
         data: {
           datasets: [
             {
-              label: 'Murah',
-              data: priceZs.map((z) => ({ x: z, y: fuzzifyPrice(z).Murah })),
-              borderColor: palette.high,
+              label: 'Redup',
+              data: lightZs.map((z) => ({ x: z, y: fuzzifyLight(z).Redup })),
+              borderColor: palette.low,
               borderWidth: 2,
               pointRadius: 0,
               tension: 0
             },
             {
-              label: 'Sedang',
-              data: priceZs.map((z) => ({ x: z, y: fuzzifyPrice(z).Sedang })),
+              label: 'Cukup',
+              data: lightZs.map((z) => ({ x: z, y: fuzzifyLight(z).Cukup })),
               borderColor: palette.mid,
               borderWidth: 2,
               borderDash: [6, 3],
@@ -289,21 +286,21 @@ export class FuzzyChartsManager {
               tension: 0
             },
             {
-              label: 'Mahal',
-              data: priceZs.map((z) => ({ x: z, y: fuzzifyPrice(z).Mahal })),
-              borderColor: palette.low,
+              label: 'Terang',
+              data: lightZs.map((z) => ({ x: z, y: fuzzifyLight(z).Terang })),
+              borderColor: palette.high,
               borderWidth: 2,
               pointRadius: 0,
               tension: 0
             }
           ]
         },
-        options: this.baseOptions(10, 100, 'Harga Rata-rata Menu (Ribu Rp)', palette, {
-          value: 25,
+        options: this.baseOptions(0, 600, 'Pencahayaan (Lux)', palette, {
+          value: 300,
           color: palette.accent,
           badgeBg: palette.accent,
-          badgeFg: document.documentElement.getAttribute('data-theme') === 'dark' ? '#17120F' : '#FFFDF8',
-          label: 'z = 25'
+          badgeFg,
+          label: 'z = 300'
         })
       });
     }
@@ -312,6 +309,7 @@ export class FuzzyChartsManager {
   createOutputChart() {
     const ChartGlobal = window.Chart;
     const palette = getPalette();
+    const badgeFg = document.documentElement.getAttribute('data-theme') === 'dark' ? '#17120F' : '#FFFDF8';
     const ws = generateRange(0, 100, 1);
     const outCtx = document.getElementById('output-chart');
     if (!outCtx) return;
@@ -332,8 +330,8 @@ export class FuzzyChartsManager {
             order: 1
           },
           {
-            label: 'Tidak Disarankan',
-            data: ws.map((w) => ({ x: w, y: membershipOutput(w)['Tidak Disarankan'] })),
+            label: 'Tidak Nyaman',
+            data: ws.map((w) => ({ x: w, y: membershipOutput(w)['Tidak Nyaman'] })),
             borderColor: palette.low,
             borderWidth: 1.5,
             borderDash: [4, 4],
@@ -343,8 +341,8 @@ export class FuzzyChartsManager {
             order: 2
           },
           {
-            label: 'Cocok untuk Santai',
-            data: ws.map((w) => ({ x: w, y: membershipOutput(w)['Cocok untuk Santai'] })),
+            label: 'Cukup Nyaman',
+            data: ws.map((w) => ({ x: w, y: membershipOutput(w)['Cukup Nyaman'] })),
             borderColor: palette.mid,
             borderWidth: 1.5,
             borderDash: [4, 4],
@@ -366,13 +364,13 @@ export class FuzzyChartsManager {
           }
         ]
       },
-      options: this.baseOptions(0, 100, 'Skor Kecocokan WFC (w)', palette, {
+      options: this.baseOptions(0, 100, 'Skor Kenyamanan Ruang Kerja (w)', palette, {
         value: 75,
         dash: [],
         lineWidth: 2.5,
         color: palette.accent,
         badgeBg: palette.accent,
-        badgeFg: document.documentElement.getAttribute('data-theme') === 'dark' ? '#17120F' : '#FFFDF8',
+        badgeFg,
         label: 'Z* = 75,00'
       })
     });
@@ -382,18 +380,18 @@ export class FuzzyChartsManager {
     if (!this.ready) return;
     const palette = getPalette();
     const badgeFg = document.documentElement.getAttribute('data-theme') === 'dark' ? '#17120F' : '#FFFDF8';
-    const { wifi, noise, price } = evalResult.inputs;
+    const { temp, noise, light } = evalResult.inputs;
     const zStar = evalResult.centroid.zStar;
 
-    if (this.charts.wifi) {
-      this.charts.wifi.options.plugins.verticalMarker = {
-        value: wifi,
+    if (this.charts.temp) {
+      this.charts.temp.options.plugins.verticalMarker = {
+        value: temp,
         color: palette.accent,
         badgeBg: palette.accent,
         badgeFg,
-        label: `x = ${String(wifi).replace('.', ',')}`
+        label: `x = ${String(temp).replace('.', ',')}`
       };
-      this.charts.wifi.update();
+      this.charts.temp.update();
     }
 
     if (this.charts.noise) {
@@ -407,15 +405,15 @@ export class FuzzyChartsManager {
       this.charts.noise.update();
     }
 
-    if (this.charts.price) {
-      this.charts.price.options.plugins.verticalMarker = {
-        value: price,
+    if (this.charts.light) {
+      this.charts.light.options.plugins.verticalMarker = {
+        value: light,
         color: palette.accent,
         badgeBg: palette.accent,
         badgeFg,
-        label: `z = ${String(price).replace('.', ',')}`
+        label: `z = ${String(light).replace('.', ',')}`
       };
-      this.charts.price.update();
+      this.charts.light.update();
     }
 
     if (this.charts.output) {

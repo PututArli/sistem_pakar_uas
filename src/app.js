@@ -6,32 +6,32 @@ import {
 } from './fuzzyEngine.js';
 import { FuzzyChartsManager } from './charts.js';
 
-const STORAGE_KEY_CAFES = 'wfc_mamdani_comparison_v1';
+const STORAGE_KEY_SPOTS = 'wfc_k3_mamdani_comparison_v2';
 const STORAGE_KEY_THEME = 'wfc_theme';
 
-const PRESET_CAFES = [
+const PRESET_SPOTS = [
   {
-    id: 'preset-kafe-a',
-    name: 'Studi Kasus: Kafe A',
-    wifi: 45,
+    id: 'preset-spot-a',
+    name: 'Studi Kasus: Spot WFC A',
+    temp: 25,
     noise: 60,
-    price: 25,
+    light: 300,
     isSampleNote: 'Bab 4 Laporan'
   },
   {
-    id: 'preset-kafe-b',
-    name: 'Sampel: Ruang Seduh Tenang',
-    wifi: 65,
+    id: 'preset-spot-b',
+    name: 'Sampel: Ruang Baca Tenang',
+    temp: 24,
     noise: 42,
-    price: 35,
+    light: 400,
     isSampleNote: 'Simulasi'
   },
   {
-    id: 'preset-kafe-c',
-    name: 'Sampel: Kedai Kopi Jalan Raya',
-    wifi: 22,
-    noise: 78,
-    price: 20,
+    id: 'preset-spot-c',
+    name: 'Sampel: Teras Kafe Sore',
+    temp: 29,
+    noise: 74,
+    light: 160,
     isSampleNote: 'Simulasi'
   }
 ];
@@ -40,20 +40,15 @@ function fmtNum(val, decimals = 2) {
   return Number(val).toFixed(decimals).replace('.', ',');
 }
 
-function fmtRupiahFromRibu(ribu) {
-  const rupiah = Math.round(Number(ribu) * 1000);
-  return 'Rp' + rupiah.toLocaleString('id-ID');
-}
-
 function statusMeta(key) {
   if (key === 'ideal') return { cls: 'status-ideal', symbol: '[+]' };
-  if (key === 'santai') return { cls: 'status-santai', symbol: '[~]' };
+  if (key === 'cukup') return { cls: 'status-santai', symbol: '[~]' };
   return { cls: 'status-tidak', symbol: '[-]' };
 }
 
 function outputShortKey(outputLabel) {
   if (outputLabel === 'Sangat Ideal') return 'ideal';
-  if (outputLabel === 'Cocok untuk Santai') return 'santai';
+  if (outputLabel === 'Cukup Nyaman') return 'cukup';
   return 'tidak';
 }
 
@@ -74,10 +69,10 @@ function createEl(tag, className, text) {
 }
 
 const state = {
-  cafeName: 'Studi Kasus: Kafe A',
-  wifi: 45,
+  spotName: 'Studi Kasus: Spot WFC A',
+  temp: 25,
   noise: 60,
-  price: 25,
+  light: 300,
   sampleMode: '10',
   currentResult: null,
   comparisonList: [],
@@ -94,9 +89,9 @@ function getSamplePoints() {
 function loadSavedComparison() {
   const errorBanner = document.getElementById('storage-error-banner');
   try {
-    const raw = localStorage.getItem(STORAGE_KEY_CAFES);
+    const raw = localStorage.getItem(STORAGE_KEY_SPOTS);
     if (!raw) {
-      state.comparisonList = [{ ...PRESET_CAFES[0] }, { ...PRESET_CAFES[1] }];
+      state.comparisonList = [{ ...PRESET_SPOTS[0] }, { ...PRESET_SPOTS[1] }];
       saveComparison();
       return;
     }
@@ -105,28 +100,28 @@ function loadSavedComparison() {
     const sanitized = [];
     for (const item of parsed.slice(0, 3)) {
       if (!item || typeof item.name !== 'string') continue;
-      const check = validateInputs(item.wifi, item.noise, item.price);
+      const check = validateInputs(item.temp, item.noise, item.light);
       if (!check.valid) continue;
       sanitized.push({
-        id: String(item.id || `cafe-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`),
-        name: item.name.trim().slice(0, 60) || 'Kafe Tanpa Nama',
-        wifi: check.values.wifi,
+        id: String(item.id || `spot-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`),
+        name: item.name.trim().slice(0, 60) || 'Ruang Tanpa Nama',
+        temp: check.values.temp,
         noise: check.values.noise,
-        price: check.values.price,
+        light: check.values.light,
         isSampleNote: typeof item.isSampleNote === 'string' ? item.isSampleNote : ''
       });
     }
     state.comparisonList = sanitized;
     if (errorBanner) errorBanner.hidden = true;
   } catch (_err) {
-    state.comparisonList = [{ ...PRESET_CAFES[0] }];
+    state.comparisonList = [{ ...PRESET_SPOTS[0] }];
     if (errorBanner) errorBanner.hidden = false;
   }
 }
 
 function saveComparison() {
   try {
-    localStorage.setItem(STORAGE_KEY_CAFES, JSON.stringify(state.comparisonList));
+    localStorage.setItem(STORAGE_KEY_SPOTS, JSON.stringify(state.comparisonList));
   } catch (_err) {
     const errorBanner = document.getElementById('storage-error-banner');
     if (errorBanner) errorBanner.hidden = false;
@@ -142,8 +137,15 @@ function renderCompactMu(containerId, muMap) {
   el.textContent = active.join(' · ');
 }
 
+function syncPresetSelect(selectId, value) {
+  const sel = document.getElementById(selectId);
+  if (!sel) return;
+  const match = Array.from(sel.options).some((opt) => opt.value === String(value));
+  sel.value = match ? String(value) : '';
+}
+
 function renderPrimaryResult(res) {
-  const titleEl = document.getElementById('result-cafe-title');
+  const titleEl = document.getElementById('result-spot-title');
   const scoreEl = document.getElementById('result-score-value');
   const catBadge = document.getElementById('result-category-badge');
   const catSymbol = document.getElementById('result-category-symbol');
@@ -152,47 +154,97 @@ function renderPrimaryResult(res) {
   const activeCountEl = document.getElementById('summary-active-rules');
   const aggEl = document.getElementById('summary-aggregation');
   const fracEl = document.getElementById('summary-centroid-fraction');
+  const quickGrid = document.getElementById('k3-quick-grid');
 
-  if (titleEl) titleEl.textContent = state.cafeName.trim() || 'Kafe sedang dievaluasi';
+  if (titleEl) titleEl.textContent = state.spotName.trim() || 'Ruang sedang dievaluasi';
   if (scoreEl) scoreEl.textContent = fmtNum(res.centroid.zStar);
 
   const meta = statusMeta(res.classification.key);
   if (catBadge) catBadge.className = `status-tag ${meta.cls} shrink-0`;
   if (catSymbol) catSymbol.textContent = meta.symbol;
-  if (catText) catText.textContent = res.classification.label;
+  if (catText) catText.textContent = res.classification.shortLabel;
   if (catSummary) catSummary.textContent = res.classification.summary;
 
   if (activeCountEl) activeCountEl.textContent = `${res.activeRules.length}/27`;
   if (aggEl) {
-    aggEl.textContent = `${fmtNum(res.aggregation['Tidak Disarankan'])} / ${fmtNum(res.aggregation['Cocok untuk Santai'])} / ${fmtNum(res.aggregation['Sangat Ideal'])}`;
+    aggEl.textContent = `${fmtNum(res.aggregation['Tidak Nyaman'])} / ${fmtNum(res.aggregation['Cukup Nyaman'])} / ${fmtNum(res.aggregation['Sangat Ideal'])}`;
   }
   if (fracEl) {
-    fracEl.textContent = `${fmtNum(res.centroid.numerator)} / ${fmtNum(res.centroid.denominator)} = ${fmtNum(res.centroid.zStar)}`;
+    fracEl.textContent = `Z* = ${fmtNum(res.centroid.numerator)} / ${fmtNum(res.centroid.denominator)}`;
   }
 
-  const wifiChartVal = document.getElementById('wifi-chart-val');
+  if (quickGrid) {
+    quickGrid.replaceChildren();
+    const shortParamNames = {
+      'Suhu Ruangan': 'Suhu',
+      'Tingkat Kebisingan': 'Kebisingan',
+      'Intensitas Pencahayaan': 'Pencahayaan'
+    };
+    const shortStatusNames = {
+      'Ambang Maksimal K3': 'Ambang K3',
+      'Perlu Penyesuaian': 'Sesuaikan',
+      'Melebihi Batas K3': 'Melebihi K3',
+      'Di Luar Standar': 'Luar Standar'
+    };
+    for (const rec of res.recommendations) {
+      const rMeta = statusMeta(rec.statusKey);
+      const chip = createEl('div', 'surface-subtle px-3 py-2 space-y-1');
+      const top = createEl('div', 'flex items-center justify-between gap-1 text-[11px]');
+      top.appendChild(createEl('span', 'text-muted-custom font-semibold', shortParamNames[rec.param] || rec.param));
+      top.appendChild(createEl('span', 'font-formula font-bold shrink-0', rec.valueText));
+      chip.appendChild(top);
+      const chipLabel = shortStatusNames[rec.statusLabel] || rec.statusLabel;
+      chip.appendChild(createEl('span', `status-tag ${rMeta.cls} text-[11px]`, `${rMeta.symbol} ${chipLabel}`));
+      quickGrid.appendChild(chip);
+    }
+  }
+
+  const tempChartVal = document.getElementById('temp-chart-val');
   const noiseChartVal = document.getElementById('noise-chart-val');
-  const priceChartVal = document.getElementById('price-chart-val');
-  const rupiahPreview = document.getElementById('price-rupiah-preview');
+  const lightChartVal = document.getElementById('light-chart-val');
 
-  if (wifiChartVal) wifiChartVal.textContent = `${String(res.inputs.wifi).replace('.', ',')} Mbps`;
+  if (tempChartVal) tempChartVal.textContent = `${String(res.inputs.temp).replace('.', ',')} °C`;
   if (noiseChartVal) noiseChartVal.textContent = `${String(res.inputs.noise).replace('.', ',')} dB`;
-  if (priceChartVal) priceChartVal.textContent = fmtRupiahFromRibu(res.inputs.price);
-  if (rupiahPreview) rupiahPreview.textContent = `(${fmtRupiahFromRibu(res.inputs.price)})`;
+  if (lightChartVal) lightChartVal.textContent = `${String(res.inputs.light).replace('.', ',')} Lux`;
 
-  renderCompactMu('wifi-mu-summary', res.fuzzification.wifi);
+  renderCompactMu('temp-mu-summary', res.fuzzification.temp);
   renderCompactMu('noise-mu-summary', res.fuzzification.noise);
-  renderCompactMu('price-mu-summary', res.fuzzification.price);
+  renderCompactMu('light-mu-summary', res.fuzzification.light);
+
+  syncPresetSelect('temp-preset', res.inputs.temp);
+  syncPresetSelect('noise-preset', res.inputs.noise);
+  syncPresetSelect('light-preset', res.inputs.light);
 }
 
 function renderTransparencyPanels(res) {
+  const recGrid = document.getElementById('ergonomic-recommendations-grid');
+  if (recGrid) {
+    recGrid.replaceChildren();
+    for (const rec of res.recommendations) {
+      const rMeta = statusMeta(rec.statusKey);
+      const card = createEl('div', 'surface-subtle p-3.5 space-y-2');
+      const head = createEl('div', 'flex items-center justify-between gap-2');
+      head.appendChild(createEl('h4', 'font-bold text-xs sm:text-sm', rec.param));
+      head.appendChild(createEl('span', 'font-formula text-xs font-bold', rec.valueText));
+      card.appendChild(head);
+
+      const badgeRow = createEl('div', 'flex flex-wrap items-center justify-between gap-2 text-xs');
+      badgeRow.appendChild(createEl('span', `status-tag ${rMeta.cls}`, `${rMeta.symbol} ${rec.statusLabel}`));
+      badgeRow.appendChild(createEl('span', 'font-formula text-[11px] text-muted-custom', `K3: ${rec.standardText}`));
+      card.appendChild(badgeRow);
+
+      card.appendChild(createEl('p', 'text-xs text-muted-custom', rec.advice));
+      recGrid.appendChild(card);
+    }
+  }
+
   const step1Container = document.getElementById('step1-fuzzification-cards');
   if (step1Container) {
     step1Container.replaceChildren();
     const groups = [
-      { title: `Wi-Fi (${String(res.inputs.wifi).replace('.', ',')} Mbps)`, entries: res.fuzzification.wifi },
+      { title: `Suhu (${String(res.inputs.temp).replace('.', ',')} °C)`, entries: res.fuzzification.temp },
       { title: `Kebisingan (${String(res.inputs.noise).replace('.', ',')} dB)`, entries: res.fuzzification.noise },
-      { title: `Harga (${fmtRupiahFromRibu(res.inputs.price)})`, entries: res.fuzzification.price }
+      { title: `Pencahayaan (${String(res.inputs.light).replace('.', ',')} Lux)`, entries: res.fuzzification.light }
     ];
 
     for (const grp of groups) {
@@ -219,7 +271,7 @@ function renderTransparencyPanels(res) {
       const tr = createEl('tr', 'border-b last:border-b-0');
       tr.style.borderColor = 'var(--border-soft)';
       tr.appendChild(createEl('td', 'py-2 px-3 font-formula font-bold', rule.id));
-      tr.appendChild(createEl('td', 'py-2 px-3 text-xs sm:text-sm', `${rule.wifi}, ${rule.noise}, ${rule.price}`));
+      tr.appendChild(createEl('td', 'py-2 px-3 text-xs sm:text-sm', `${rule.temp}, ${rule.noise}, ${rule.light}`));
 
       const tdOut = createEl('td', 'py-2 px-3');
       const meta = statusMeta(outputShortKey(rule.output));
@@ -227,7 +279,7 @@ function renderTransparencyPanels(res) {
       tr.appendChild(tdOut);
 
       tr.appendChild(
-        createEl('td', 'py-2 px-3 font-formula text-xs text-muted-custom', `min(${fmtNum(rule.muWifi)}; ${fmtNum(rule.muNoise)}; ${fmtNum(rule.muPrice)})`)
+        createEl('td', 'py-2 px-3 font-formula text-xs text-muted-custom', `min(${fmtNum(rule.muTemp)}; ${fmtNum(rule.muNoise)}; ${fmtNum(rule.muLight)})`)
       );
       tr.appendChild(createEl('td', 'py-2 px-3 font-formula font-bold text-right', fmtNum(rule.alpha)));
       activeTbody.appendChild(tr);
@@ -237,7 +289,7 @@ function renderTransparencyPanels(res) {
   const step3Container = document.getElementById('step3-aggregation-cards');
   if (step3Container) {
     step3Container.replaceChildren();
-    for (const term of ['Sangat Ideal', 'Cocok untuk Santai', 'Tidak Disarankan']) {
+    for (const term of ['Sangat Ideal', 'Cukup Nyaman', 'Tidak Nyaman']) {
       const maxVal = res.aggregation[term];
       const meta = statusMeta(outputShortKey(term));
       const row = createEl('div', 'surface-subtle px-3.5 py-2.5 flex items-center justify-between gap-2');
@@ -273,7 +325,7 @@ function renderTransparencyPanels(res) {
         createEl(
           'td',
           'py-1.5 px-3 text-muted-custom',
-          `${fmtNum(s.clipped['Tidak Disarankan'])} / ${fmtNum(s.clipped['Cocok untuk Santai'])} / ${fmtNum(s.clipped['Sangat Ideal'])}`
+          `${fmtNum(s.clipped['Tidak Nyaman'])} / ${fmtNum(s.clipped['Cukup Nyaman'])} / ${fmtNum(s.clipped['Sangat Ideal'])}`
         )
       );
       tr.appendChild(createEl('td', 'py-1.5 px-3 text-right', fmtNum(s.mu)));
@@ -320,9 +372,9 @@ function renderAllRulesTable(res) {
     if (rule.active) tr.style.backgroundColor = 'var(--accent-tint)';
 
     tr.appendChild(createEl('td', 'py-2 px-3.5 font-formula font-bold', rule.id));
-    tr.appendChild(createEl('td', 'py-2 px-3.5', rule.wifi));
+    tr.appendChild(createEl('td', 'py-2 px-3.5', rule.temp));
     tr.appendChild(createEl('td', 'py-2 px-3.5', rule.noise));
-    tr.appendChild(createEl('td', 'py-2 px-3.5', rule.price));
+    tr.appendChild(createEl('td', 'py-2 px-3.5', rule.light));
 
     const tdOut = createEl('td', 'py-2 px-3.5');
     tdOut.appendChild(createEl('span', `status-tag ${meta.cls}`, `${meta.symbol} ${rule.output}`));
@@ -344,7 +396,7 @@ function renderAllRulesTable(res) {
     mCard.appendChild(topRow);
 
     const bottomRow = createEl('div', 'flex items-center justify-between gap-2 text-muted-custom');
-    bottomRow.appendChild(createEl('span', '', `Wi-Fi ${rule.wifi} · ${rule.noise} · ${rule.price}`));
+    bottomRow.appendChild(createEl('span', '', `Suhu ${rule.temp} · ${rule.noise} · ${rule.light}`));
     bottomRow.appendChild(createEl('span', 'font-formula font-bold', `α = ${fmtNum(rule.alpha)}`));
     mCard.appendChild(bottomRow);
 
@@ -382,9 +434,9 @@ function renderComparisonSection() {
 
   const samplePts = getSamplePoints();
   const ranked = state.comparisonList
-    .map((cafe) => ({
-      ...cafe,
-      calc: evaluateMamdani(cafe.wifi, cafe.noise, cafe.price, samplePts)
+    .map((spot) => ({
+      ...spot,
+      calc: evaluateMamdani(spot.temp, spot.noise, spot.light, samplePts)
     }))
     .sort((a, b) => b.calc.centroid.zStar - a.calc.centroid.zStar);
 
@@ -402,7 +454,7 @@ function renderComparisonSection() {
     const topBlock = createEl('div', 'space-y-3');
 
     const rankRow = createEl('div', 'flex items-center justify-between gap-2');
-    rankRow.appendChild(createEl('span', 'index-stamp', isTop ? '#1 TERBAIK' : `PERINGKAT #${idx + 1}`));
+    rankRow.appendChild(createEl('span', 'rank-badge', isTop ? 'Peringkat 1 · Terbaik' : `Peringkat ${idx + 1}`));
     if (item.isSampleNote) {
       rankRow.appendChild(createEl('span', 'text-xs text-muted-custom', item.isSampleNote));
     }
@@ -421,9 +473,9 @@ function renderComparisonSection() {
 
     const metricsRow = createEl('div', 'grid grid-cols-3 gap-2 surface-subtle p-2.5 text-center font-formula text-xs');
     const mItems = [
-      ['Wi-Fi', `${String(item.wifi).replace('.', ',')} Mbps`],
+      ['Suhu', `${String(item.temp).replace('.', ',')} °C`],
       ['Bising', `${String(item.noise).replace('.', ',')} dB`],
-      ['Menu', fmtRupiahFromRibu(item.price)]
+      ['Cahaya', `${String(item.light).replace('.', ',')} Lux`]
     ];
     for (const [lbl, val] of mItems) {
       const cell = createEl('div', 'space-y-0.5');
@@ -438,7 +490,7 @@ function renderComparisonSection() {
     const loadBtn = createEl('button', 'btn-secondary text-xs flex-1', 'Muat ke Evaluasi');
     loadBtn.type = 'button';
     loadBtn.addEventListener('click', () => {
-      applyInputValues(item.name, item.wifi, item.noise, item.price);
+      applyInputValues(item.name, item.temp, item.noise, item.light);
       document.getElementById('evaluasi')?.scrollIntoView({ behavior: 'smooth' });
       announce(`Parameter ${item.name} dimuat.`);
     });
@@ -467,10 +519,10 @@ function clearFieldErrors() {
     summary.textContent = '';
   }
   for (const [inputId, errId] of [
-    ['cafe-name', 'cafe-name-error'],
-    ['wifi-number', 'wifi-error'],
+    ['spot-name', 'spot-name-error'],
+    ['temp-number', 'temp-error'],
     ['noise-number', 'noise-error'],
-    ['price-number', 'price-error']
+    ['light-number', 'light-error']
   ]) {
     document.getElementById(inputId)?.setAttribute('aria-invalid', 'false');
     const err = document.getElementById(errId);
@@ -483,10 +535,10 @@ function clearFieldErrors() {
 
 function showFieldErrors(errorMap) {
   const mapping = {
-    cafeName: ['cafe-name', 'cafe-name-error'],
-    wifi: ['wifi-number', 'wifi-error'],
+    spotName: ['spot-name', 'spot-name-error'],
+    temp: ['temp-number', 'temp-error'],
     noise: ['noise-number', 'noise-error'],
-    price: ['price-number', 'price-error']
+    light: ['light-number', 'light-error']
   };
   const messages = [];
   let firstInvalidEl = null;
@@ -516,13 +568,13 @@ function showFieldErrors(errorMap) {
 }
 
 function runEvaluationFromState() {
-  const check = validateInputs(state.wifi, state.noise, state.price);
+  const check = validateInputs(state.temp, state.noise, state.light);
   if (!check.valid) {
     showFieldErrors(check.errors);
     return false;
   }
   clearFieldErrors();
-  const res = evaluateMamdani(state.wifi, state.noise, state.price, getSamplePoints());
+  const res = evaluateMamdani(state.temp, state.noise, state.light, getSamplePoints());
   state.currentResult = res;
   renderPrimaryResult(res);
   renderTransparencyPanels(res);
@@ -531,24 +583,24 @@ function runEvaluationFromState() {
   return true;
 }
 
-function applyInputValues(name, wifi, noise, price) {
-  state.cafeName = name;
-  state.wifi = wifi;
+function applyInputValues(name, temp, noise, light) {
+  state.spotName = name;
+  state.temp = temp;
   state.noise = noise;
-  state.price = price;
+  state.light = light;
 
   const setVal = (id, v) => {
     const el = document.getElementById(id);
     if (el) el.value = String(v);
   };
 
-  setVal('cafe-name', name);
-  setVal('wifi-slider', wifi);
-  setVal('wifi-number', wifi);
+  setVal('spot-name', name);
+  setVal('temp-slider', temp);
+  setVal('temp-number', temp);
   setVal('noise-slider', noise);
   setVal('noise-number', noise);
-  setVal('price-slider', price);
-  setVal('price-number', price);
+  setVal('light-slider', light);
+  setVal('light-number', light);
 
   runEvaluationFromState();
 }
@@ -560,7 +612,7 @@ function openReplaceDialog(newEntry) {
 
   list.replaceChildren();
   state.comparisonList.forEach((item, index) => {
-    const calc = evaluateMamdani(item.wifi, item.noise, item.price, getSamplePoints());
+    const calc = evaluateMamdani(item.temp, item.noise, item.light, getSamplePoints());
     const btn = createEl('button', 'btn-secondary w-full justify-between text-left', '');
     btn.type = 'button';
     btn.appendChild(createEl('span', 'font-bold truncate', `${index + 1}. ${item.name}`));
@@ -599,27 +651,28 @@ function activateTabById(tabId, moveFocus = false) {
 }
 
 function setupFormControls() {
-  const nameInp = document.getElementById('cafe-name');
+  const nameInp = document.getElementById('spot-name');
   nameInp?.addEventListener('input', () => {
-    state.cafeName = nameInp.value;
-    const titleEl = document.getElementById('result-cafe-title');
-    if (titleEl) titleEl.textContent = state.cafeName.trim() || 'Kafe sedang dievaluasi';
-    if (state.cafeName.trim()) {
+    state.spotName = nameInp.value;
+    const titleEl = document.getElementById('result-spot-title');
+    if (titleEl) titleEl.textContent = state.spotName.trim() || 'Ruang sedang dievaluasi';
+    if (state.spotName.trim()) {
       nameInp.setAttribute('aria-invalid', 'false');
-      const err = document.getElementById('cafe-name-error');
+      const err = document.getElementById('spot-name-error');
       if (err) err.hidden = true;
     }
   });
 
   const bindings = [
-    { key: 'wifi', sliderId: 'wifi-slider', numId: 'wifi-number', min: 0, max: 100 },
-    { key: 'noise', sliderId: 'noise-slider', numId: 'noise-number', min: 30, max: 100 },
-    { key: 'price', sliderId: 'price-slider', numId: 'price-number', min: 10, max: 100 }
+    { key: 'temp', sliderId: 'temp-slider', numId: 'temp-number', presetId: 'temp-preset', min: 16, max: 36 },
+    { key: 'noise', sliderId: 'noise-slider', numId: 'noise-number', presetId: 'noise-preset', min: 30, max: 100 },
+    { key: 'light', sliderId: 'light-slider', numId: 'light-number', presetId: 'light-preset', min: 0, max: 600 }
   ];
 
   for (const b of bindings) {
     const slider = document.getElementById(b.sliderId);
     const num = document.getElementById(b.numId);
+    const preset = document.getElementById(b.presetId);
 
     slider?.addEventListener('input', () => {
       const val = Number(slider.value);
@@ -640,24 +693,17 @@ function setupFormControls() {
       }
       runEvaluationFromState();
     });
-  }
 
-  document.querySelectorAll('[data-step-target]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const target = btn.getAttribute('data-step-target');
-      const delta = Number(btn.getAttribute('data-step-delta') || 0);
-      const spec = bindings.find((item) => item.key === target);
-      if (!spec) return;
-      const current = Number.isFinite(Number(state[target])) ? Number(state[target]) : spec.min;
-      const next = Math.min(spec.max, Math.max(spec.min, Math.round((current + delta) * 10) / 10));
-      state[target] = next;
-      const slider = document.getElementById(spec.sliderId);
-      const num = document.getElementById(spec.numId);
-      if (slider) slider.value = String(next);
-      if (num) num.value = String(next);
+    preset?.addEventListener('change', () => {
+      if (!preset.value) return;
+      const val = Number(preset.value);
+      state[b.key] = val;
+      if (slider) slider.value = String(val);
+      if (num) num.value = String(val);
       runEvaluationFromState();
+      announce(`Patokan ${b.key} diatur ke ${val}.`);
     });
-  });
+  }
 
   const sampleSelect = document.getElementById('sample-mode-select');
   sampleSelect?.addEventListener('change', () => {
@@ -673,16 +719,16 @@ function setupFormControls() {
 
   document.getElementById('eval-form')?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const trimmedName = (document.getElementById('cafe-name')?.value || '').trim();
+    const trimmedName = (document.getElementById('spot-name')?.value || '').trim();
     const check = validateInputs(
-      document.getElementById('wifi-number')?.value,
+      document.getElementById('temp-number')?.value,
       document.getElementById('noise-number')?.value,
-      document.getElementById('price-number')?.value
+      document.getElementById('light-number')?.value
     );
 
     const allErrors = { ...check.errors };
     if (!trimmedName) {
-      allErrors.cafeName = 'Nama kafe wajib diisi sebelum disimpan ke komparasi.';
+      allErrors.spotName = 'Nama ruang kerja wajib diisi sebelum disimpan ke komparasi.';
     }
     if (Object.keys(allErrors).length > 0) {
       showFieldErrors(allErrors);
@@ -690,21 +736,21 @@ function setupFormControls() {
     }
 
     clearFieldErrors();
-    state.cafeName = trimmedName;
-    state.wifi = check.values.wifi;
+    state.spotName = trimmedName;
+    state.temp = check.values.temp;
     state.noise = check.values.noise;
-    state.price = check.values.price;
+    state.light = check.values.light;
     runEvaluationFromState();
 
     const existingIdx = state.comparisonList.findIndex(
       (c) => c.name.toLowerCase() === trimmedName.toLowerCase()
     );
     const newEntry = {
-      id: existingIdx >= 0 ? state.comparisonList[existingIdx].id : `cafe-${Date.now()}`,
+      id: existingIdx >= 0 ? state.comparisonList[existingIdx].id : `spot-${Date.now()}`,
       name: trimmedName,
-      wifi: state.wifi,
+      temp: state.temp,
       noise: state.noise,
-      price: state.price,
+      light: state.light,
       isSampleNote: 'Tersimpan'
     };
 
@@ -730,15 +776,15 @@ function setupFormControls() {
   });
 
   document.getElementById('reset-form-btn')?.addEventListener('click', () => {
-    applyInputValues('Studi Kasus: Kafe A', 45, 60, 25);
-    announce('Formulir direset ke Studi Kasus Kafe A.');
+    applyInputValues('Studi Kasus: Spot WFC A', 25, 60, 300);
+    announce('Formulir direset ke Studi Kasus Spot WFC A.');
   });
 
   document.getElementById('load-case-a-btn')?.addEventListener('click', () => {
     state.sampleMode = '10';
     if (sampleSelect) sampleSelect.value = '10';
-    applyInputValues('Studi Kasus: Kafe A', 45, 60, 25);
-    announce('Studi Kasus Kafe A dimuat: Skor 75,00.');
+    applyInputValues('Studi Kasus: Spot WFC A', 25, 60, 300);
+    announce('Studi Kasus Spot WFC A dimuat: Skor 75,00.');
   });
 
   document.getElementById('jump-to-steps-link')?.addEventListener('click', () => {
@@ -826,7 +872,7 @@ function setupThemeAndNavigation() {
 
 function setupComparisonAndRulesActions() {
   const loadPresets = () => {
-    state.comparisonList = PRESET_CAFES.map((item) => ({ ...item }));
+    state.comparisonList = PRESET_SPOTS.map((item) => ({ ...item }));
     saveComparison();
     renderComparisonSection();
     announce('Tiga sampel uji komparasi dimuat.');
@@ -843,7 +889,7 @@ function setupComparisonAndRulesActions() {
   });
 
   document.getElementById('reset-storage-btn')?.addEventListener('click', () => {
-    state.comparisonList = [{ ...PRESET_CAFES[0] }, { ...PRESET_CAFES[1] }];
+    state.comparisonList = [{ ...PRESET_SPOTS[0] }, { ...PRESET_SPOTS[1] }];
     saveComparison();
     const banner = document.getElementById('storage-error-banner');
     if (banner) banner.hidden = true;
