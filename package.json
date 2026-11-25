@@ -1,0 +1,19 @@
+{
+  "name": "sispak-wfc-mamdani",
+  "version": "1.0.0",
+  "description": "Sistem Pakar Evaluasi Kenyamanan Ruang Kerja (Work From Cafe) menggunakan metode Fuzzy Mamdani",
+  "type": "module",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./assets/styles.css --minify",
+    "copy:vendor": "node -e \"import('node:fs').then(fs => { fs.mkdirSync('./assets/vendor', { recursive: true }); fs.copyFileSync('./node_modules/chart.js/dist/chart.umd.min.js', './assets/vendor/chart.umd.min.js'); })\"",
+    "build": "npm run copy:vendor && npm run build:css",
+    "test": "node ./tests/fuzzyEngine.test.js"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "tailwindcss": "^4.2.2"
+  }
+}

@@ -1,0 +1,511 @@
+- generic [active] [ref=e1]:
+  - link "Langsung ke konten utama" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - alert [ref=e4]
+  - banner [ref=e5]:
+    - generic [ref=e6]:
+      - link "Indeks Ruang Kerja WFC Sistem Pakar Metode Fuzzy Mamdani" [ref=e8] [cursor=pointer]:
+        - /url: "#evaluasi"
+        - generic [ref=e9]: Indeks Ruang Kerja WFC
+        - generic [ref=e10]: Sistem Pakar Metode Fuzzy Mamdani
+      - navigation "Navigasi bagian utama" [ref=e11]:
+        - link "01. Evaluasi" [ref=e12] [cursor=pointer]:
+          - /url: "#evaluasi"
+        - link "02. Perhitungan" [ref=e13] [cursor=pointer]:
+          - /url: "#transparansi"
+        - link "03. Komparasi 2/3" [ref=e14] [cursor=pointer]:
+          - /url: "#komparasi"
+          - text: 03. Komparasi
+          - generic [ref=e15]: 2/3
+        - link "04. 27 Aturan" [ref=e16] [cursor=pointer]:
+          - /url: "#basis-aturan"
+      - generic [ref=e17]:
+        - button "Ganti ke mode gelap" [ref=e18] [cursor=pointer]:
+          - generic [ref=e19]: Mode Gelap
+        - button "Menu" [ref=e20] [cursor=pointer]
+  - main [ref=e21]:
+    - region "Ukur Kelayakan Kafe untuk Fokus Bekerja secara Objektif" [ref=e22]:
+      - generic [ref=e23]:
+        - generic [ref=e24]:
+          - paragraph [ref=e25]: MATA KULIAH SISTEM PAKAR / METODE FUZZY MAMDANI
+          - heading "Ukur Kelayakan Kafe untuk Fokus Bekerja secara Objektif" [level=1] [ref=e26]
+          - paragraph [ref=e27]: Ulasan seperti "Wi-Fi lumayan kencang", "agak berisik", atau "harga standar" sering kali terlalu samar untuk memutuskan tempat kerja. Instrumen ini menerjemahkan kecepatan koneksi, kebisingan ruang, dan harga rata-rata menu menjadi skor kecocokan Work From Cafe (0 sampai 100) dengan tahapan fuzzifikasi, inferensi 27 aturan, agregasi MAX, dan defuzzifikasi Centroid yang terbuka penuh.
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - generic [ref=e30]: Uji Cepat Laporan Bab 4
+            - generic [ref=e31]: Z* = 75,00
+          - paragraph [ref=e32]:
+            - text: Muat parameter
+            - strong [ref=e33]: Studi Kasus Kafe A
+            - text: (Wi-Fi 45 Mbps, Kebisingan 60 dB, Harga Rp25.000) untuk memverifikasi kecocokan perhitungan manual dengan mesin web.
+          - button "Muat Parameter Studi Kasus Kafe A" [ref=e34] [cursor=pointer]
+    - region "Meja Evaluasi Ruang Kerja" [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - text: BAGIAN 01
+          - heading "Meja Evaluasi Ruang Kerja" [level=2] [ref=e38]
+        - paragraph [ref=e39]: Geser slider, gunakan tombol +/-, atau ketik angka presisi untuk memperbarui kurva secara langsung.
+      - generic [ref=e40]:
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - generic [ref=e43] [cursor=pointer]: Nama Kafe atau Ruang Kerja
+            - paragraph [ref=e44]: Wajib diisi ketika Anda menyimpan hasil evaluasi ke Papan Komparasi (maksimal 3 kafe).
+            - textbox "Nama Kafe atau Ruang Kerja" [ref=e45]:
+              - /placeholder: "Contoh: Kafe A (Jl. Zainal Abidin)"
+              - text: "Studi Kasus: Kafe A"
+          - separator [ref=e46]
+          - generic [ref=e47]:
+            - generic [ref=e48]:
+              - generic [ref=e49] [cursor=pointer]: 1. Kecepatan Wi-Fi (x)
+              - generic [ref=e50]: "Semesta: [0, 100] Mbps"
+            - generic [ref=e51]:
+              - generic [ref=e52]:
+                - button "Kurangi kecepatan Wi-Fi 5 Mbps" [ref=e53] [cursor=pointer]: "-5"
+                - slider "Slider kecepatan Wi-Fi dalam Mbps" [ref=e54] [cursor=pointer]: "45"
+                - button "Tambah kecepatan Wi-Fi 5 Mbps" [ref=e55] [cursor=pointer]: "+5"
+              - generic [ref=e56]:
+                - spinbutton "1. Kecepatan Wi-Fi (x)" [ref=e57]: "45"
+                - generic [ref=e58]: Mbps
+            - generic "Derajat keanggotaan kecepatan Wi-Fi" [ref=e59]:
+              - generic [ref=e60]: μLambat = 0,00
+              - generic [ref=e61]: μSedang = 0,25
+              - generic [ref=e62]: μCepat = 0,75
+          - separator [ref=e63]
+          - generic [ref=e64]:
+            - generic [ref=e65]:
+              - generic [ref=e66] [cursor=pointer]: 2. Tingkat Kebisingan (y)
+              - generic [ref=e67]: "Semesta: [30, 100] dB"
+            - generic [ref=e68]:
+              - generic [ref=e69]:
+                - button "Kurangi tingkat kebisingan 5 dB" [ref=e70] [cursor=pointer]: "-5"
+                - slider "Slider tingkat kebisingan dalam desibel" [ref=e71] [cursor=pointer]: "60"
+                - button "Tambah tingkat kebisingan 5 dB" [ref=e72] [cursor=pointer]: "+5"
+              - generic [ref=e73]:
+                - spinbutton "2. Tingkat Kebisingan (y)" [ref=e74]: "60"
+                - generic [ref=e75]: dB
+            - generic "Derajat keanggotaan tingkat kebisingan" [ref=e76]:
+              - generic [ref=e77]: μTenang = 0,25
+              - generic [ref=e78]: μSedang = 0,75
+              - generic [ref=e79]: μBising = 0,00
+          - separator [ref=e80]
+          - generic [ref=e81]:
+            - generic [ref=e82]:
+              - generic [ref=e83] [cursor=pointer]: 3. Harga Rata-rata Menu (z)
+              - generic [ref=e84]: "Semesta: [10, 100] Ribu Rp (Rp25.000)"
+            - generic [ref=e85]:
+              - generic [ref=e86]:
+                - button "Kurangi harga rata-rata menu 5 ribu rupiah" [ref=e87] [cursor=pointer]: "-5"
+                - slider "Slider harga rata-rata menu dalam ribu rupiah" [ref=e88] [cursor=pointer]: "25"
+                - button "Tambah harga rata-rata menu 5 ribu rupiah" [ref=e89] [cursor=pointer]: "+5"
+              - generic [ref=e90]:
+                - spinbutton "3. Harga Rata-rata Menu (z)" [ref=e91]: "25"
+                - generic [ref=e92]: Ribu Rp
+            - generic "Derajat keanggotaan harga menu" [ref=e93]:
+              - generic [ref=e94]: μMurah = 1,00
+              - generic [ref=e95]: μSedang = 0,00
+              - generic [ref=e96]: μMahal = 0,00
+          - separator [ref=e97]
+          - group "Resolusi Sampel Defuzzifikasi Centroid" [ref=e98]:
+            - generic [ref=e100]:
+              - generic [ref=e101] [cursor=pointer]:
+                - radio "10 Titik Diskrit (w = 10, 20, ..., 100 sesuai Bab 4 Laporan)" [checked] [ref=e102]
+                - generic [ref=e103]:
+                  - strong [ref=e104]: 10 Titik Diskrit
+                  - text: (w = 10, 20, ..., 100 sesuai Bab 4 Laporan)
+              - generic [ref=e105] [cursor=pointer]:
+                - radio "101 Titik Rapat (w = 0, 1, ..., 100 presisi kontinu)" [ref=e106]
+                - generic [ref=e107]:
+                  - strong [ref=e108]: 101 Titik Rapat
+                  - text: (w = 0, 1, ..., 100 presisi kontinu)
+          - generic [ref=e109]:
+            - button "Simpan Kafe ke Papan Komparasi" [ref=e110] [cursor=pointer]
+            - button "Kembalikan ke Nilai Awal" [ref=e111] [cursor=pointer]
+          - paragraph [ref=e112]: Slot papan komparasi terisi 2 dari 3 kafe. Data tersimpan otomatis pada browser ini.
+        - generic [ref=e113]:
+          - generic [ref=e114]:
+            - generic [ref=e115]:
+              - paragraph [ref=e116]: KEPUTUSAN DEFUZZIFIKASI (Z*)
+              - 'heading "Studi Kasus: Kafe A" [level=3] [ref=e117]'
+            - generic [ref=e118]: 10 sampel diskrit
+          - generic [ref=e119]:
+            - generic [ref=e120]:
+              - generic [ref=e121]: 75,00
+              - generic [ref=e122]: / 100
+            - generic [ref=e123]:
+              - generic [aria-hidden] [ref=e124]: "[+]"
+              - generic [ref=e125]: Sangat Ideal untuk Fokus
+          - paragraph [ref=e126]: Kombinasi koneksi, ketenangan ruang, dan harga menu mendukung sesi kerja fokus berdurasi panjang.
+          - generic [ref=e127]:
+            - generic [ref=e128]:
+              - generic [ref=e129]: "Aturan Aktif (α > 0):"
+              - strong [ref=e130]: 4 dari 27 aturan
+            - generic [ref=e131]:
+              - generic [ref=e132]: "Agregasi MAX [TD / CS / SI]:"
+              - strong [ref=e133]: 0,00 / 0,25 / 0,75
+            - generic [ref=e134]:
+              - generic [ref=e135]: "Centroid ∑(w·μ) / ∑μ:"
+              - strong [ref=e136]: 307,50 / 4,10 = 75,00
+          - generic [ref=e137]:
+            - generic [ref=e138]:
+              - heading "Area Hasil Agregasi Output & Titik Sentroid Z*" [level=4] [ref=e139]
+              - generic [ref=e140]: Grafik aktif (real-time)
+            - img "Grafik fungsi keanggotaan output skor WFC dan area arsiran agregasi Centroid" [ref=e142]
+          - link "Lihat Rincian 4 Langkah Perhitungan Mamdani" [ref=e144] [cursor=pointer]:
+            - /url: "#transparansi"
+    - region "Transparansi Perhitungan & Grafik Kurva Input" [ref=e145]:
+      - generic [ref=e146]:
+        - generic [ref=e147]:
+          - text: BAGIAN 02
+          - heading "Transparansi Perhitungan & Grafik Kurva Input" [level=2] [ref=e148]
+        - paragraph [ref=e149]: Menampilkan seluruh tahapan Mamdani tanpa kotak hitam (fuzzifikasi, inferensi MIN, agregasi MAX, dan Centroid).
+      - generic [ref=e150]:
+        - tablist "Tahapan perhitungan Fuzzy Mamdani" [ref=e151]:
+          - tab "Kurva Keanggotaan Input" [selected] [ref=e152] [cursor=pointer]
+          - 'tab "Langkah 1 & 2: Fuzzifikasi + Inferensi" [ref=e153] [cursor=pointer]'
+          - 'tab "Langkah 3 & 4: Agregasi + Centroid" [ref=e154] [cursor=pointer]'
+        - tabpanel "Kurva Keanggotaan Input" [ref=e155]:
+          - paragraph [ref=e156]: Setiap variabel input menggunakan kurva Bahu Trapesium di sisi kiri serta kanan dan kurva Segitiga di bagian tengah. Garis vertikal putus-putus menandai posisi input aktual saat ini.
+          - generic [ref=e157]:
+            - generic [ref=e158]:
+              - generic [ref=e159]:
+                - heading "A. Kecepatan Wi-Fi (x)" [level=3] [ref=e160]
+                - generic [ref=e161]: x = 45 Mbps
+              - paragraph [ref=e162]: Bahu kiri Lambat [0, 0, 10, 30], Segitiga Sedang [10, 30, 50], Bahu kanan Cepat [30, 50, 100, 100].
+              - img "Grafik fungsi keanggotaan kecepatan Wi-Fi" [ref=e164]
+            - generic [ref=e165]:
+              - generic [ref=e166]:
+                - heading "B. Tingkat Kebisingan (y)" [level=3] [ref=e167]
+                - generic [ref=e168]: y = 60 dB
+              - paragraph [ref=e169]: Bahu kiri Tenang [30, 30, 45, 65], Segitiga Sedang [45, 65, 85], Bahu kanan Bising [65, 85, 100, 100].
+              - img "Grafik fungsi keanggotaan tingkat kebisingan" [ref=e171]
+            - generic [ref=e172]:
+              - generic [ref=e173]:
+                - heading "C. Harga Rata-rata Menu (z)" [level=3] [ref=e174]
+                - generic [ref=e175]: z = 25 (Rp25.000)
+              - paragraph [ref=e176]: Bahu kiri Murah [10, 10, 25, 45], Segitiga Sedang [25, 45, 65], Bahu kanan Mahal [45, 65, 100, 100].
+              - img "Grafik fungsi keanggotaan harga rata-rata menu" [ref=e178]
+    - region "Papan Komparasi Kafe (2 sampai 3 Kafe)" [ref=e179]:
+      - generic [ref=e180]:
+        - generic [ref=e181]:
+          - text: BAGIAN 03
+          - heading "Papan Komparasi Kafe (2 sampai 3 Kafe)" [level=2] [ref=e182]
+          - paragraph [ref=e183]: Bandingkan maksimal 3 kandidat kafe secara berdampingan. Peringkat diurutkan otomatis dari skor kecocokan WFC tertinggi dan disimpan di sesi browser Anda.
+        - generic [ref=e184]:
+          - button "Isi 3 Sampel Uji Komparasi" [ref=e185] [cursor=pointer]
+          - button "Kosongkan Papan" [ref=e186] [cursor=pointer]
+      - generic [ref=e187]:
+        - article [ref=e188]:
+          - generic [ref=e189]:
+            - generic [ref=e190]:
+              - generic [ref=e191]: "PERINGKAT #1 TERBAIK"
+              - generic [ref=e192]: Sampel simulasi pembanding
+            - 'heading "Sampel Uji: Ruang Seduh Tenang" [level=3] [ref=e193]'
+            - generic [ref=e194]:
+              - generic [ref=e195]: 80,83
+              - generic [ref=e196]: "[+] Sangat Ideal"
+            - generic [ref=e199]:
+              - generic [ref=e200]:
+                - term [ref=e201]: Kecepatan Wi-Fi
+                - definition [ref=e202]: 65 Mbps
+              - generic [ref=e203]:
+                - term [ref=e204]: Kebisingan Ruang
+                - definition [ref=e205]: 42 dB
+              - generic [ref=e206]:
+                - term [ref=e207]: Harga Rata-rata
+                - definition [ref=e208]: Rp35.000
+              - generic [ref=e209]:
+                - term [ref=e210]: Aturan Aktif
+                - definition [ref=e211]: 2 aturan
+          - generic [ref=e212]:
+            - button "Muat ke Kurva & Rincian" [ref=e213] [cursor=pointer]
+            - 'button "Hapus Sampel Uji: Ruang Seduh Tenang dari papan komparasi" [ref=e214] [cursor=pointer]': Hapus
+        - article [ref=e215]:
+          - generic [ref=e216]:
+            - generic [ref=e217]:
+              - generic [ref=e218]: "PERINGKAT #2"
+              - generic [ref=e219]: Data uji Bab 4 Laporan
+            - 'heading "Studi Kasus: Kafe A (Laporan Bab 4)" [level=3] [ref=e220]'
+            - generic [ref=e221]:
+              - generic [ref=e222]: 75,00
+              - generic [ref=e223]: "[+] Sangat Ideal"
+            - generic [ref=e226]:
+              - generic [ref=e227]:
+                - term [ref=e228]: Kecepatan Wi-Fi
+                - definition [ref=e229]: 45 Mbps
+              - generic [ref=e230]:
+                - term [ref=e231]: Kebisingan Ruang
+                - definition [ref=e232]: 60 dB
+              - generic [ref=e233]:
+                - term [ref=e234]: Harga Rata-rata
+                - definition [ref=e235]: Rp25.000
+              - generic [ref=e236]:
+                - term [ref=e237]: Aturan Aktif
+                - definition [ref=e238]: 4 aturan
+          - generic [ref=e239]:
+            - button "Muat ke Kurva & Rincian" [ref=e240] [cursor=pointer]
+            - 'button "Hapus Studi Kasus: Kafe A (Laporan Bab 4) dari papan komparasi" [ref=e241] [cursor=pointer]': Hapus
+    - region "Basis Pengetahuan 27 Aturan Fuzzy Mamdani" [ref=e242]:
+      - generic [ref=e243]:
+        - generic [ref=e244]:
+          - generic [ref=e245]:
+            - text: BAGIAN 04
+            - heading "Basis Pengetahuan 27 Aturan Fuzzy Mamdani" [level=2] [ref=e246]
+            - paragraph [ref=e247]: Daftar lengkap aturan R1 sampai R27 sesuai rancangan laporan. Baris yang sedang aktif pada evaluasi saat ini ditandai secara langsung beserta nilai α-predikatnya.
+          - generic [ref=e248]:
+            - generic [ref=e249]:
+              - generic [ref=e250] [cursor=pointer]: Filter Kategori Output
+              - combobox "Filter Kategori Output" [ref=e251] [cursor=pointer]:
+                - option "Semua Kategori (27)" [selected]
+                - option "Sangat Ideal"
+                - option "Cocok untuk Santai"
+                - option "Tidak Disarankan"
+            - generic [ref=e252]:
+              - generic [ref=e253] [cursor=pointer]: Status pada Input Saat Ini
+              - combobox "Status pada Input Saat Ini" [ref=e254] [cursor=pointer]:
+                - option "Semua Aturan" [selected]
+                - option "Hanya Aturan Aktif (α > 0)"
+            - button "Tampilkan Semua (27)" [ref=e256] [cursor=pointer]
+          - table [ref=e258]:
+            - rowgroup [ref=e259]:
+              - row [ref=e260]:
+                - columnheader "No" [ref=e261]
+                - columnheader "Kecepatan Wi-Fi" [ref=e262]
+                - columnheader "Kebisingan" [ref=e263]
+                - columnheader "Harga Menu" [ref=e264]
+                - columnheader "Output Skor WFC" [ref=e265]
+                - columnheader "Status α" [ref=e266]
+            - rowgroup [ref=e267]:
+              - row [ref=e268]:
+                - cell "R1" [ref=e269]
+                - cell "Lambat" [ref=e270]
+                - cell "Tenang" [ref=e271]
+                - cell "Murah" [ref=e272]
+                - cell "[~] Cocok untuk Santai" [ref=e273]
+                - cell "0,00" [ref=e275]
+              - row [ref=e276]:
+                - cell "R2" [ref=e277]
+                - cell "Lambat" [ref=e278]
+                - cell "Tenang" [ref=e279]
+                - cell "Sedang" [ref=e280]
+                - cell "[~] Cocok untuk Santai" [ref=e281]
+                - cell "0,00" [ref=e283]
+              - row [ref=e284]:
+                - cell "R3" [ref=e285]
+                - cell "Lambat" [ref=e286]
+                - cell "Tenang" [ref=e287]
+                - cell "Mahal" [ref=e288]
+                - cell "[-] Tidak Disarankan" [ref=e289]
+                - cell "0,00" [ref=e291]
+              - row [ref=e292]:
+                - cell "R4" [ref=e293]
+                - cell "Lambat" [ref=e294]
+                - cell "Sedang" [ref=e295]
+                - cell "Murah" [ref=e296]
+                - cell "[-] Tidak Disarankan" [ref=e297]
+                - cell "0,00" [ref=e299]
+              - row [ref=e300]:
+                - cell "R5" [ref=e301]
+                - cell "Lambat" [ref=e302]
+                - cell "Sedang" [ref=e303]
+                - cell "Sedang" [ref=e304]
+                - cell "[-] Tidak Disarankan" [ref=e305]
+                - cell "0,00" [ref=e307]
+              - row [ref=e308]:
+                - cell "R6" [ref=e309]
+                - cell "Lambat" [ref=e310]
+                - cell "Sedang" [ref=e311]
+                - cell "Mahal" [ref=e312]
+                - cell "[-] Tidak Disarankan" [ref=e313]
+                - cell "0,00" [ref=e315]
+              - row [ref=e316]:
+                - cell "R7" [ref=e317]
+                - cell "Lambat" [ref=e318]
+                - cell "Bising" [ref=e319]
+                - cell "Murah" [ref=e320]
+                - cell "[-] Tidak Disarankan" [ref=e321]
+                - cell "0,00" [ref=e323]
+              - row [ref=e324]:
+                - cell "R8" [ref=e325]
+                - cell "Lambat" [ref=e326]
+                - cell "Bising" [ref=e327]
+                - cell "Sedang" [ref=e328]
+                - cell "[-] Tidak Disarankan" [ref=e329]
+                - cell "0,00" [ref=e331]
+              - row [ref=e332]:
+                - cell "R9" [ref=e333]
+                - cell "Lambat" [ref=e334]
+                - cell "Bising" [ref=e335]
+                - cell "Mahal" [ref=e336]
+                - cell "[-] Tidak Disarankan" [ref=e337]
+                - cell "0,00" [ref=e339]
+              - row [ref=e340]:
+                - cell "R10" [ref=e341]
+                - cell "Sedang" [ref=e342]
+                - cell "Tenang" [ref=e343]
+                - cell "Murah" [ref=e344]
+                - cell "[+] Sangat Ideal" [ref=e345]
+                - cell "Aktif (0,25)" [ref=e347]
+              - row [ref=e348]:
+                - cell "R11" [ref=e349]
+                - cell "Sedang" [ref=e350]
+                - cell "Tenang" [ref=e351]
+                - cell "Sedang" [ref=e352]
+                - cell "[+] Sangat Ideal" [ref=e353]
+                - cell "0,00" [ref=e355]
+              - row [ref=e356]:
+                - cell "R12" [ref=e357]
+                - cell "Sedang" [ref=e358]
+                - cell "Tenang" [ref=e359]
+                - cell "Mahal" [ref=e360]
+                - cell "[~] Cocok untuk Santai" [ref=e361]
+                - cell "0,00" [ref=e363]
+              - row [ref=e364]:
+                - cell "R13" [ref=e365]
+                - cell "Sedang" [ref=e366]
+                - cell "Sedang" [ref=e367]
+                - cell "Murah" [ref=e368]
+                - cell "[~] Cocok untuk Santai" [ref=e369]
+                - cell "Aktif (0,25)" [ref=e371]
+              - row [ref=e372]:
+                - cell "R14" [ref=e373]
+                - cell "Sedang" [ref=e374]
+                - cell "Sedang" [ref=e375]
+                - cell "Sedang" [ref=e376]
+                - cell "[~] Cocok untuk Santai" [ref=e377]
+                - cell "0,00" [ref=e379]
+              - row [ref=e380]:
+                - cell "R15" [ref=e381]
+                - cell "Sedang" [ref=e382]
+                - cell "Sedang" [ref=e383]
+                - cell "Mahal" [ref=e384]
+                - cell "[~] Cocok untuk Santai" [ref=e385]
+                - cell "0,00" [ref=e387]
+              - row [ref=e388]:
+                - cell "R16" [ref=e389]
+                - cell "Sedang" [ref=e390]
+                - cell "Bising" [ref=e391]
+                - cell "Murah" [ref=e392]
+                - cell "[-] Tidak Disarankan" [ref=e393]
+                - cell "0,00" [ref=e395]
+              - row [ref=e396]:
+                - cell "R17" [ref=e397]
+                - cell "Sedang" [ref=e398]
+                - cell "Bising" [ref=e399]
+                - cell "Sedang" [ref=e400]
+                - cell "[-] Tidak Disarankan" [ref=e401]
+                - cell "0,00" [ref=e403]
+              - row [ref=e404]:
+                - cell "R18" [ref=e405]
+                - cell "Sedang" [ref=e406]
+                - cell "Bising" [ref=e407]
+                - cell "Mahal" [ref=e408]
+                - cell "[-] Tidak Disarankan" [ref=e409]
+                - cell "0,00" [ref=e411]
+              - row [ref=e412]:
+                - cell "R19" [ref=e413]
+                - cell "Cepat" [ref=e414]
+                - cell "Tenang" [ref=e415]
+                - cell "Murah" [ref=e416]
+                - cell "[+] Sangat Ideal" [ref=e417]
+                - cell "Aktif (0,25)" [ref=e419]
+              - row [ref=e420]:
+                - cell "R20" [ref=e421]
+                - cell "Cepat" [ref=e422]
+                - cell "Tenang" [ref=e423]
+                - cell "Sedang" [ref=e424]
+                - cell "[+] Sangat Ideal" [ref=e425]
+                - cell "0,00" [ref=e427]
+              - row [ref=e428]:
+                - cell "R21" [ref=e429]
+                - cell "Cepat" [ref=e430]
+                - cell "Tenang" [ref=e431]
+                - cell "Mahal" [ref=e432]
+                - cell "[+] Sangat Ideal" [ref=e433]
+                - cell "0,00" [ref=e435]
+              - row [ref=e436]:
+                - cell "R22" [ref=e437]
+                - cell "Cepat" [ref=e438]
+                - cell "Sedang" [ref=e439]
+                - cell "Murah" [ref=e440]
+                - cell "[+] Sangat Ideal" [ref=e441]
+                - cell "Aktif (0,75)" [ref=e443]
+              - row [ref=e444]:
+                - cell "R23" [ref=e445]
+                - cell "Cepat" [ref=e446]
+                - cell "Sedang" [ref=e447]
+                - cell "Sedang" [ref=e448]
+                - cell "[~] Cocok untuk Santai" [ref=e449]
+                - cell "0,00" [ref=e451]
+              - row [ref=e452]:
+                - cell "R24" [ref=e453]
+                - cell "Cepat" [ref=e454]
+                - cell "Sedang" [ref=e455]
+                - cell "Mahal" [ref=e456]
+                - cell "[~] Cocok untuk Santai" [ref=e457]
+                - cell "0,00" [ref=e459]
+              - row [ref=e460]:
+                - cell "R25" [ref=e461]
+                - cell "Cepat" [ref=e462]
+                - cell "Bising" [ref=e463]
+                - cell "Murah" [ref=e464]
+                - cell "[~] Cocok untuk Santai" [ref=e465]
+                - cell "0,00" [ref=e467]
+              - row [ref=e468]:
+                - cell "R26" [ref=e469]
+                - cell "Cepat" [ref=e470]
+                - cell "Bising" [ref=e471]
+                - cell "Sedang" [ref=e472]
+                - cell "[-] Tidak Disarankan" [ref=e473]
+                - cell "0,00" [ref=e475]
+              - row [ref=e476]:
+                - cell "R27" [ref=e477]
+                - cell "Cepat" [ref=e478]
+                - cell "Bising" [ref=e479]
+                - cell "Mahal" [ref=e480]
+                - cell "[-] Tidak Disarankan" [ref=e481]
+                - cell "0,00" [ref=e483]
+        - complementary "Klasifikasi Label Output Akhir (Z*)" [ref=e484]:
+          - generic [ref=e485]:
+            - heading "Klasifikasi Label Output Akhir (Z*)" [level=3] [ref=e486]
+            - paragraph [ref=e487]: "Ambang interpretasi skor hasil defuzzifikasi sesuai Spesifikasi Bab 3.2:"
+            - list [ref=e488]:
+              - listitem [ref=e489]:
+                - generic [ref=e490]:
+                  - generic [ref=e491]: "[+] Sangat Ideal untuk Fokus"
+                  - paragraph [ref=e492]: Rentang skor tertinggi untuk pekerjaan fokus intensif.
+                - generic [ref=e493]: 70 - 100
+              - listitem [ref=e494]:
+                - generic [ref=e495]:
+                  - generic [ref=e496]: "[~] Cocok untuk Santai"
+                  - paragraph [ref=e497]: Memadai untuk tugas ringan atau diskusi kasual.
+                - generic [ref=e498]: 40 - 69,99
+              - listitem [ref=e499]:
+                - generic [ref=e500]:
+                  - generic [ref=e501]: "[-] Tidak Disarankan untuk Nugas"
+                  - paragraph [ref=e502]: Kurang mendukung produktivitas kerja jarak jauh.
+                - generic [ref=e503]: 0 - 39,99
+          - generic [ref=e504]:
+            - heading "Identitas Proyek & Tim Penyusun" [level=3] [ref=e505]
+            - paragraph [ref=e506]: "Laporan Tugas Proyek UAS Mata Kuliah Sistem Pakar:"
+            - generic [ref=e507]:
+              - generic [ref=e508]:
+                - term [ref=e509]: Rafael Putut Arli (2417051042)
+                - definition [ref=e510]: "Fuzzy Logic Engineer: himpunan fuzzy, fungsi keanggotaan, 27 aturan, dan validasi manual."
+              - generic [ref=e511]:
+                - term [ref=e512]: Miqdad Dzakiy Arroyan (2417051044)
+                - definition [ref=e513]: "UI/UX dan Frontend Developer: antarmuka web, kontrol input slider, dan komparasi 2-3 kafe."
+              - generic [ref=e514]:
+                - term [ref=e515]: Wisnu Wira Winata
+                - definition [ref=e516]: "Logic dan Visualization Developer: mesin hitung Mamdani JavaScript dan kurva fuzzy Chart.js."
+              - generic [ref=e517]:
+                - term [ref=e518]: Atalah
+                - definition [ref=e519]: "QA, Data dan Dokumentasi: pengujian data sampel kafe, laporan akhir, dan materi presentasi."
+  - contentinfo [ref=e520]:
+    - generic [ref=e521]:
+      - generic [ref=e522]:
+        - paragraph [ref=e523]: Sistem Pakar Evaluasi Kenyamanan Ruang Kerja (Work From Cafe)
+        - paragraph [ref=e524]: Metode Inferensi Fuzzy Mamdani (Implikasi MIN, Agregasi MAX, Defuzzifikasi Centroid Diskrit).
+      - generic [ref=e525]:
+        - link "Kembali ke Atas" [ref=e526] [cursor=pointer]:
+          - /url: "#evaluasi"
+        - button "Ringkasan Persamaan Keanggotaan" [ref=e527] [cursor=pointer]
