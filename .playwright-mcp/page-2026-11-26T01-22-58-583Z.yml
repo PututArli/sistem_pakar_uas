@@ -1,0 +1,282 @@
+- generic [active] [ref=f3e1]:
+  - link "Langsung ke konten utama" [ref=f3e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f3e4]:
+    - generic [ref=f3e5]:
+      - link "Indeks Ruang Kerja" [ref=f3e6] [cursor=pointer]:
+        - /url: ./index.html
+      - generic [ref=f3e8]:
+        - button "Ganti ke mode gelap" [ref=f3e9] [cursor=pointer]:
+          - generic [ref=f3e10]: Gelap
+        - button "Menu" [ref=f3e11] [cursor=pointer]
+  - main [ref=f3e12]:
+    - region "Basis Pengetahuan 27 Aturan" [ref=f3e13]:
+      - generic [ref=f3e14]:
+        - heading "Basis Pengetahuan 27 Aturan" [level=1] [ref=f3e15]
+        - paragraph [ref=f3e16]: Setiap kombinasi suhu, kebisingan, dan pencahayaan dipetakan ke satu keputusan kenyamanan. Aturan yang menyala untuk ruang aktif ditandai.
+      - generic [ref=f3e17]:
+        - generic [ref=f3e18]: "4 dari 27 aturan aktif untuk Studi Kasus: Spot WFC A (skor 75,00)."
+        - link "Lihat perhitungannya" [ref=f3e19] [cursor=pointer]:
+          - /url: ./perhitungan.html
+      - generic [ref=f3e20]:
+        - generic [ref=f3e21]:
+          - generic [ref=f3e22]:
+            - generic [ref=f3e23] [cursor=pointer]: Kategori output
+            - combobox "Kategori output" [ref=f3e24] [cursor=pointer]:
+              - option "Semua kategori (27)" [selected]
+              - option "Sangat Ideal"
+              - option "Cukup Nyaman"
+              - option "Tidak Nyaman"
+          - generic [ref=f3e25]:
+            - generic [ref=f3e26] [cursor=pointer]: Status inferensi
+            - combobox "Status inferensi" [ref=f3e27] [cursor=pointer]:
+              - option "Semua aturan" [selected]
+              - option "Hanya yang aktif (α > 0)"
+          - button "Reset Filter" [ref=f3e28] [cursor=pointer]
+        - paragraph [ref=f3e29]: Menampilkan 27 dari 27 aturan
+        - generic [ref=f3e30]:
+          - generic [ref=f3e31]:
+            - generic [ref=f3e32]:
+              - generic [ref=f3e33]: R1
+              - generic [ref=f3e34]: "[~] Cukup Nyaman"
+            - generic [ref=f3e35]:
+              - generic [ref=f3e36]: Dingin · Tenang · Redup
+              - generic [ref=f3e37]: α 0,00
+          - generic [ref=f3e38]:
+            - generic [ref=f3e39]:
+              - generic [ref=f3e40]: R2
+              - generic [ref=f3e41]: "[+] Sangat Ideal"
+            - generic [ref=f3e42]:
+              - generic [ref=f3e43]: Dingin · Tenang · Cukup
+              - generic [ref=f3e44]: α 0,00
+          - generic [ref=f3e45]:
+            - generic [ref=f3e46]:
+              - generic [ref=f3e47]: R3
+              - generic [ref=f3e48]: "[+] Sangat Ideal"
+            - generic [ref=f3e49]:
+              - generic [ref=f3e50]: Dingin · Tenang · Terang
+              - generic [ref=f3e51]: α 0,00
+          - generic [ref=f3e52]:
+            - generic [ref=f3e53]:
+              - generic [ref=f3e54]: R4
+              - generic [ref=f3e55]: "[-] Tidak Nyaman"
+            - generic [ref=f3e56]:
+              - generic [ref=f3e57]: Dingin · Sedang · Redup
+              - generic [ref=f3e58]: α 0,00
+          - generic [ref=f3e59]:
+            - generic [ref=f3e60]:
+              - generic [ref=f3e61]: R5
+              - generic [ref=f3e62]: "[~] Cukup Nyaman"
+            - generic [ref=f3e63]:
+              - generic [ref=f3e64]: Dingin · Sedang · Cukup
+              - generic [ref=f3e65]: α 0,00
+          - generic [ref=f3e66]:
+            - generic [ref=f3e67]:
+              - generic [ref=f3e68]: R6
+              - generic [ref=f3e69]: "[~] Cukup Nyaman"
+            - generic [ref=f3e70]:
+              - generic [ref=f3e71]: Dingin · Sedang · Terang
+              - generic [ref=f3e72]: α 0,00
+          - generic [ref=f3e73]:
+            - generic [ref=f3e74]:
+              - generic [ref=f3e75]: R7
+              - generic [ref=f3e76]: "[-] Tidak Nyaman"
+            - generic [ref=f3e77]:
+              - generic [ref=f3e78]: Dingin · Bising · Redup
+              - generic [ref=f3e79]: α 0,00
+          - generic [ref=f3e80]:
+            - generic [ref=f3e81]:
+              - generic [ref=f3e82]: R8
+              - generic [ref=f3e83]: "[-] Tidak Nyaman"
+            - generic [ref=f3e84]:
+              - generic [ref=f3e85]: Dingin · Bising · Cukup
+              - generic [ref=f3e86]: α 0,00
+          - generic [ref=f3e87]:
+            - generic [ref=f3e88]:
+              - generic [ref=f3e89]: R9
+              - generic [ref=f3e90]: "[-] Tidak Nyaman"
+            - generic [ref=f3e91]:
+              - generic [ref=f3e92]: Dingin · Bising · Terang
+              - generic [ref=f3e93]: α 0,00
+          - generic [ref=f3e94]:
+            - generic [ref=f3e95]:
+              - generic [ref=f3e96]: R10
+              - generic [ref=f3e97]: "[~] Cukup Nyaman"
+            - generic [ref=f3e98]:
+              - generic [ref=f3e99]: Nyaman · Tenang · Redup
+              - generic [ref=f3e100]: α 0,00
+          - generic [ref=f3e101]:
+            - generic [ref=f3e102]:
+              - generic [ref=f3e103]: R11
+              - generic [ref=f3e104]: "[+] Sangat Ideal"
+            - generic [ref=f3e105]:
+              - generic [ref=f3e106]: Nyaman · Tenang · Cukup
+              - generic [ref=f3e107]: α 0,25
+          - generic [ref=f3e108]:
+            - generic [ref=f3e109]:
+              - generic [ref=f3e110]: R12
+              - generic [ref=f3e111]: "[+] Sangat Ideal"
+            - generic [ref=f3e112]:
+              - generic [ref=f3e113]: Nyaman · Tenang · Terang
+              - generic [ref=f3e114]: α 0,00
+          - generic [ref=f3e115]:
+            - generic [ref=f3e116]:
+              - generic [ref=f3e117]: R13
+              - generic [ref=f3e118]: "[~] Cukup Nyaman"
+            - generic [ref=f3e119]:
+              - generic [ref=f3e120]: Nyaman · Sedang · Redup
+              - generic [ref=f3e121]: α 0,00
+          - generic [ref=f3e122]:
+            - generic [ref=f3e123]:
+              - generic [ref=f3e124]: R14
+              - generic [ref=f3e125]: "[+] Sangat Ideal"
+            - generic [ref=f3e126]:
+              - generic [ref=f3e127]: Nyaman · Sedang · Cukup
+              - generic [ref=f3e128]: α 0,75
+          - generic [ref=f3e129]:
+            - generic [ref=f3e130]:
+              - generic [ref=f3e131]: R15
+              - generic [ref=f3e132]: "[~] Cukup Nyaman"
+            - generic [ref=f3e133]:
+              - generic [ref=f3e134]: Nyaman · Sedang · Terang
+              - generic [ref=f3e135]: α 0,00
+          - generic [ref=f3e136]:
+            - generic [ref=f3e137]:
+              - generic [ref=f3e138]: R16
+              - generic [ref=f3e139]: "[-] Tidak Nyaman"
+            - generic [ref=f3e140]:
+              - generic [ref=f3e141]: Nyaman · Bising · Redup
+              - generic [ref=f3e142]: α 0,00
+          - generic [ref=f3e143]:
+            - generic [ref=f3e144]:
+              - generic [ref=f3e145]: R17
+              - generic [ref=f3e146]: "[~] Cukup Nyaman"
+            - generic [ref=f3e147]:
+              - generic [ref=f3e148]: Nyaman · Bising · Cukup
+              - generic [ref=f3e149]: α 0,00
+          - generic [ref=f3e150]:
+            - generic [ref=f3e151]:
+              - generic [ref=f3e152]: R18
+              - generic [ref=f3e153]: "[-] Tidak Nyaman"
+            - generic [ref=f3e154]:
+              - generic [ref=f3e155]: Nyaman · Bising · Terang
+              - generic [ref=f3e156]: α 0,00
+          - generic [ref=f3e157]:
+            - generic [ref=f3e158]:
+              - generic [ref=f3e159]: R19
+              - generic [ref=f3e160]: "[-] Tidak Nyaman"
+            - generic [ref=f3e161]:
+              - generic [ref=f3e162]: Panas · Tenang · Redup
+              - generic [ref=f3e163]: α 0,00
+          - generic [ref=f3e164]:
+            - generic [ref=f3e165]:
+              - generic [ref=f3e166]: R20
+              - generic [ref=f3e167]: "[~] Cukup Nyaman"
+            - generic [ref=f3e168]:
+              - generic [ref=f3e169]: Panas · Tenang · Cukup
+              - generic [ref=f3e170]: α 0,25
+          - generic [ref=f3e171]:
+            - generic [ref=f3e172]:
+              - generic [ref=f3e173]: R21
+              - generic [ref=f3e174]: "[~] Cukup Nyaman"
+            - generic [ref=f3e175]:
+              - generic [ref=f3e176]: Panas · Tenang · Terang
+              - generic [ref=f3e177]: α 0,00
+          - generic [ref=f3e178]:
+            - generic [ref=f3e179]:
+              - generic [ref=f3e180]: R22
+              - generic [ref=f3e181]: "[-] Tidak Nyaman"
+            - generic [ref=f3e182]:
+              - generic [ref=f3e183]: Panas · Sedang · Redup
+              - generic [ref=f3e184]: α 0,00
+          - generic [ref=f3e185]:
+            - generic [ref=f3e186]:
+              - generic [ref=f3e187]: R23
+              - generic [ref=f3e188]: "[~] Cukup Nyaman"
+            - generic [ref=f3e189]:
+              - generic [ref=f3e190]: Panas · Sedang · Cukup
+              - generic [ref=f3e191]: α 0,25
+          - generic [ref=f3e192]:
+            - generic [ref=f3e193]:
+              - generic [ref=f3e194]: R24
+              - generic [ref=f3e195]: "[-] Tidak Nyaman"
+            - generic [ref=f3e196]:
+              - generic [ref=f3e197]: Panas · Sedang · Terang
+              - generic [ref=f3e198]: α 0,00
+          - generic [ref=f3e199]:
+            - generic [ref=f3e200]:
+              - generic [ref=f3e201]: R25
+              - generic [ref=f3e202]: "[-] Tidak Nyaman"
+            - generic [ref=f3e203]:
+              - generic [ref=f3e204]: Panas · Bising · Redup
+              - generic [ref=f3e205]: α 0,00
+          - generic [ref=f3e206]:
+            - generic [ref=f3e207]:
+              - generic [ref=f3e208]: R26
+              - generic [ref=f3e209]: "[-] Tidak Nyaman"
+            - generic [ref=f3e210]:
+              - generic [ref=f3e211]: Panas · Bising · Cukup
+              - generic [ref=f3e212]: α 0,00
+          - generic [ref=f3e213]:
+            - generic [ref=f3e214]:
+              - generic [ref=f3e215]: R27
+              - generic [ref=f3e216]: "[-] Tidak Nyaman"
+            - generic [ref=f3e217]:
+              - generic [ref=f3e218]: Panas · Bising · Terang
+              - generic [ref=f3e219]: α 0,00
+    - region "Persamaan fungsi keanggotaan (Bab 3.2)" [ref=f3e220]:
+      - heading "Persamaan fungsi keanggotaan (Bab 3.2)" [level=2] [ref=f3e221]
+      - generic [ref=f3e222]:
+        - generic [ref=f3e223]:
+          - heading "Suhu ruangan (x, 16-36 °C, ideal 23-26 °C)" [level=3] [ref=f3e224]
+          - paragraph [ref=f3e225]: "Dingin [16, 16, 20, 24]: 1 (x <= 20); (24-x)/4 (20 < x < 24); 0 (x >= 24)"
+          - paragraph [ref=f3e226]: "Nyaman [20, 24, 28]: (x-20)/4 (20 < x <= 24); (28-x)/4 (24 < x < 28)"
+          - paragraph [ref=f3e227]: "Panas [24, 28, 36, 36]: (x-24)/4 (24 < x < 28); 1 (x >= 28)"
+        - generic [ref=f3e228]:
+          - heading "Kebisingan (y, 30-100 dB, ideal <= 55-65 dB)" [level=3] [ref=f3e229]
+          - paragraph [ref=f3e230]: "Tenang [30, 30, 45, 65]: 1 (y <= 45); (65-y)/20 (45 < y < 65); 0 (y >= 65)"
+          - paragraph [ref=f3e231]: "Sedang [45, 65, 85]: (y-45)/20 (45 < y <= 65); (85-y)/20 (65 < y < 85)"
+          - paragraph [ref=f3e232]: "Bising [65, 85, 100, 100]: (y-65)/20 (65 < y < 85); 1 (y >= 85)"
+        - generic [ref=f3e233]:
+          - heading "Pencahayaan (z, 0-600 Lux, ideal >= 300 Lux)" [level=3] [ref=f3e234]
+          - paragraph [ref=f3e235]: "Redup [0, 0, 150, 300]: 1 (z <= 150); (300-z)/150 (150 < z < 300); 0 (z >= 300)"
+          - paragraph [ref=f3e236]: "Cukup [150, 300, 450]: (z-150)/150 (150 < z <= 300); (450-z)/150 (300 < z < 450)"
+          - paragraph [ref=f3e237]: "Terang [300, 450, 600, 600]: (z-300)/150 (300 < z < 450); 1 (z >= 450)"
+        - generic [ref=f3e238]:
+          - heading "Skor kenyamanan (w, 0-100)" [level=3] [ref=f3e239]
+          - paragraph [ref=f3e240]: "Tidak Nyaman [0, 0, 25, 50]: 1 (w <= 25); (50-w)/25 (25 < w < 50)"
+          - paragraph [ref=f3e241]: "Cukup Nyaman [25, 50, 75]: (w-25)/25 (25 < w <= 50); (75-w)/25 (50 < w < 75)"
+          - paragraph [ref=f3e242]: "Sangat Ideal [50, 75, 100, 100]: (w-50)/25 (50 < w < 75); 1 (w >= 75)"
+    - generic [ref=f3e243]:
+      - region "Ambang klasifikasi skor akhir (Z*)" [ref=f3e244]:
+        - heading "Ambang klasifikasi skor akhir (Z*)" [level=2] [ref=f3e245]
+        - list [ref=f3e246]:
+          - listitem [ref=f3e247]:
+            - generic [ref=f3e248]: "[+] Sangat Ideal untuk Fokus"
+            - generic [ref=f3e249]: 70,00 - 100
+          - listitem [ref=f3e250]:
+            - generic [ref=f3e251]: "[~] Cukup Nyaman"
+            - generic [ref=f3e252]: 40,00 - 69,99
+          - listitem [ref=f3e253]:
+            - generic [ref=f3e254]: "[-] Tidak Nyaman"
+            - generic [ref=f3e255]: 0,00 - 39,99
+      - region "Tim penyusun" [ref=f3e256]:
+        - heading "Tim penyusun" [level=2] [ref=f3e257]
+        - list [ref=f3e258]:
+          - listitem [ref=f3e259]:
+            - paragraph [ref=f3e260]: Rafael Putut Arli 2417051042
+            - paragraph [ref=f3e261]: "Fuzzy Logic Engineer: standar K3, 27 aturan, dan validasi hitungan."
+          - listitem [ref=f3e262]:
+            - paragraph [ref=f3e263]: Miqdad Dzakiy Arroyan 2417051044
+            - paragraph [ref=f3e264]: "UI/UX dan Frontend: slider, preset bantu, dan komparasi ruang."
+          - listitem [ref=f3e265]:
+            - paragraph [ref=f3e266]: Wisnu Wira Winata 2417051035
+            - paragraph [ref=f3e267]: "Logic dan Visualisasi: mesin Mamdani dan kurva Chart.js."
+          - listitem [ref=f3e268]:
+            - paragraph [ref=f3e269]: Athallah Wildan Rafi 2417051004
+            - paragraph [ref=f3e270]: QA, data sampel pengukuran, dan dokumentasi.
+  - contentinfo [ref=f3e271]:
+    - generic [ref=f3e272]:
+      - generic [ref=f3e273]: Sistem Pakar Evaluasi Kenyamanan Ruang Kerja WFC / WFH (Fuzzy Mamdani, Permenkes RI No. 48 Tahun 2016)
+      - link "Mulai evaluasi" [ref=f3e274] [cursor=pointer]:
+        - /url: ./index.html

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Komparasi Ruang Kerja: Indeks Ruang Kerja WFC / WFH</title>
+  <meta name="description" content="Bandingkan 2 sampai 3 ruang kerja WFC / WFH berdasarkan skor kenyamanan Fuzzy Mamdani dan standar K3 Permenkes RI No. 48 Tahun 2016.">
+  <link rel="icon" href="data:,">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('wfc_theme');
+        if (saved === 'dark' || saved === 'light') {
+          document.documentElement.setAttribute('data-theme', saved);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="./assets/styles.css">
+  <script defer src="./assets/vendor/chart.umd.min.js"></script>
+  <script type="module" src="./src/pageKomparasi.js"></script>
+</head>
+<body class="flex flex-col">
+  <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
+  <div id="polite-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <header class="sticky top-0 z-40 border-b" style="background-color: var(--bg-page); border-color: var(--border-soft);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between gap-3">
+      <a href="./index.html" class="inline-flex items-baseline gap-2 min-h-[44px] py-2 min-w-0">
+        <span class="font-editorial text-lg sm:text-xl font-bold truncate">Indeks Ruang Kerja</span>
+        <span class="hidden sm:inline text-xs text-muted-custom font-formula">Mamdani K3</span>
+      </a>
+      <nav aria-label="Navigasi utama" class="hidden md:flex items-center gap-1">
+        <a href="./index.html" class="nav-link">Evaluasi</a>
+        <a href="./komparasi.html" class="nav-link" aria-current="page">Komparasi <span id="nav-compare-count" class="ml-1.5 px-1.5 py-0.5 text-xs rounded font-formula border" style="border-color: var(--border-control); background-color: var(--bg-subtle);">0/3</span></a>
+        <a href="./perhitungan.html" class="nav-link">Perhitungan</a>
+        <a href="./aturan.html" class="nav-link">Aturan &amp; Tim</a>
+      </nav>
+      <div class="flex items-center gap-2 shrink-0">
+        <button type="button" id="theme-toggle" class="btn-secondary" aria-pressed="false" aria-label="Ganti ke mode gelap"><span id="theme-toggle-label">Gelap</span></button>
+        <button type="button" id="mobile-menu-btn" class="btn-secondary md:hidden" aria-expanded="false" aria-controls="mobile-nav-drawer">Menu</button>
+      </div>
+    </div>
+    <nav id="mobile-nav-drawer" aria-label="Navigasi seluler" hidden class="md:hidden border-t px-4 py-2.5 space-y-1" style="background-color: var(--bg-surface); border-color: var(--border-soft);">
+      <a href="./index.html" class="nav-link w-full justify-start">Evaluasi</a>
+      <a href="./komparasi.html" class="nav-link w-full justify-start" aria-current="page">Komparasi <span id="mobile-compare-count" class="ml-1.5 text-xs font-formula">0/3</span></a>
+      <a href="./perhitungan.html" class="nav-link w-full justify-start">Perhitungan</a>
+      <a href="./aturan.html" class="nav-link w-full justify-start">Aturan &amp; Tim</a>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1" class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b pb-4" style="border-color: var(--border-soft);">
+      <div class="space-y-1 max-w-2xl">
+        <h1 class="text-2xl sm:text-3xl font-bold leading-tight">Perbandingan Ruang Kerja</h1>
+        <p class="text-sm text-muted-custom">Bandingkan sampai 3 ruang kerja yang sudah dievaluasi. Peringkat diurutkan otomatis dari skor kenyamanan tertinggi.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 shrink-0">
+        <a href="./index.html" class="btn-primary">Evaluasi Ruang Baru</a>
+        <button type="button" id="load-preset-comparison-btn" class="btn-secondary">Muat 3 Sampel Uji</button>
+        <button type="button" id="clear-comparison-btn" class="btn-secondary">Kosongkan</button>
+      </div>
+    </div>
+
+    <div id="storage-error-banner" role="alert" hidden class="surface-card p-4 border-2" style="border-color: var(--status-tidak); background-color: var(--status-tidak-bg);">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <p class="font-bold text-sm" style="color: var(--status-tidak);">Data komparasi tidak terbaca</p>
+          <p class="text-xs mt-0.5">Data tersimpan rusak atau diblokir browser. Pulihkan untuk kembali ke daftar awal.</p>
+        </div>
+        <button type="button" id="reset-storage-btn" class="btn-secondary shrink-0">Pulihkan Data</button>
+      </div>
+    </div>
+
+    <div id="comparison-empty-state" hidden class="surface-card p-6 sm:p-10 text-center space-y-3">
+      <h2 class="font-editorial text-lg font-bold">Belum ada ruang kerja untuk dibandingkan</h2>
+      <p class="text-sm text-muted-custom max-w-md mx-auto">Evaluasi sebuah ruangan lalu tekan "Simpan ke Komparasi", atau muat 3 sampel uji untuk melihat contoh perbandingan.</p>
+      <div class="flex flex-wrap justify-center gap-2.5 pt-1">
+        <a href="./index.html" class="btn-primary">Evaluasi Ruang Kerja</a>
+        <button type="button" id="empty-load-preset-btn" class="btn-secondary">Muat 3 Sampel Uji</button>
+      </div>
+    </div>
+
+    <div id="comparison-single-notice" hidden class="surface-subtle px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
+      <span>Baru 1 ruang tersimpan. Tambahkan minimal 1 ruang lagi agar peringkat bisa dibandingkan.</span>
+      <a href="./index.html" class="font-semibold underline underline-offset-4 py-2 shrink-0" style="color: var(--accent);">Tambah ruang kerja</a>
+    </div>
+
+    <div id="comparison-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
+    <section id="compare-chart-section" hidden aria-labelledby="compare-chart-heading" class="surface-card p-4 sm:p-6 space-y-3">
+      <div class="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 id="compare-chart-heading" class="text-lg font-bold">Ruang mana yang paling layak untuk bekerja?</h2>
+        <span class="text-xs text-muted-custom">Skor Z* (0-100), warna mengikuti kategori kenyamanan</span>
+      </div>
+      <div class="chart-box-compare">
+        <canvas id="compare-bar-chart" role="img" aria-label="Grafik batang perbandingan skor kenyamanan Z* tiap ruang kerja"></canvas>
+      </div>
+      <p id="compare-chart-summary" class="text-sm text-muted-custom"></p>
+    </section>
+  </main>
+
+  <footer class="mt-12 border-t py-6" style="border-color: var(--border-soft); background-color: var(--bg-surface);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-custom">
+      <span>Sistem Pakar Evaluasi Kenyamanan Ruang Kerja WFC / WFH (Fuzzy Mamdani, Permenkes RI No. 48 Tahun 2016)</span>
+      <a href="./aturan.html#tim" class="font-semibold underline underline-offset-4 py-2" style="color: var(--accent);">Tim Penyusun</a>
+    </div>
+  </footer>
+</body>
+</html>

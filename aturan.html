@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Basis 27 Aturan, Rumus, dan Tim: Indeks Ruang Kerja WFC / WFH</title>
+  <meta name="description" content="Basis pengetahuan 27 aturan fuzzy, persamaan fungsi keanggotaan, ambang klasifikasi, dan tim penyusun sistem pakar evaluasi kenyamanan ruang kerja.">
+  <link rel="icon" href="data:,">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('wfc_theme');
+        if (saved === 'dark' || saved === 'light') {
+          document.documentElement.setAttribute('data-theme', saved);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="./assets/styles.css">
+  <script type="module" src="./src/pageAturan.js"></script>
+</head>
+<body class="flex flex-col">
+  <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
+  <div id="polite-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <header class="sticky top-0 z-40 border-b" style="background-color: var(--bg-page); border-color: var(--border-soft);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between gap-3">
+      <a href="./index.html" class="inline-flex items-baseline gap-2 min-h-[44px] py-2 min-w-0">
+        <span class="font-editorial text-lg sm:text-xl font-bold truncate">Indeks Ruang Kerja</span>
+        <span class="hidden sm:inline text-xs text-muted-custom font-formula">Mamdani K3</span>
+      </a>
+      <nav aria-label="Navigasi utama" class="hidden md:flex items-center gap-1">
+        <a href="./index.html" class="nav-link">Evaluasi</a>
+        <a href="./komparasi.html" class="nav-link">Komparasi <span id="nav-compare-count" class="ml-1.5 px-1.5 py-0.5 text-xs rounded font-formula border" style="border-color: var(--border-control); background-color: var(--bg-subtle);">0/3</span></a>
+        <a href="./perhitungan.html" class="nav-link">Perhitungan</a>
+        <a href="./aturan.html" class="nav-link" aria-current="page">Aturan &amp; Tim</a>
+      </nav>
+      <div class="flex items-center gap-2 shrink-0">
+        <button type="button" id="theme-toggle" class="btn-secondary" aria-pressed="false" aria-label="Ganti ke mode gelap"><span id="theme-toggle-label">Gelap</span></button>
+        <button type="button" id="mobile-menu-btn" class="btn-secondary md:hidden" aria-expanded="false" aria-controls="mobile-nav-drawer">Menu</button>
+      </div>
+    </div>
+    <nav id="mobile-nav-drawer" aria-label="Navigasi seluler" hidden class="md:hidden border-t px-4 py-2.5 space-y-1" style="background-color: var(--bg-surface); border-color: var(--border-soft);">
+      <a href="./index.html" class="nav-link w-full justify-start">Evaluasi</a>
+      <a href="./komparasi.html" class="nav-link w-full justify-start">Komparasi <span id="mobile-compare-count" class="ml-1.5 text-xs font-formula">0/3</span></a>
+      <a href="./perhitungan.html" class="nav-link w-full justify-start">Perhitungan</a>
+      <a href="./aturan.html" class="nav-link w-full justify-start" aria-current="page">Aturan &amp; Tim</a>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1" class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-10">
+    <section aria-labelledby="heading-aturan" class="space-y-4">
+      <div class="space-y-1 max-w-2xl">
+        <h1 id="heading-aturan" class="text-2xl sm:text-3xl font-bold leading-tight">Basis Pengetahuan 27 Aturan</h1>
+        <p class="text-sm text-muted-custom">Setiap kombinasi suhu, kebisingan, dan pencahayaan dipetakan ke satu keputusan kenyamanan. Aturan yang menyala untuk ruang aktif ditandai.</p>
+      </div>
+
+      <div class="surface-subtle px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
+        <span id="active-rules-banner">4 dari 27 aturan aktif untuk Studi Kasus: Spot WFC A.</span>
+        <a href="./perhitungan.html" class="font-semibold underline underline-offset-4 py-2 shrink-0" style="color: var(--accent);">Lihat perhitungannya</a>
+      </div>
+
+      <div class="surface-card p-4 sm:p-5 space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
+          <div>
+            <label for="rule-filter-output" class="block text-xs font-bold mb-1">Kategori output</label>
+            <select id="rule-filter-output" class="input-field w-full text-sm">
+              <option value="ALL">Semua kategori (27)</option>
+              <option value="Sangat Ideal">Sangat Ideal</option>
+              <option value="Cukup Nyaman">Cukup Nyaman</option>
+              <option value="Tidak Nyaman">Tidak Nyaman</option>
+            </select>
+          </div>
+          <div>
+            <label for="rule-filter-status" class="block text-xs font-bold mb-1">Status inferensi</label>
+            <select id="rule-filter-status" class="input-field w-full text-sm">
+              <option value="ALL">Semua aturan</option>
+              <option value="ACTIVE">Hanya yang aktif (α &gt; 0)</option>
+            </select>
+          </div>
+          <button type="button" id="reset-rule-filter-btn" class="btn-secondary w-full">Reset Filter</button>
+        </div>
+
+        <p id="rules-count" class="text-xs text-muted-custom font-formula">Menampilkan 27 aturan</p>
+
+        <div id="rules-filter-empty" hidden class="surface-subtle p-6 text-center space-y-1">
+          <p class="font-bold text-sm">Tidak ada aturan yang cocok dengan filter ini</p>
+          <p class="text-xs text-muted-custom">Tekan Reset Filter untuk menampilkan kembali seluruh 27 aturan.</p>
+        </div>
+
+        <div id="rules-table-wrapper" class="hidden sm:block border rounded-lg overflow-x-auto" style="border-color: var(--border-soft);">
+          <table class="w-full text-left text-sm border-collapse">
+            <thead style="background-color: var(--bg-subtle);">
+              <tr class="border-b" style="border-color: var(--border-soft);">
+                <th scope="col" class="py-2.5 px-3.5 font-bold">Kode</th>
+                <th scope="col" class="py-2.5 px-3.5 font-bold">Suhu</th>
+                <th scope="col" class="py-2.5 px-3.5 font-bold">Kebisingan</th>
+                <th scope="col" class="py-2.5 px-3.5 font-bold">Pencahayaan</th>
+                <th scope="col" class="py-2.5 px-3.5 font-bold">Output</th>
+                <th scope="col" class="py-2.5 px-3.5 font-bold text-right">α</th>
+              </tr>
+            </thead>
+            <tbody id="all-rules-tbody"></tbody>
+          </table>
+        </div>
+        <div id="all-rules-mobile-list" class="sm:hidden space-y-2"></div>
+      </div>
+    </section>
+
+    <section id="rumus" aria-labelledby="heading-rumus" class="space-y-4">
+      <h2 id="heading-rumus" class="text-xl sm:text-2xl font-bold">Persamaan fungsi keanggotaan (Bab 3.2)</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <div class="surface-card p-4 space-y-1.5">
+          <h3 class="font-bold text-sm">Suhu ruangan (x, 16-36 °C, ideal 23-26 °C)</h3>
+          <p class="font-formula">Dingin [16, 16, 20, 24]: 1 (x &lt;= 20); (24-x)/4 (20 &lt; x &lt; 24); 0 (x &gt;= 24)</p>
+          <p class="font-formula">Nyaman [20, 24, 28]: (x-20)/4 (20 &lt; x &lt;= 24); (28-x)/4 (24 &lt; x &lt; 28)</p>
+          <p class="font-formula">Panas [24, 28, 36, 36]: (x-24)/4 (24 &lt; x &lt; 28); 1 (x &gt;= 28)</p>
+        </div>
+        <div class="surface-card p-4 space-y-1.5">
+          <h3 class="font-bold text-sm">Kebisingan (y, 30-100 dB, ideal &lt;= 55-65 dB)</h3>
+          <p class="font-formula">Tenang [30, 30, 45, 65]: 1 (y &lt;= 45); (65-y)/20 (45 &lt; y &lt; 65); 0 (y &gt;= 65)</p>
+          <p class="font-formula">Sedang [45, 65, 85]: (y-45)/20 (45 &lt; y &lt;= 65); (85-y)/20 (65 &lt; y &lt; 85)</p>
+          <p class="font-formula">Bising [65, 85, 100, 100]: (y-65)/20 (65 &lt; y &lt; 85); 1 (y &gt;= 85)</p>
+        </div>
+        <div class="surface-card p-4 space-y-1.5">
+          <h3 class="font-bold text-sm">Pencahayaan (z, 0-600 Lux, ideal &gt;= 300 Lux)</h3>
+          <p class="font-formula">Redup [0, 0, 150, 300]: 1 (z &lt;= 150); (300-z)/150 (150 &lt; z &lt; 300); 0 (z &gt;= 300)</p>
+          <p class="font-formula">Cukup [150, 300, 450]: (z-150)/150 (150 &lt; z &lt;= 300); (450-z)/150 (300 &lt; z &lt; 450)</p>
+          <p class="font-formula">Terang [300, 450, 600, 600]: (z-300)/150 (300 &lt; z &lt; 450); 1 (z &gt;= 450)</p>
+        </div>
+        <div class="surface-card p-4 space-y-1.5">
+          <h3 class="font-bold text-sm">Skor kenyamanan (w, 0-100)</h3>
+          <p class="font-formula">Tidak Nyaman [0, 0, 25, 50]: 1 (w &lt;= 25); (50-w)/25 (25 &lt; w &lt; 50)</p>
+          <p class="font-formula">Cukup Nyaman [25, 50, 75]: (w-25)/25 (25 &lt; w &lt;= 50); (75-w)/25 (50 &lt; w &lt; 75)</p>
+          <p class="font-formula">Sangat Ideal [50, 75, 100, 100]: (w-50)/25 (50 &lt; w &lt; 75); 1 (w &gt;= 75)</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+      <section aria-labelledby="heading-ambang" class="md:col-span-5 surface-card p-4 sm:p-5 space-y-3">
+        <h2 id="heading-ambang" class="text-lg font-bold">Ambang klasifikasi skor akhir (Z*)</h2>
+        <ul class="space-y-2 text-xs">
+          <li class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b" style="border-color: var(--border-soft);">
+            <span class="status-tag status-ideal">[+] Sangat Ideal untuk Fokus</span>
+            <span class="font-formula font-bold">70,00 - 100</span>
+          </li>
+          <li class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b" style="border-color: var(--border-soft);">
+            <span class="status-tag status-santai">[~] Cukup Nyaman</span>
+            <span class="font-formula font-bold">40,00 - 69,99</span>
+          </li>
+          <li class="flex flex-wrap items-center justify-between gap-2">
+            <span class="status-tag status-tidak">[-] Tidak Nyaman</span>
+            <span class="font-formula font-bold">0,00 - 39,99</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="tim" aria-labelledby="heading-tim" class="md:col-span-7 surface-card p-4 sm:p-5 space-y-3">
+        <h2 id="heading-tim" class="text-lg font-bold">Tim penyusun</h2>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
+          <li>
+            <p class="font-bold">Rafael Putut Arli <span class="font-formula font-normal text-xs text-muted-custom">2417051042</span></p>
+            <p class="text-xs text-muted-custom">Fuzzy Logic Engineer: standar K3, 27 aturan, dan validasi hitungan.</p>
+          </li>
+          <li>
+            <p class="font-bold">Miqdad Dzakiy Arroyan <span class="font-formula font-normal text-xs text-muted-custom">2417051044</span></p>
+            <p class="text-xs text-muted-custom">UI/UX dan Frontend: slider, preset bantu, dan komparasi ruang.</p>
+          </li>
+          <li>
+            <p class="font-bold">Wisnu Wira Winata <span class="font-formula font-normal text-xs text-muted-custom">2417051035</span></p>
+            <p class="text-xs text-muted-custom">Logic dan Visualisasi: mesin Mamdani dan kurva Chart.js.</p>
+          </li>
+          <li>
+            <p class="font-bold">Athallah Wildan Rafi <span class="font-formula font-normal text-xs text-muted-custom">2417051004</span></p>
+            <p class="text-xs text-muted-custom">QA, data sampel pengukuran, dan dokumentasi.</p>
+          </li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <footer class="mt-12 border-t py-6" style="border-color: var(--border-soft); background-color: var(--bg-surface);">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-custom">
+      <span>Sistem Pakar Evaluasi Kenyamanan Ruang Kerja WFC / WFH (Fuzzy Mamdani, Permenkes RI No. 48 Tahun 2016)</span>
+      <a href="./index.html" class="font-semibold underline underline-offset-4 py-2" style="color: var(--accent);">Mulai evaluasi</a>
+    </div>
+  </footer>
+</body>
+</html>

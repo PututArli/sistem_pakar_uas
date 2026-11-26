@@ -1,0 +1,302 @@
+- generic [active] [ref=e1]:
+  - link "Langsung ke konten utama" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "Indeks Ruang Kerja Mamdani K3" [ref=e6] [cursor=pointer]:
+        - /url: ./index.html
+        - generic [ref=e7]: Indeks Ruang Kerja
+        - generic [ref=e8]: Mamdani K3
+      - navigation "Navigasi utama" [ref=e9]:
+        - link "Evaluasi" [ref=e10] [cursor=pointer]:
+          - /url: ./index.html
+        - link "Komparasi 3/3" [ref=e11] [cursor=pointer]:
+          - /url: ./komparasi.html
+          - text: Komparasi
+          - generic [ref=e12]: 3/3
+        - link "Perhitungan" [ref=e13] [cursor=pointer]:
+          - /url: ./perhitungan.html
+        - link "Aturan & Tim" [ref=e14] [cursor=pointer]:
+          - /url: ./aturan.html
+      - button "Ganti ke mode gelap" [ref=e16] [cursor=pointer]:
+        - generic [ref=e17]: Gelap
+  - main [ref=e18]:
+    - region "Basis Pengetahuan 27 Aturan" [ref=e19]:
+      - generic [ref=e20]:
+        - heading "Basis Pengetahuan 27 Aturan" [level=1] [ref=e21]
+        - paragraph [ref=e22]: Setiap kombinasi suhu, kebisingan, dan pencahayaan dipetakan ke satu keputusan kenyamanan. Aturan yang menyala untuk ruang aktif ditandai.
+      - generic [ref=e23]:
+        - generic [ref=e24]: "2 dari 27 aturan aktif untuk Sampel: Ruang Baca Tenang (skor 81,74)."
+        - link "Lihat perhitungannya" [ref=e25] [cursor=pointer]:
+          - /url: ./perhitungan.html
+      - generic [ref=e26]:
+        - generic [ref=e27]:
+          - generic [ref=e28]:
+            - generic [ref=e29] [cursor=pointer]: Kategori output
+            - combobox "Kategori output" [ref=e30] [cursor=pointer]:
+              - option "Semua kategori (27)" [selected]
+              - option "Sangat Ideal"
+              - option "Cukup Nyaman"
+              - option "Tidak Nyaman"
+          - generic [ref=e31]:
+            - generic [ref=e32] [cursor=pointer]: Status inferensi
+            - combobox "Status inferensi" [ref=e33] [cursor=pointer]:
+              - option "Semua aturan" [selected]
+              - option "Hanya yang aktif (α > 0)"
+          - button "Reset Filter" [ref=e34] [cursor=pointer]
+        - paragraph [ref=e35]: Menampilkan 27 dari 27 aturan
+        - table [ref=e37]:
+          - rowgroup [ref=e38]:
+            - row [ref=e39]:
+              - columnheader "Kode" [ref=e40]
+              - columnheader "Suhu" [ref=e41]
+              - columnheader "Kebisingan" [ref=e42]
+              - columnheader "Pencahayaan" [ref=e43]
+              - columnheader "Output" [ref=e44]
+              - columnheader "α" [ref=e45]
+          - rowgroup [ref=e46]:
+            - row [ref=e47]:
+              - cell "R1" [ref=e48]
+              - cell "Dingin" [ref=e49]
+              - cell "Tenang" [ref=e50]
+              - cell "Redup" [ref=e51]
+              - cell "[~] Cukup Nyaman" [ref=e52]
+              - cell "0,00" [ref=e54]
+            - row [ref=e55]:
+              - cell "R2" [ref=e56]
+              - cell "Dingin" [ref=e57]
+              - cell "Tenang" [ref=e58]
+              - cell "Cukup" [ref=e59]
+              - cell "[+] Sangat Ideal" [ref=e60]
+              - cell "0,00" [ref=e62]
+            - row [ref=e63]:
+              - cell "R3" [ref=e64]
+              - cell "Dingin" [ref=e65]
+              - cell "Tenang" [ref=e66]
+              - cell "Terang" [ref=e67]
+              - cell "[+] Sangat Ideal" [ref=e68]
+              - cell "0,00" [ref=e70]
+            - row [ref=e71]:
+              - cell "R4" [ref=e72]
+              - cell "Dingin" [ref=e73]
+              - cell "Sedang" [ref=e74]
+              - cell "Redup" [ref=e75]
+              - cell "[-] Tidak Nyaman" [ref=e76]
+              - cell "0,00" [ref=e78]
+            - row [ref=e79]:
+              - cell "R5" [ref=e80]
+              - cell "Dingin" [ref=e81]
+              - cell "Sedang" [ref=e82]
+              - cell "Cukup" [ref=e83]
+              - cell "[~] Cukup Nyaman" [ref=e84]
+              - cell "0,00" [ref=e86]
+            - row [ref=e87]:
+              - cell "R6" [ref=e88]
+              - cell "Dingin" [ref=e89]
+              - cell "Sedang" [ref=e90]
+              - cell "Terang" [ref=e91]
+              - cell "[~] Cukup Nyaman" [ref=e92]
+              - cell "0,00" [ref=e94]
+            - row [ref=e95]:
+              - cell "R7" [ref=e96]
+              - cell "Dingin" [ref=e97]
+              - cell "Bising" [ref=e98]
+              - cell "Redup" [ref=e99]
+              - cell "[-] Tidak Nyaman" [ref=e100]
+              - cell "0,00" [ref=e102]
+            - row [ref=e103]:
+              - cell "R8" [ref=e104]
+              - cell "Dingin" [ref=e105]
+              - cell "Bising" [ref=e106]
+              - cell "Cukup" [ref=e107]
+              - cell "[-] Tidak Nyaman" [ref=e108]
+              - cell "0,00" [ref=e110]
+            - row [ref=e111]:
+              - cell "R9" [ref=e112]
+              - cell "Dingin" [ref=e113]
+              - cell "Bising" [ref=e114]
+              - cell "Terang" [ref=e115]
+              - cell "[-] Tidak Nyaman" [ref=e116]
+              - cell "0,00" [ref=e118]
+            - row [ref=e119]:
+              - cell "R10" [ref=e120]
+              - cell "Nyaman" [ref=e121]
+              - cell "Tenang" [ref=e122]
+              - cell "Redup" [ref=e123]
+              - cell "[~] Cukup Nyaman" [ref=e124]
+              - cell "0,00" [ref=e126]
+            - row [ref=e127]:
+              - cell "R11" [ref=e128]
+              - cell "Nyaman" [ref=e129]
+              - cell "Tenang" [ref=e130]
+              - cell "Cukup" [ref=e131]
+              - cell "[+] Sangat Ideal" [ref=e132]
+              - cell "Aktif 0,33" [ref=e134]
+            - row [ref=e135]:
+              - cell "R12" [ref=e136]
+              - cell "Nyaman" [ref=e137]
+              - cell "Tenang" [ref=e138]
+              - cell "Terang" [ref=e139]
+              - cell "[+] Sangat Ideal" [ref=e140]
+              - cell "Aktif 0,67" [ref=e142]
+            - row [ref=e143]:
+              - cell "R13" [ref=e144]
+              - cell "Nyaman" [ref=e145]
+              - cell "Sedang" [ref=e146]
+              - cell "Redup" [ref=e147]
+              - cell "[~] Cukup Nyaman" [ref=e148]
+              - cell "0,00" [ref=e150]
+            - row [ref=e151]:
+              - cell "R14" [ref=e152]
+              - cell "Nyaman" [ref=e153]
+              - cell "Sedang" [ref=e154]
+              - cell "Cukup" [ref=e155]
+              - cell "[+] Sangat Ideal" [ref=e156]
+              - cell "0,00" [ref=e158]
+            - row [ref=e159]:
+              - cell "R15" [ref=e160]
+              - cell "Nyaman" [ref=e161]
+              - cell "Sedang" [ref=e162]
+              - cell "Terang" [ref=e163]
+              - cell "[~] Cukup Nyaman" [ref=e164]
+              - cell "0,00" [ref=e166]
+            - row [ref=e167]:
+              - cell "R16" [ref=e168]
+              - cell "Nyaman" [ref=e169]
+              - cell "Bising" [ref=e170]
+              - cell "Redup" [ref=e171]
+              - cell "[-] Tidak Nyaman" [ref=e172]
+              - cell "0,00" [ref=e174]
+            - row [ref=e175]:
+              - cell "R17" [ref=e176]
+              - cell "Nyaman" [ref=e177]
+              - cell "Bising" [ref=e178]
+              - cell "Cukup" [ref=e179]
+              - cell "[~] Cukup Nyaman" [ref=e180]
+              - cell "0,00" [ref=e182]
+            - row [ref=e183]:
+              - cell "R18" [ref=e184]
+              - cell "Nyaman" [ref=e185]
+              - cell "Bising" [ref=e186]
+              - cell "Terang" [ref=e187]
+              - cell "[-] Tidak Nyaman" [ref=e188]
+              - cell "0,00" [ref=e190]
+            - row [ref=e191]:
+              - cell "R19" [ref=e192]
+              - cell "Panas" [ref=e193]
+              - cell "Tenang" [ref=e194]
+              - cell "Redup" [ref=e195]
+              - cell "[-] Tidak Nyaman" [ref=e196]
+              - cell "0,00" [ref=e198]
+            - row [ref=e199]:
+              - cell "R20" [ref=e200]
+              - cell "Panas" [ref=e201]
+              - cell "Tenang" [ref=e202]
+              - cell "Cukup" [ref=e203]
+              - cell "[~] Cukup Nyaman" [ref=e204]
+              - cell "0,00" [ref=e206]
+            - row [ref=e207]:
+              - cell "R21" [ref=e208]
+              - cell "Panas" [ref=e209]
+              - cell "Tenang" [ref=e210]
+              - cell "Terang" [ref=e211]
+              - cell "[~] Cukup Nyaman" [ref=e212]
+              - cell "0,00" [ref=e214]
+            - row [ref=e215]:
+              - cell "R22" [ref=e216]
+              - cell "Panas" [ref=e217]
+              - cell "Sedang" [ref=e218]
+              - cell "Redup" [ref=e219]
+              - cell "[-] Tidak Nyaman" [ref=e220]
+              - cell "0,00" [ref=e222]
+            - row [ref=e223]:
+              - cell "R23" [ref=e224]
+              - cell "Panas" [ref=e225]
+              - cell "Sedang" [ref=e226]
+              - cell "Cukup" [ref=e227]
+              - cell "[~] Cukup Nyaman" [ref=e228]
+              - cell "0,00" [ref=e230]
+            - row [ref=e231]:
+              - cell "R24" [ref=e232]
+              - cell "Panas" [ref=e233]
+              - cell "Sedang" [ref=e234]
+              - cell "Terang" [ref=e235]
+              - cell "[-] Tidak Nyaman" [ref=e236]
+              - cell "0,00" [ref=e238]
+            - row [ref=e239]:
+              - cell "R25" [ref=e240]
+              - cell "Panas" [ref=e241]
+              - cell "Bising" [ref=e242]
+              - cell "Redup" [ref=e243]
+              - cell "[-] Tidak Nyaman" [ref=e244]
+              - cell "0,00" [ref=e246]
+            - row [ref=e247]:
+              - cell "R26" [ref=e248]
+              - cell "Panas" [ref=e249]
+              - cell "Bising" [ref=e250]
+              - cell "Cukup" [ref=e251]
+              - cell "[-] Tidak Nyaman" [ref=e252]
+              - cell "0,00" [ref=e254]
+            - row [ref=e255]:
+              - cell "R27" [ref=e256]
+              - cell "Panas" [ref=e257]
+              - cell "Bising" [ref=e258]
+              - cell "Terang" [ref=e259]
+              - cell "[-] Tidak Nyaman" [ref=e260]
+              - cell "0,00" [ref=e262]
+    - region "Persamaan fungsi keanggotaan (Bab 3.2)" [ref=e263]:
+      - heading "Persamaan fungsi keanggotaan (Bab 3.2)" [level=2] [ref=e264]
+      - generic [ref=e265]:
+        - generic [ref=e266]:
+          - heading "Suhu ruangan (x, 16-36 °C, ideal 23-26 °C)" [level=3] [ref=e267]
+          - paragraph [ref=e268]: "Dingin [16, 16, 20, 24]: 1 (x <= 20); (24-x)/4 (20 < x < 24); 0 (x >= 24)"
+          - paragraph [ref=e269]: "Nyaman [20, 24, 28]: (x-20)/4 (20 < x <= 24); (28-x)/4 (24 < x < 28)"
+          - paragraph [ref=e270]: "Panas [24, 28, 36, 36]: (x-24)/4 (24 < x < 28); 1 (x >= 28)"
+        - generic [ref=e271]:
+          - heading "Kebisingan (y, 30-100 dB, ideal <= 55-65 dB)" [level=3] [ref=e272]
+          - paragraph [ref=e273]: "Tenang [30, 30, 45, 65]: 1 (y <= 45); (65-y)/20 (45 < y < 65); 0 (y >= 65)"
+          - paragraph [ref=e274]: "Sedang [45, 65, 85]: (y-45)/20 (45 < y <= 65); (85-y)/20 (65 < y < 85)"
+          - paragraph [ref=e275]: "Bising [65, 85, 100, 100]: (y-65)/20 (65 < y < 85); 1 (y >= 85)"
+        - generic [ref=e276]:
+          - heading "Pencahayaan (z, 0-600 Lux, ideal >= 300 Lux)" [level=3] [ref=e277]
+          - paragraph [ref=e278]: "Redup [0, 0, 150, 300]: 1 (z <= 150); (300-z)/150 (150 < z < 300); 0 (z >= 300)"
+          - paragraph [ref=e279]: "Cukup [150, 300, 450]: (z-150)/150 (150 < z <= 300); (450-z)/150 (300 < z < 450)"
+          - paragraph [ref=e280]: "Terang [300, 450, 600, 600]: (z-300)/150 (300 < z < 450); 1 (z >= 450)"
+        - generic [ref=e281]:
+          - heading "Skor kenyamanan (w, 0-100)" [level=3] [ref=e282]
+          - paragraph [ref=e283]: "Tidak Nyaman [0, 0, 25, 50]: 1 (w <= 25); (50-w)/25 (25 < w < 50)"
+          - paragraph [ref=e284]: "Cukup Nyaman [25, 50, 75]: (w-25)/25 (25 < w <= 50); (75-w)/25 (50 < w < 75)"
+          - paragraph [ref=e285]: "Sangat Ideal [50, 75, 100, 100]: (w-50)/25 (50 < w < 75); 1 (w >= 75)"
+    - generic [ref=e286]:
+      - region "Ambang klasifikasi skor akhir (Z*)" [ref=e287]:
+        - heading "Ambang klasifikasi skor akhir (Z*)" [level=2] [ref=e288]
+        - list [ref=e289]:
+          - listitem [ref=e290]:
+            - generic [ref=e291]: "[+] Sangat Ideal untuk Fokus"
+            - generic [ref=e292]: 70,00 - 100
+          - listitem [ref=e293]:
+            - generic [ref=e294]: "[~] Cukup Nyaman"
+            - generic [ref=e295]: 40,00 - 69,99
+          - listitem [ref=e296]:
+            - generic [ref=e297]: "[-] Tidak Nyaman"
+            - generic [ref=e298]: 0,00 - 39,99
+      - region "Tim penyusun" [ref=e299]:
+        - heading "Tim penyusun" [level=2] [ref=e300]
+        - list [ref=e301]:
+          - listitem [ref=e302]:
+            - paragraph [ref=e303]: Rafael Putut Arli 2417051042
+            - paragraph [ref=e304]: "Fuzzy Logic Engineer: standar K3, 27 aturan, dan validasi hitungan."
+          - listitem [ref=e305]:
+            - paragraph [ref=e306]: Miqdad Dzakiy Arroyan 2417051044
+            - paragraph [ref=e307]: "UI/UX dan Frontend: slider, preset bantu, dan komparasi ruang."
+          - listitem [ref=e308]:
+            - paragraph [ref=e309]: Wisnu Wira Winata
+            - paragraph [ref=e310]: "Logic dan Visualisasi: mesin Mamdani dan kurva Chart.js."
+          - listitem [ref=e311]:
+            - paragraph [ref=e312]: Athallah Wildan Rafi
+            - paragraph [ref=e313]: QA, data sampel pengukuran, dan dokumentasi.
+  - contentinfo [ref=e314]:
+    - generic [ref=e315]:
+      - generic [ref=e316]: Sistem Pakar Evaluasi Kenyamanan Ruang Kerja WFC / WFH (Fuzzy Mamdani, Permenkes RI No. 48 Tahun 2016)
+      - link "Mulai evaluasi" [ref=e317] [cursor=pointer]:
+        - /url: ./index.html

@@ -1,0 +1,256 @@
+- generic [active] [ref=f3e1]:
+  - link "Langsung ke konten utama" [ref=f3e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f3e4]:
+    - generic [ref=f3e5]:
+      - link "Indeks Ruang Kerja Mamdani K3" [ref=f3e6] [cursor=pointer]:
+        - /url: ./index.html
+        - generic [ref=f3e7]: Indeks Ruang Kerja
+        - generic [ref=f3e8]: Mamdani K3
+      - navigation "Navigasi utama" [ref=f3e9]:
+        - link "Evaluasi" [ref=f3e10] [cursor=pointer]:
+          - /url: ./index.html
+        - link "Komparasi 3/3" [ref=f3e11] [cursor=pointer]:
+          - /url: ./komparasi.html
+          - text: Komparasi
+          - generic [ref=f3e12]: 3/3
+        - link "Perhitungan" [ref=f3e13] [cursor=pointer]:
+          - /url: ./perhitungan.html
+        - link "Aturan & Tim" [ref=f3e14] [cursor=pointer]:
+          - /url: ./aturan.html
+      - button "Ganti ke mode gelap" [ref=f3e16] [cursor=pointer]:
+        - generic [ref=f3e17]: Gelap
+  - main [ref=f3e18]:
+    - generic [ref=f3e19]:
+      - heading "Perhitungan Mamdani dan Saran Ergonomi" [level=1] [ref=f3e20]
+      - paragraph [ref=f3e21]: Lihat bagaimana skor dihitung langkah demi langkah, dan apa yang perlu diperbaiki agar ruangan memenuhi standar K3.
+    - region "Ruang kerja yang sedang dihitung" [ref=f3e22]:
+      - generic [ref=f3e23]:
+        - generic [ref=f3e24]:
+          - paragraph [ref=f3e25]: "Sampel: Ruang Baca Tenang"
+          - paragraph [ref=f3e26]: 24 °C · 42 dB · 400 Lux
+        - generic [ref=f3e27]:
+          - generic [ref=f3e28]: 81,74
+          - generic [ref=f3e29]: "[+] Sangat Ideal"
+        - generic [ref=f3e30]:
+          - generic [ref=f3e31]:
+            - generic [ref=f3e32] [cursor=pointer]: Pilih ruang kerja yang dihitung
+            - combobox "Pilih ruang kerja yang dihitung" [ref=f3e33] [cursor=pointer]:
+              - 'option "Studi Kasus: Spot WFC A (25 °C, 60 dB, 300 Lux)"'
+              - 'option "Sampel: Ruang Baca Tenang (24 °C, 42 dB, 400 Lux)" [selected]'
+              - option "Ruang Uji Lantai 2 (25 °C, 60 dB, 300 Lux)"
+          - link "Ubah Parameter" [ref=f3e34] [cursor=pointer]:
+            - /url: ./index.html
+    - region "Rekomendasi ergonomi" [ref=f3e35]:
+      - generic [ref=f3e36]:
+        - heading "Rekomendasi ergonomi" [level=2] [ref=f3e37]
+        - generic [ref=f3e38]: Dibandingkan dengan ambang Permenkes RI No. 48 Tahun 2016
+      - generic [ref=f3e39]:
+        - article [ref=f3e40]:
+          - generic [ref=f3e41]:
+            - heading "Suhu Ruangan" [level=3] [ref=f3e42]
+            - generic [ref=f3e43]: 24 °C
+          - generic [ref=f3e44]:
+            - generic [ref=f3e45]: "[+] Sesuai K3"
+            - generic [ref=f3e46]: "Standar: 23 - 26 °C"
+          - paragraph [ref=f3e47]: Suhu berada dalam rentang ideal Permenkes (23 sampai 26 °C).
+        - article [ref=f3e48]:
+          - generic [ref=f3e49]:
+            - heading "Tingkat Kebisingan" [level=3] [ref=f3e50]
+            - generic [ref=f3e51]: 42 dB
+          - generic [ref=f3e52]:
+            - generic [ref=f3e53]: "[+] Sesuai K3"
+            - generic [ref=f3e54]: "Standar: <= 55 - 65 dB"
+          - paragraph [ref=f3e55]: Kebisingan rendah (<= 55 dB), optimal untuk konsentrasi tinggi.
+        - article [ref=f3e56]:
+          - generic [ref=f3e57]:
+            - heading "Intensitas Pencahayaan" [level=3] [ref=f3e58]
+            - generic [ref=f3e59]: 400 Lux
+          - generic [ref=f3e60]:
+            - generic [ref=f3e61]: "[+] Sesuai K3"
+            - generic [ref=f3e62]: "Standar: >= 300 Lux"
+          - paragraph [ref=f3e63]: Pencahayaan memenuhi minimal 300 Lux tanpa risiko silau berlebih.
+    - region "Kurva fungsi keanggotaan input" [ref=f3e64]:
+      - generic [ref=f3e65]:
+        - heading "Kurva fungsi keanggotaan input" [level=2] [ref=f3e66]
+        - generic [ref=f3e67]: Real-time
+      - generic [ref=f3e68]:
+        - generic [ref=f3e69]:
+          - generic [ref=f3e70]:
+            - heading "Suhu ruangan (x)" [level=3] [ref=f3e71]
+            - generic [ref=f3e72]: 24 °C
+          - img "Grafik keanggotaan suhu ruangan" [ref=f3e74]
+        - generic [ref=f3e75]:
+          - generic [ref=f3e76]:
+            - heading "Kebisingan (y)" [level=3] [ref=f3e77]
+            - generic [ref=f3e78]: 42 dB
+          - img "Grafik keanggotaan tingkat kebisingan" [ref=f3e80]
+        - generic [ref=f3e81]:
+          - generic [ref=f3e82]:
+            - heading "Pencahayaan (z)" [level=3] [ref=f3e83]
+            - generic [ref=f3e84]: 400 Lux
+          - img "Grafik keanggotaan intensitas pencahayaan" [ref=f3e86]
+    - region "Empat langkah inferensi Mamdani" [ref=f3e87]:
+      - heading "Empat langkah inferensi Mamdani" [level=2] [ref=f3e88]
+      - generic [ref=f3e89]:
+        - generic [ref=f3e90]:
+          - 'heading "Langkah 1: Fuzzifikasi" [level=3] [ref=f3e91]'
+          - generic [ref=f3e92]:
+            - generic [ref=f3e93]:
+              - heading "Suhu (24 °C)" [level=4] [ref=f3e94]
+              - list [ref=f3e95]:
+                - listitem [ref=f3e96]:
+                  - generic [ref=f3e97]: Dingin
+                  - generic [ref=f3e98]: 0,00
+                - listitem [ref=f3e99]:
+                  - generic [ref=f3e100]: Nyaman
+                  - generic [ref=f3e101]: 1,00
+                - listitem [ref=f3e102]:
+                  - generic [ref=f3e103]: Panas
+                  - generic [ref=f3e104]: 0,00
+            - generic [ref=f3e105]:
+              - heading "Kebisingan (42 dB)" [level=4] [ref=f3e106]
+              - list [ref=f3e107]:
+                - listitem [ref=f3e108]:
+                  - generic [ref=f3e109]: Tenang
+                  - generic [ref=f3e110]: 1,00
+                - listitem [ref=f3e111]:
+                  - generic [ref=f3e112]: Sedang
+                  - generic [ref=f3e113]: 0,00
+                - listitem [ref=f3e114]:
+                  - generic [ref=f3e115]: Bising
+                  - generic [ref=f3e116]: 0,00
+            - generic [ref=f3e117]:
+              - heading "Cahaya (400 Lux)" [level=4] [ref=f3e118]
+              - list [ref=f3e119]:
+                - listitem [ref=f3e120]:
+                  - generic [ref=f3e121]: Redup
+                  - generic [ref=f3e122]: 0,00
+                - listitem [ref=f3e123]:
+                  - generic [ref=f3e124]: Cukup
+                  - generic [ref=f3e125]: 0,33
+                - listitem [ref=f3e126]:
+                  - generic [ref=f3e127]: Terang
+                  - generic [ref=f3e128]: 0,67
+        - generic [ref=f3e129]:
+          - 'heading "Langkah 3: Agregasi MAX" [level=3] [ref=f3e130]'
+          - generic [ref=f3e131]:
+            - generic [ref=f3e132]:
+              - generic [ref=f3e133]:
+                - generic [ref=f3e134]: "[+] Sangat Ideal"
+                - generic [ref=f3e135]: 0,67
+              - paragraph [ref=f3e136]: Dari R11, R12
+            - generic [ref=f3e137]:
+              - generic [ref=f3e138]:
+                - generic [ref=f3e139]: "[~] Cukup Nyaman"
+                - generic [ref=f3e140]: 0,00
+              - paragraph [ref=f3e141]: Tidak ada aturan aktif
+            - generic [ref=f3e142]:
+              - generic [ref=f3e143]:
+                - generic [ref=f3e144]: "[-] Tidak Nyaman"
+                - generic [ref=f3e145]: 0,00
+              - paragraph [ref=f3e146]: Tidak ada aturan aktif
+      - generic [ref=f3e147]:
+        - generic [ref=f3e148]:
+          - 'heading "Langkah 2: Inferensi aturan aktif (implikasi MIN)" [level=3] [ref=f3e149]'
+          - generic [ref=f3e150]: α = min(μSuhu, μKebisingan, μCahaya)
+        - table [ref=f3e152]:
+          - rowgroup [ref=f3e153]:
+            - row [ref=f3e154]:
+              - columnheader "Aturan" [ref=f3e155]
+              - columnheader "Kondisi IF" [ref=f3e156]
+              - columnheader "Output" [ref=f3e157]
+              - columnheader "Operasi MIN" [ref=f3e158]
+              - columnheader "α" [ref=f3e159]
+          - rowgroup [ref=f3e160]:
+            - row [ref=f3e161]:
+              - cell "R11" [ref=f3e162]
+              - cell "Nyaman, Tenang, Cukup" [ref=f3e163]
+              - cell "[+] Sangat Ideal" [ref=f3e164]
+              - cell "min(1,00; 1,00; 0,33)" [ref=f3e166]
+              - cell "0,33" [ref=f3e167]
+            - row [ref=f3e168]:
+              - cell "R12" [ref=f3e169]
+              - cell "Nyaman, Tenang, Terang" [ref=f3e170]
+              - cell "[+] Sangat Ideal" [ref=f3e171]
+              - cell "min(1,00; 1,00; 0,67)" [ref=f3e173]
+              - cell "0,67" [ref=f3e174]
+      - generic [ref=f3e175]:
+        - generic [ref=f3e176]:
+          - generic [ref=f3e177]:
+            - 'heading "Langkah 4: Defuzzifikasi Centroid" [level=3] [ref=f3e178]'
+            - paragraph [ref=f3e179]: Z* = ∑(wᵢ × μ(wᵢ)) / ∑μ(wᵢ)
+          - generic [ref=f3e180]:
+            - generic [ref=f3e181] [cursor=pointer]: Titik sampel
+            - combobox "Titik sampel" [ref=f3e182] [cursor=pointer]:
+              - option "10 titik diskrit (Bab 4)" [selected]
+              - option "101 titik rapat (0..100)"
+        - generic [ref=f3e183]:
+          - paragraph [ref=f3e184]: Pembilang = (60×0,40) + (70×0,67) + (80×0,67) + (90×0,67) + (100×0,67) = 250,67
+          - paragraph [ref=f3e185]: Penyebut = ∑μ(wᵢ) = 3,07
+          - paragraph [ref=f3e186]: Z* = 250,67 / 3,07 = 81,74
+        - generic [ref=f3e187]:
+          - img "Grafik area agregasi output dan garis sentroid Z*" [ref=f3e189]
+          - table [ref=f3e191]:
+            - rowgroup [ref=f3e192]:
+              - row [ref=f3e193]:
+                - columnheader "Sampel wᵢ" [ref=f3e194]
+                - columnheader "Terpotong [TN / CN / SI]" [ref=f3e195]
+                - columnheader "μ(wᵢ)" [ref=f3e196]
+                - columnheader "wᵢ × μ" [ref=f3e197]
+            - rowgroup [ref=f3e198]:
+              - row [ref=f3e199]:
+                - cell "w = 10" [ref=f3e200]
+                - cell "0,00 / 0,00 / 0,00" [ref=f3e201]
+                - cell "0,00" [ref=f3e202]
+                - cell "0,00" [ref=f3e203]
+              - row [ref=f3e204]:
+                - cell "w = 20" [ref=f3e205]
+                - cell "0,00 / 0,00 / 0,00" [ref=f3e206]
+                - cell "0,00" [ref=f3e207]
+                - cell "0,00" [ref=f3e208]
+              - row [ref=f3e209]:
+                - cell "w = 30" [ref=f3e210]
+                - cell "0,00 / 0,00 / 0,00" [ref=f3e211]
+                - cell "0,00" [ref=f3e212]
+                - cell "0,00" [ref=f3e213]
+              - row [ref=f3e214]:
+                - cell "w = 40" [ref=f3e215]
+                - cell "0,00 / 0,00 / 0,00" [ref=f3e216]
+                - cell "0,00" [ref=f3e217]
+                - cell "0,00" [ref=f3e218]
+              - row [ref=f3e219]:
+                - cell "w = 50" [ref=f3e220]
+                - cell "0,00 / 0,00 / 0,00" [ref=f3e221]
+                - cell "0,00" [ref=f3e222]
+                - cell "0,00" [ref=f3e223]
+              - row [ref=f3e224]:
+                - cell "w = 60" [ref=f3e225]
+                - cell "0,00 / 0,00 / 0,40" [ref=f3e226]
+                - cell "0,40" [ref=f3e227]
+                - cell "24,00" [ref=f3e228]
+              - row [ref=f3e229]:
+                - cell "w = 70" [ref=f3e230]
+                - cell "0,00 / 0,00 / 0,67" [ref=f3e231]
+                - cell "0,67" [ref=f3e232]
+                - cell "46,67" [ref=f3e233]
+              - row [ref=f3e234]:
+                - cell "w = 80" [ref=f3e235]
+                - cell "0,00 / 0,00 / 0,67" [ref=f3e236]
+                - cell "0,67" [ref=f3e237]
+                - cell "53,33" [ref=f3e238]
+              - row [ref=f3e239]:
+                - cell "w = 90" [ref=f3e240]
+                - cell "0,00 / 0,00 / 0,67" [ref=f3e241]
+                - cell "0,67" [ref=f3e242]
+                - cell "60,00" [ref=f3e243]
+              - row [ref=f3e244]:
+                - cell "w = 100" [ref=f3e245]
+                - cell "0,00 / 0,00 / 0,67" [ref=f3e246]
+                - cell "0,67" [ref=f3e247]
+                - cell "66,67" [ref=f3e248]
+  - contentinfo [ref=f3e249]:
+    - generic [ref=f3e250]:
+      - generic [ref=f3e251]: Sistem Pakar Evaluasi Kenyamanan Ruang Kerja WFC / WFH (Fuzzy Mamdani, Permenkes RI No. 48 Tahun 2016)
+      - link "Tim Penyusun" [ref=f3e252] [cursor=pointer]:
+        - /url: ./aturan.html#tim
